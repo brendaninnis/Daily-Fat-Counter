@@ -34,19 +34,12 @@ final class ModelData: ObservableObject {
     
     init() {
         // Reset daily fat
-        let now = Int(Date().timeIntervalSince1970) - resetTime
-        if (resetTimeElapsed(now)) {
+        let now = Date().timeIntervalSince1970
+        if (resetTimeElapsed(Int(now))) {
             resetUsedFat()
         }
-        let nowSinceMidnight = now % SECONDS_PER_DAY
-        let fireAt: Int;
-        if (nowSinceMidnight < resetTime) {
-            fireAt = resetTime - nowSinceMidnight
-        } else {
-            fireAt = SECONDS_PER_DAY - nowSinceMidnight + resetTime
-        }
-        timer = Timer(fireAt: Date(timeIntervalSinceNow: TimeInterval(fireAt)), interval: TimeInterval(SECONDS_PER_DAY), target: self, selector: #selector(self.resetUsedFat), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer!, forMode: .common)
+        startResetTimer(Int(now))
+        lastLaunch = now
     }
     
     @objc private func resetUsedFat() {
@@ -57,5 +50,18 @@ final class ModelData: ObservableObject {
         let nowDays = timestampInSeconds / SECONDS_PER_DAY
         let thenDays = (Int(lastLaunch) - resetTime)  / SECONDS_PER_DAY
         return nowDays > thenDays
+    }
+    
+    private func startResetTimer(_ timestampInSeconds: Int) {
+        let nowOffset = timestampInSeconds - resetTime
+        let nowSinceMidnight = nowOffset % SECONDS_PER_DAY
+        let fireAt: Int;
+        if (nowSinceMidnight < resetTime) {
+            fireAt = resetTime - nowSinceMidnight
+        } else {
+            fireAt = SECONDS_PER_DAY - nowSinceMidnight + resetTime
+        }
+        timer = Timer(fireAt: Date(timeIntervalSinceNow: TimeInterval(fireAt)), interval: TimeInterval(SECONDS_PER_DAY), target: self, selector: #selector(self.resetUsedFat), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer!, forMode: .common)
     }
 }
