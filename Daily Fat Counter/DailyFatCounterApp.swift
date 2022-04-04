@@ -8,10 +8,12 @@
 import SwiftUI
 
 @main
-struct Daily_Fat_CounterApp: App {
+struct DailyFatCounterApp: App {
+    @StateObject private var modelData = ModelData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(modelData)
         }
     }
 }
