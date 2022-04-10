@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct CounterSettings: View {
-    @Binding var totalFat: Double;
-    @Binding var resetTime: Int;
+    @EnvironmentObject var modelData: ModelData
     
     private var hours: Int {
-        resetTime / SECONDS_PER_HOUR
+        modelData.resetTime / SECONDS_PER_HOUR
     }
     private var minutes: Int {
-        (resetTime % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
+        (modelData.resetTime % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
     }
     private var displayTime: String {
         let period: String;
@@ -42,18 +41,21 @@ struct CounterSettings: View {
                 Text("Total daily fat allowed")
                     .foregroundColor(.secondary)
                 Stepper(
-                    String(format: "%.1fg", totalFat),
-                    value: $totalFat,
+                    String(format: "%.1fg", modelData.totalFat),
+                    value: $modelData.totalFat,
                     in: 0...Double.infinity,
                     step: 1.0
                 )
                 .padding(8)
             }.padding(8)
             VStack(alignment: .leading) {
-                Text("Reset daily fat at")
+                Text("Reset daily fat time")
                     .foregroundColor(.secondary)
-                Text(displayTime)
-                    .padding(8)
+                DatePicker(
+                    "Daily reset",
+                    selection: $modelData.dateForResetSelection,
+                    displayedComponents: .hourAndMinute
+                ).padding(8)
             }.padding(8)
             Button("Report a bug") {
                 
@@ -64,7 +66,8 @@ struct CounterSettings: View {
 
 struct CounterSettings_Previews: PreviewProvider {
     static var previews: some View {
-        CounterSettings(totalFat: .constant(45.0), resetTime: .constant(57600))
+        CounterSettings()
+            .environmentObject(ModelData())
             .preferredColorScheme(.dark)
     }
 }

@@ -23,7 +23,7 @@ struct CounterHome: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(CounterHome.dateFormatter.string(from: date))
-                    .font(.title)
+                    .font(.title2)
                 Spacer()
                 Button() {
                     showingSettings.toggle()
@@ -48,10 +48,7 @@ struct CounterHome: View {
                 ForEach([1, 5, 10], id: \.self) { value in
                     CounterButton(value: value) {
                         modelData.usedFat += Double(value)
-                    }
-                    if (value < 10) {
-                        Spacer()
-                    }
+                    }.padding(4)
                 }
                 Spacer()
             }
@@ -60,10 +57,7 @@ struct CounterHome: View {
         .background(Color.ui.background)
         .sheet(isPresented: $showingSettings) {
             VStack {
-                CounterSettings(
-                    totalFat: $modelData.totalFat,
-                    resetTime: $modelData.resetTime
-                )
+                CounterSettings()
             }
         }
     }
