@@ -34,33 +34,42 @@ struct CounterSettings: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Settings")
-                .font(.title)
-            VStack(alignment: .leading) {
-                Text("Total daily fat allowed")
-                    .foregroundColor(.secondary)
-                Stepper(
-                    String(format: "%.1fg", modelData.totalFat),
-                    value: $modelData.totalFat,
-                    in: 0...Double.infinity,
-                    step: 1.0
-                )
-                .padding(8)
-            }.padding(8)
-            VStack(alignment: .leading) {
-                Text("Reset daily fat time")
-                    .foregroundColor(.secondary)
-                DatePicker(
-                    "Daily reset",
-                    selection: $modelData.dateForResetSelection,
-                    displayedComponents: .hourAndMinute
-                ).padding(8)
-            }.padding(8)
-            Button("Report a bug") {
-                
-            }.padding(16)
-        }.padding(8)
+        NavigationView {
+            List() {
+                Section(header: Text("Total daily fat allowed")) {
+                    Stepper(
+                        String(format: "%.1fg", modelData.totalFat),
+                        value: $modelData.totalFat,
+                        in: 0...Double.infinity,
+                        step: 1.0
+                    )
+                }
+                Section(
+                    header: Text("Reset daily fat time"),
+                    footer: HStack() {
+                        Spacer(minLength: 24)
+                        Text("Each day at the chosen time, the amount of fat used during the day will be reset to 0.0g")
+                            .multilineTextAlignment(.center)
+                        Spacer(minLength: 24)
+                    }
+                ) {
+                    DatePicker(
+                        "Daily reset",
+                        selection: $modelData.dateForResetSelection,
+                        displayedComponents: .hourAndMinute
+                    )
+                    Button("Reset fat used now") {
+                        modelData.usedFat = 0
+                    }
+                }
+                Button("Give Feedback") {
+                    
+                }
+                Button("Report a bug", role: .destructive) {
+                    
+                }
+            }.navigationTitle("Settings")
+        }
     }
 }
 
