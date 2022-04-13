@@ -62,11 +62,13 @@ struct CounterSettings: View {
                         modelData.usedFat = 0
                     }
                 }
-                Button("Give Feedback") {
-                    
-                }
-                Button("Report a bug", role: .destructive) {
-                    
+                Section() {
+                    Button("Give Feedback") {
+                        
+                    }
+                    Button("Report a bug", role: .destructive) {
+                        
+                    }
                 }
             }.navigationTitle("Settings")
         }

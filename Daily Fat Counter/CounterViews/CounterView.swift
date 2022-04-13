@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct CounterView: View {
+    static let gradient = Gradient(
+        colors: [
+            Color.ui.paleGreen,
+            Color.ui.paleYellow,
+            Color.ui.paleYellow,
+            Color.ui.paleGreen
+        ]
+    )
     static let angularGradient = AngularGradient(
-        gradient: Gradient(
-            colors: [
-                Color.ui.paleGreen,
-                Color.ui.paleYellow,
-                Color.ui.paleYellow,
-                Color.ui.paleGreen
-            ]
-        ),
+        gradient: gradient,
         center: .center,
         startAngle: .degrees(90),
         endAngle: .degrees(450)
