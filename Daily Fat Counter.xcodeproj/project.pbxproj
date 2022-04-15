@@ -21,6 +21,11 @@
 		B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DF27F914ED007ABA20 /* CounterButton.swift */; };
 		B8B131E427FA2219007ABA20 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E327FA2219007ABA20 /* ModelData.swift */; };
 		B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E527FA3E71007ABA20 /* CounterSettings.swift */; };
+		B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */; };
+		B8CD9F5B2809DBF10009BBDA /* DailyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */; };
+		B8CD9F5D2809E1900009BBDA /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
+		B8CD9F5F2809EB730009BBDA /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */; };
+		B8CD9F612809F2240009BBDA /* HistoryGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F602809F2240009BBDA /* HistoryGraph.swift */; };
 		B8D8214927FA837000B28F90 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8214827FA837000B28F90 /* Numbers.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +64,11 @@
 		B8B131DF27F914ED007ABA20 /* CounterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterButton.swift; sourceTree = "<group>"; };
 		B8B131E327FA2219007ABA20 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		B8B131E527FA3E71007ABA20 /* CounterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSettings.swift; sourceTree = "<group>"; };
+		B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryHome.swift; sourceTree = "<group>"; };
+		B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFat.swift; sourceTree = "<group>"; };
+		B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFatStore.swift; sourceTree = "<group>"; };
+		B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
+		B8CD9F602809F2240009BBDA /* HistoryGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGraph.swift; sourceTree = "<group>"; };
 		B8D8214827FA837000B28F90 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,14 +120,15 @@
 		B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */ = {
 			isa = PBXGroup;
 			children = (
+				B8CD9F582809DB1C0009BBDA /* Icons */,
+				B8CD9F572809DB0A0009BBDA /* Models */,
+				B8CD9F542809D6D60009BBDA /* History Views */,
 				B8B131E227FA1C81007ABA20 /* Constants */,
 				B8B131E127FA1C63007ABA20 /* CounterViews */,
 				B8AFB0E927F1365B008B5AD3 /* DailyFatCounterApp.swift */,
 				B8AFB0EB27F1365B008B5AD3 /* ContentView.swift */,
 				B8AFB0ED27F13661008B5AD3 /* Assets.xcassets */,
 				B8AFB0EF27F13661008B5AD3 /* Preview Content */,
-				B8B131E327FA2219007ABA20 /* ModelData.swift */,
-				B8AB4B7028036BAF00A55E8D /* AppIcon.swift */,
 			);
 			path = "Daily Fat Counter";
 			sourceTree = "<group>";
@@ -165,6 +176,42 @@
 				B8D8214827FA837000B28F90 /* Numbers.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		B8CD9F542809D6D60009BBDA /* History Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */,
+				B8CD9F602809F2240009BBDA /* HistoryGraph.swift */,
+				B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */,
+			);
+			path = "History Views";
+			sourceTree = "<group>";
+		};
+		B8CD9F572809DB0A0009BBDA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B8CD9F592809DB720009BBDA /* History */,
+				B8B131E327FA2219007ABA20 /* ModelData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B8CD9F582809DB1C0009BBDA /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				B8AB4B7028036BAF00A55E8D /* AppIcon.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		B8CD9F592809DB720009BBDA /* History */ = {
+			isa = PBXGroup;
+			children = (
+				B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */,
+				B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,13 +344,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8CD9F612809F2240009BBDA /* HistoryGraph.swift in Sources */,
 				B8AB4B7128036BAF00A55E8D /* AppIcon.swift in Sources */,
+				B8CD9F5D2809E1900009BBDA /* DailyFatStore.swift in Sources */,
 				B8AFB0EC27F1365B008B5AD3 /* ContentView.swift in Sources */,
 				B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */,
 				B8AFB0EA27F1365B008B5AD3 /* DailyFatCounterApp.swift in Sources */,
 				B8AFB11427F136D0008B5AD3 /* CounterView.swift in Sources */,
 				B8B131DE27F900F8007ABA20 /* CounterHome.swift in Sources */,
 				B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */,
+				B8CD9F5B2809DBF10009BBDA /* DailyFat.swift in Sources */,
+				B8CD9F5F2809EB730009BBDA /* HistoryRow.swift in Sources */,
+				B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */,
 				B8B131DC27F8DCBD007ABA20 /* Colours.swift in Sources */,
 				B8B131E427FA2219007ABA20 /* ModelData.swift in Sources */,
 				B8D8214927FA837000B28F90 /* Numbers.swift in Sources */,

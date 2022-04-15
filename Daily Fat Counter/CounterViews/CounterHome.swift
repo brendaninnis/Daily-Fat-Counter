@@ -17,20 +17,11 @@ struct CounterHome: View {
     
     let date = Date()
     @EnvironmentObject var modelData: ModelData
-    @State private var showingSettings = false
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text(CounterHome.dateFormatter.string(from: date))
-                    .font(.title2)
-                Spacer()
-                Button() {
-                    showingSettings.toggle()
-                } label: {
-                    Label("Settings", systemImage: "gearshape")
-                }
-            }
+            Text(CounterHome.dateFormatter.string(from: date))
+                .font(.title2)
             Spacer()
             HStack {
                 Spacer()
@@ -54,12 +45,10 @@ struct CounterHome: View {
             }
         }
         .padding()
-        .background(Color.ui.background)
-        .sheet(isPresented: $showingSettings) {
-            VStack {
-                CounterSettings()
-            }
-        }
+    }
+    
+    init() {
+        UITabBar.appearance().barTintColor = UIColor.secondarySystemBackground
     }
 }
 
