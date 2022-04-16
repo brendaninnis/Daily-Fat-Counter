@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
     @EnvironmentObject var dailyData: DailyFatStore
     @State private var selection: Tab = .counter
     
@@ -37,6 +38,12 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gearshape")
                 }
                 .tag(Tab.settings)
+        }.onChange(of: selection) { tab in
+            if tab == .history {
+                modelData.animateHistory = true
+            } else {
+                modelData.animateHistory = false
+            }
         }
     }
 }

@@ -38,6 +38,7 @@ final class ModelData: ObservableObject {
             startResetTimer(Int(Date().timeIntervalSince1970))
         }
     }
+    @Published var animateHistory: Bool = false
     
     init() {
         let now = Date().timeIntervalSince1970
@@ -45,7 +46,6 @@ final class ModelData: ObservableObject {
         intializeDailyFatReset(intnow)
         initializDateForResetSelection(intnow)
         lastLaunch = now
-        
     }
     
     private func intializeDailyFatReset(_ timestampInSeconds: Int) {

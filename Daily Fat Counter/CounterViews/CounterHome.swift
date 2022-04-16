@@ -46,10 +46,6 @@ struct CounterHome: View {
         }
         .padding()
     }
-    
-    init() {
-        UITabBar.appearance().barTintColor = UIColor.secondarySystemBackground
-    }
 }
 
 struct CounterHome_Previews: PreviewProvider {

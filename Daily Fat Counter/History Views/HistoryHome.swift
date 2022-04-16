@@ -14,7 +14,9 @@ struct HistoryHome: View {
         var dailyFat: [DailyFat]
     }
     
+    @EnvironmentObject var modelData: ModelData
     @Binding var history: [DailyFat]
+    
     private var months: [Month] {
         var months = [Month]()
         var currentMonth: Month?
@@ -39,7 +41,7 @@ struct HistoryHome: View {
             ForEach(months) { month in
                 Section(month.name) {
                     ForEach(month.dailyFat) { dailyFat in
-                        HistoryRow(dailyFat: dailyFat)
+                        HistoryRow(dailyFat: dailyFat, isAnimated: $modelData.animateHistory)
                     }
                 }
             }

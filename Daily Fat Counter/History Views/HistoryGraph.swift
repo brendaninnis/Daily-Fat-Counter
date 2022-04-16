@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HistoryGraph: View {
+    let smallHeight: CGFloat = 4
+    let largeHeight: CGFloat = 16
     let linearGradient = LinearGradient(
         gradient: Gradient(colors: [
             Color.ui.paleGreen,
@@ -16,6 +18,7 @@ struct HistoryGraph: View {
         startPoint: .leading,
         endPoint: .trailing
     )
+    @Binding var isAnimated: Bool
     var progress: CGFloat {
         didSet {
             if (progress > 1) {
@@ -24,7 +27,8 @@ struct HistoryGraph: View {
         }
     }
     
-    init(progress: CGFloat) {
+    init(isAnimated: Binding<Bool>, progress: CGFloat) {
+        self._isAnimated = isAnimated
         self.progress = progress > 1 ? 1 : progress
     }
     
@@ -32,11 +36,23 @@ struct HistoryGraph: View {
         GeometryReader { geometry in
             ZStack {
                 RoundedRectangle(cornerRadius: 2)
-                    .path(in: CGRect(x: 0, y: geometry.size.height * 0.5 - 2, width: geometry.size.width, height: 4))
+                    .path(in: CGRect(
+                        x: 0,
+                        y: geometry.size.height * 0.5 - smallHeight * 0.5,
+                        width: geometry.size.width,
+                        height: smallHeight))
                     .fill(linearGradient)
-                RoundedRectangle(cornerRadius: 8)
-                    .path(in: CGRect(x: 0, y: geometry.size.height * 0.5 - 8, width: geometry.size.width * progress, height: 16))
-                    .fill(linearGradient)
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: geometry.size.height * 0.5))
+                    path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height * 0.5))
+                }
+                .trim(from: 0, to: isAnimated ? progress : 0)
+                .stroke(linearGradient, style: StrokeStyle(
+                    lineWidth: largeHeight,
+                    lineCap: .round,
+                    lineJoin: .round
+                ))
+                .animation(.easeInOut, value: isAnimated)
             }
         }
     }
@@ -44,6 +60,6 @@ struct HistoryGraph: View {
 
 struct HistoryGraph_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryGraph(progress: 0.7)
+        HistoryGraph(isAnimated: .constant(true), progress: 0.7)
     }
 }
