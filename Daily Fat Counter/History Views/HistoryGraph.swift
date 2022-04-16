@@ -52,7 +52,6 @@ struct HistoryGraph: View {
                     lineCap: .round,
                     lineJoin: .round
                 ))
-                .animation(.easeInOut, value: isAnimated)
             }
         }
     }

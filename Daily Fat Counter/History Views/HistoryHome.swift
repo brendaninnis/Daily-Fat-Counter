@@ -15,6 +15,7 @@ struct HistoryHome: View {
     }
     
     @EnvironmentObject var modelData: ModelData
+    @State var animateHistory = false
     @Binding var history: [DailyFat]
     
     private var months: [Month] {
@@ -41,12 +42,22 @@ struct HistoryHome: View {
             ForEach(months) { month in
                 Section(month.name) {
                     ForEach(month.dailyFat) { dailyFat in
-                        HistoryRow(dailyFat: dailyFat, isAnimated: $modelData.animateHistory)
+                        HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
                     }
                 }
             }
         }
         .listStyle(.plain)
+        .onAppear() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                withAnimation(.easeInOut) {
+                    animateHistory = true
+                }
+            }
+        }
+        .onDisappear() {
+            animateHistory = false
+        }
     }
 }
 

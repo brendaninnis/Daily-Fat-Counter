@@ -38,12 +38,6 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gearshape")
                 }
                 .tag(Tab.settings)
-        }.onChange(of: selection) { tab in
-            if tab == .history {
-                modelData.animateHistory = true
-            } else {
-                modelData.animateHistory = false
-            }
         }
     }
 }
