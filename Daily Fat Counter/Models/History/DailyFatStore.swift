@@ -59,3 +59,18 @@ class DailyFatStore: ObservableObject {
         }
     }
 }
+
+// MARK: CounterDataDelegate
+extension DailyFatStore: CounterDataDelegate {
+    func newDailyFat(_ dailyFat: DailyFat) {
+        history.insert(dailyFat, at: 0)
+        Self.save(history: history) { result in
+            switch result {
+            case .success(let count):
+                print("Daily fat #\(count) saved for \(dailyFat.dateLabel)")
+            case .failure(let error):
+                print("Failed to save daily fat: \(error.localizedDescription)")
+            }
+        }
+    }
+}

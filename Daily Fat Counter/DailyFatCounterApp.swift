@@ -9,13 +9,13 @@ import SwiftUI
 
 @main
 struct DailyFatCounterApp: App {
-    @StateObject private var modelData = ModelData()
+    @StateObject private var counterData = CounterData()
     @StateObject private var dailyData = DailyFatStore()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(modelData)
+                .environmentObject(counterData)
                 .environmentObject(dailyData)
                 .onAppear {
                     DailyFatStore.load { result in
@@ -25,6 +25,7 @@ struct DailyFatCounterApp: App {
                         case .success(let history):
                             dailyData.history = history
                         }
+                        counterData.start(withDelegate: dailyData)
                     }
             }
         }

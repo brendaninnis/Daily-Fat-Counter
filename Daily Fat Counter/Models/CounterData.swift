@@ -1,5 +1,5 @@
 //
-//  ModelData.swift
+//  CounterData.swift
 //  Daily Fat Counter
 //
 //  Created by Brendan Innis on 2022-04-03.
@@ -9,11 +9,12 @@ import Foundation
 import SwiftUI
 import Combine
 
-final class ModelData: ObservableObject {
+final class CounterData: ObservableObject {
     private var timer: Timer? = nil
+    private var delegate: CounterDataDelegate?
     
-    @AppStorage("last_launch") var lastLaunch: Double = 0.0
-    @AppStorage("reset_time") var resetTime: Int = 6600 {
+    @AppStorage("last_launch") var lastLaunch: Int = 0
+    @AppStorage("reset_time") var resetTime: Int = 0 {
         willSet {
             // Publish changes
             objectWillChange.send()
@@ -39,12 +40,13 @@ final class ModelData: ObservableObject {
         }
     }
     
-    init() {
+    func start(withDelegate delegate: CounterDataDelegate? = nil) {
+        self.delegate = delegate
         let now = Date().timeIntervalSince1970
         let intnow = Int(now)
         intializeDailyFatReset(intnow)
         initializDateForResetSelection(intnow)
-        lastLaunch = now
+        lastLaunch = intnow
     }
     
     private func intializeDailyFatReset(_ timestampInSeconds: Int) {
@@ -55,7 +57,7 @@ final class ModelData: ObservableObject {
     
     private func resetTimeElapsed(_ timestampInSeconds: Int) -> Bool {
         let nowDays = timestampInSeconds / SECONDS_PER_DAY
-        let thenDays = (Int(lastLaunch) - resetTime)  / SECONDS_PER_DAY
+        let thenDays = (lastLaunch - resetTime) / SECONDS_PER_DAY
         return nowDays > thenDays
     }
     
@@ -83,7 +85,32 @@ final class ModelData: ObservableObject {
     }
     
     @objc private func resetUsedFat() {
+        createDailyFat()
         usedFat = 0
     }
+    
+    private func createDailyFat() {
+        let nowOffset = lastLaunch - TimeZone.current.secondsFromGMT()
+        let nowSinceMidnight = nowOffset % SECONDS_PER_DAY
+        let dateComponents: DateComponents
+        if (nowSinceMidnight > resetTime) {
+            dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date(timeIntervalSince1970: Double(lastLaunch)))
+            // Last reset today
+        } else {
+            dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date(timeIntervalSince1970: Double(lastLaunch - SECONDS_PER_DAY)))
+            // Last reset yesterday
+        }
+        delegate?.newDailyFat(DailyFat.createDailyFat(
+            year: dateComponents.year!,
+            month: dateComponents.month!,
+            day: dateComponents.day!,
+            usedFat: usedFat,
+            totalFat: totalFat
+        ))
+    }
 
+}
+
+protocol CounterDataDelegate {
+    func newDailyFat(_ dailyFat: DailyFat)
 }

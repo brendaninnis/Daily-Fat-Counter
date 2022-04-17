@@ -17,8 +17,8 @@ let YEAR_SHIFT  = 16
 
 struct DailyFat: Identifiable, Codable {
     let id      : Int
-    let usedFat : Int
-    let totalFat: Int
+    let usedFat : Double
+    let totalFat: Double
     
     var dateLabel: String {
         let year  = (id & YEAR_MASK) >> YEAR_SHIFT
@@ -29,5 +29,10 @@ struct DailyFat: Identifiable, Codable {
     var monthLabel: String {
         let month = (id & MONTH_MASK) >> MONTH_SHIFT
         return DateFormatter().monthSymbols[month]
+    }
+    
+    static func createDailyFat(year: Int, month: Int, day: Int, usedFat: Double, totalFat: Double) -> DailyFat {
+        let id = year << YEAR_SHIFT + month << MONTH_SHIFT + day
+        return DailyFat(id: id, usedFat: usedFat, totalFat: totalFat)
     }
 }
