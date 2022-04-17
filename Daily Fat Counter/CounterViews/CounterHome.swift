@@ -16,28 +16,19 @@ struct CounterHome: View {
     }()
     
     let date = Date()
-    @EnvironmentObject var modelData: ModelData
-    @State private var showingSettings = false
+    @EnvironmentObject var counterData: CounterData
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text(CounterHome.dateFormatter.string(from: date))
-                    .font(.title2)
-                Spacer()
-                Button() {
-                    showingSettings.toggle()
-                } label: {
-                    Label("Settings", systemImage: "gearshape")
-                }
-            }
+            Text(CounterHome.dateFormatter.string(from: date))
+                .font(.title)
             Spacer()
             HStack {
                 Spacer()
                 VStack {
                     CounterView(
-                        usedGrams: $modelData.usedFat,
-                        totalGrams: $modelData.totalFat
+                        usedGrams: $counterData.usedFat,
+                        totalGrams: $counterData.totalFat
                     )
                 }
                 Spacer()
@@ -47,26 +38,20 @@ struct CounterHome: View {
                 Spacer()
                 ForEach([1, 5, 10], id: \.self) { value in
                     CounterButton(value: value) {
-                        modelData.usedFat += Double(value)
+                        counterData.usedFat += Double(value)
                     }.padding(4)
                 }
                 Spacer()
             }
         }
         .padding()
-        .background(Color.ui.background)
-        .sheet(isPresented: $showingSettings) {
-            VStack {
-                CounterSettings()
-            }
-        }
     }
 }
 
 struct CounterHome_Previews: PreviewProvider {
     static var previews: some View {
         CounterHome()
-            .environmentObject(ModelData())
+            .environmentObject(CounterData())
             .previewInterfaceOrientation(.portrait)
     }
 }

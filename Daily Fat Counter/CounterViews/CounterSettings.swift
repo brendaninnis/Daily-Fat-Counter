@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CounterSettings: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var counterData: CounterData
     
     private var hours: Int {
-        modelData.resetTime / SECONDS_PER_HOUR
+        counterData.resetTime / SECONDS_PER_HOUR
     }
     private var minutes: Int {
-        (modelData.resetTime % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
+        (counterData.resetTime % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
     }
     private var displayTime: String {
         let period: String;
@@ -38,8 +38,8 @@ struct CounterSettings: View {
             List() {
                 Section(header: Text("Total daily fat allowed")) {
                     Stepper(
-                        String(format: "%.1fg", modelData.totalFat),
-                        value: $modelData.totalFat,
+                        String(format: "%.1fg", counterData.totalFat),
+                        value: $counterData.totalFat,
                         in: 0...Double.infinity,
                         step: 1.0
                     )
@@ -55,11 +55,11 @@ struct CounterSettings: View {
                 ) {
                     DatePicker(
                         "Daily reset",
-                        selection: $modelData.dateForResetSelection,
+                        selection: $counterData.dateForResetSelection,
                         displayedComponents: .hourAndMinute
                     )
                     Button("Reset fat used now") {
-                        modelData.usedFat = 0
+                        counterData.usedFat = 0
                     }
                 }
                 Section() {
@@ -78,7 +78,7 @@ struct CounterSettings: View {
 struct CounterSettings_Previews: PreviewProvider {
     static var previews: some View {
         CounterSettings()
-            .environmentObject(ModelData())
+            .environmentObject(CounterData())
             .preferredColorScheme(.dark)
     }
 }
