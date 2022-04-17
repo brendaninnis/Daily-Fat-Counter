@@ -63,6 +63,10 @@ class DailyFatStore: ObservableObject {
 // MARK: CounterDataDelegate
 extension DailyFatStore: CounterDataDelegate {
     func newDailyFat(_ dailyFat: DailyFat) {
+        guard dailyFat.id > history.first?.id ?? -1 else {
+            print("Daily fat already logged for \(dailyFat.dateLabel)")
+            return
+        }
         history.insert(dailyFat, at: 0)
         Self.save(history: history) { result in
             switch result {

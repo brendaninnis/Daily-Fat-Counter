@@ -28,7 +28,7 @@ struct DailyFat: Identifiable, Codable {
     
     var monthLabel: String {
         let month = (id & MONTH_MASK) >> MONTH_SHIFT
-        return DateFormatter().monthSymbols[month]
+        return DateFormatter().monthSymbols[month - 1]
     }
     
     static func createDailyFat(year: Int, month: Int, day: Int, usedFat: Double, totalFat: Double) -> DailyFat {
