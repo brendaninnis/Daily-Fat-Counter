@@ -40,7 +40,7 @@ struct CounterSettings: View {
                     Stepper(
                         String(format: "%.1fg", counterData.totalFat),
                         value: $counterData.totalFat,
-                        in: 0...Double.infinity,
+                        in: 1...Double.infinity,
                         step: 1.0
                     )
                 }

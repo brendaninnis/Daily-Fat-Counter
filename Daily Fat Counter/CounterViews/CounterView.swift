@@ -8,20 +8,8 @@
 import SwiftUI
 
 struct CounterView: View {
-    static let gradient = Gradient(
-        colors: [
-            Color.ui.paleGreen,
-            Color.ui.paleYellow,
-            Color.ui.paleYellow,
-            Color.ui.paleGreen
-        ]
-    )
-    static let angularGradient = AngularGradient(
-        gradient: gradient,
-        center: .center,
-        startAngle: .degrees(90),
-        endAngle: .degrees(450)
-    )
+    @Environment(\.colorScheme) var colorScheme
+    
     let mode: Mode = .totalFat;
     @Binding var usedGrams: Double;
     @Binding var totalGrams: Double;
@@ -30,16 +18,37 @@ struct CounterView: View {
     }
     
     var body: some View {
+        let startColor = Color.UI.gradientStartColor(
+            withProgress: progress,
+            inColorScheme: colorScheme
+        )
+        let endColor = Color.UI.gradientEndColor(
+            withProgress: progress,
+            inColorScheme: colorScheme
+        )
+        let gradient = Gradient(colors: [
+            startColor,
+            endColor,
+            endColor,
+            startColor
+        ])
+        let angularGradient = AngularGradient(
+            gradient: gradient,
+            center: .center,
+            startAngle: .degrees(90),
+            endAngle: .degrees(450)
+        )
+
         VStack {
             ZStack {
                 Circle()
-                    .stroke(Self.angularGradient, lineWidth: 4.0)
+                    .stroke(angularGradient, lineWidth: 4.0)
                     .rotationEffect(.degrees(-90))
                     .frame(width: 160, height: 160)
                 Circle()
                     .trim(from: 0, to: progress)
                     .stroke(
-                        Self.angularGradient,
+                        angularGradient,
                         style: StrokeStyle(
                             lineWidth: 16.0,
                             lineCap: .round,
