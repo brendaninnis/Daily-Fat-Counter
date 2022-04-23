@@ -10,15 +10,27 @@ import SwiftUI
 struct AppIcon: View {
     
     static let appIconSize: Double = 512
+    let angularGradient = AngularGradient(
+        gradient: Gradient(colors: [
+            Color.ui.paleGreen,
+            Color.ui.paleYellow,
+            Color.ui.paleYellow,
+            Color.ui.paleGreen
+        ]),
+        center: .center,
+        startAngle: .degrees(90),
+        endAngle: .degrees(450)
+    )
     let circleDiameter: Double = 372
     let plusLength: Double = 240
     let lineWidth: Double = 44
     
     var body: some View {
+        
         ZStack {
             Color(UIColor.systemBackground)
             Circle()
-                .stroke(CounterView.angularGradient, lineWidth: lineWidth)
+                .stroke(angularGradient, lineWidth: lineWidth)
                 .rotationEffect(.degrees(-90))
                 .frame(width: circleDiameter, height: circleDiameter)
             Path { path in

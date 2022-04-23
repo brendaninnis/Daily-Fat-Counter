@@ -8,31 +8,30 @@
 import SwiftUI
 
 struct HistoryGraph: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     let smallHeight: CGFloat = 4
     let largeHeight: CGFloat = 16
-    let linearGradient = LinearGradient(
-        gradient: Gradient(colors: [
-            Color.ui.paleGreen,
-            Color.ui.paleYellow
-        ]),
-        startPoint: .leading,
-        endPoint: .trailing
-    )
     @Binding var isAnimated: Bool
-    var progress: CGFloat {
-        didSet {
-            if (progress > 1) {
-                progress = 1
-            }
-        }
-    }
-    
-    init(isAnimated: Binding<Bool>, progress: CGFloat) {
-        self._isAnimated = isAnimated
-        self.progress = progress > 1 ? 1 : progress
-    }
+    var progress: CGFloat
     
     var body: some View {
+        let startColor = Color.UI.gradientStartColor(
+            withProgress: progress,
+            inColorScheme: colorScheme
+        )
+        let endColor = Color.UI.gradientEndColor(
+            withProgress: progress,
+            inColorScheme: colorScheme
+        )
+        let linearGradient = LinearGradient(
+            gradient: Gradient(colors: [
+                startColor,
+                endColor
+            ]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
         GeometryReader { geometry in
             ZStack {
                 RoundedRectangle(cornerRadius: 2)
@@ -46,7 +45,7 @@ struct HistoryGraph: View {
                     path.move(to: CGPoint(x: 0, y: geometry.size.height * 0.5))
                     path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height * 0.5))
                 }
-                .trim(from: 0, to: isAnimated ? progress : 0)
+                .trim(from: 0, to: isAnimated ? min(progress, 1) : 0)
                 .stroke(linearGradient, style: StrokeStyle(
                     lineWidth: largeHeight,
                     lineCap: .round,

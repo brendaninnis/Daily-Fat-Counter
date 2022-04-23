@@ -14,7 +14,6 @@ struct DailyFatCounterApp: App {
     @StateObject private var counterData = CounterData()
     @StateObject private var dailyData = DailyFatStore()
     
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

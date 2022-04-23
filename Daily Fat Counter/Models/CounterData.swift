@@ -56,9 +56,10 @@ final class CounterData: ObservableObject {
         if (resetTimeElapsed(timestampInSeconds)) {
             DebugLog.log("Reset time elapsed")
             resetUsedFat()
+        } else {
+            lastCheck = timestampInSeconds
         }
         initializDateForResetSelection(timestampInSeconds)
-        lastCheck = timestampInSeconds
     }
     
     private func resetTimeElapsed(_ timestampInSeconds: Int) -> Bool {
@@ -67,6 +68,7 @@ final class CounterData: ObservableObject {
         }
         let nowDays = timestampInSeconds / SECONDS_PER_DAY
         let thenDays = (lastCheck - resetTime) / SECONDS_PER_DAY
+        DebugLog.log("nowDays=\(nowDays) thendays=\(thenDays) now=\(timestampInSeconds) then=\(lastCheck)")
         return nowDays > thenDays
     }
     
@@ -106,10 +108,12 @@ final class CounterData: ObservableObject {
         let nowSinceMidnight = nowOffset % SECONDS_PER_DAY
         let dateComponents: DateComponents
         if (nowSinceMidnight >= resetTime) {
-            dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date(timeIntervalSince1970: Double(lastCheck)))
+            dateComponents = Calendar.current.dateComponents(
+                [.day, .month, .year], from: Date(timeIntervalSince1970: Double(lastCheck)))
             // Last reset today
         } else {
-            dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date(timeIntervalSince1970: Double(lastCheck - SECONDS_PER_DAY)))
+            dateComponents = Calendar.current.dateComponents(
+                [.day, .month, .year], from: Date(timeIntervalSince1970: Double(lastCheck - SECONDS_PER_DAY)))
             // Last reset yesterday
         }
         DebugLog.log("Create DailyFat for year=\(dateComponents.year!) month=\(dateComponents.month!) day=\(dateComponents.day!)")
