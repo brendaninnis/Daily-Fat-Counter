@@ -38,7 +38,9 @@ struct CounterHome: View {
                 Spacer()
                 ForEach([1, 5, 10], id: \.self) { value in
                     CounterButton(value: value) {
-                        counterData.usedFat += Double(value)
+                        withAnimation(.easeInOut) {
+                            counterData.usedFat += Double(value)
+                        }
                     }.padding(4)
                 }
                 Spacer()
