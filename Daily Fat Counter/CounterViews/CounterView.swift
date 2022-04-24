@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+fileprivate var lastQuadrant: Geometry.Quadrant?
+
 struct CounterView: View {
     let circleSize: Double = 160
     let touchZoneSize: Double = 160
@@ -16,13 +18,14 @@ struct CounterView: View {
     @Binding var usedGrams: Double
     @Binding var totalGrams: Double
     
+    @State private var dragStarted = false
+    @State private var dragGrabbed = false
+    
     var progress: Double {
         usedGrams / totalGrams
     }
     
     var drag: some Gesture {
-        var grabbed = false
-        var started = false
         let origin = CGPoint(x: circleSize * 0.5, y: circleSize * 0.5)
         let outerTouchCircle = circleSize + touchZoneSize * 0.5
         let innerTouchCircle = circleSize - touchZoneSize * 0.5
@@ -35,24 +38,37 @@ struct CounterView: View {
                     y: origin.y - origin.y * cos(handleAngle)
                 )
                 let location = gesture.location
-                if (!started) {
-                    grabbed = abs(location.x - handle.x) < handleSize &&
+                let newQuadrant = Geometry.Quadrant(withPoint: location,
+                                                    inCircleWithOrigin: origin)
+                if (!dragStarted) {
+                    dragGrabbed = abs(location.x - handle.x) < handleSize &&
                               abs(location.y - handle.y) < handleSize
-                    started = true
+                    lastQuadrant = newQuadrant
+                    dragStarted = true
                 }
-                guard grabbed,
-                    point(location, isInsideCircle: outerTouchCircle, atOrigin: origin),
-                    !point(location, isInsideCircle: innerTouchCircle, atOrigin: origin) else {
+                guard dragGrabbed,
+                    Geometry.point(location,
+                                   isInsideCircle: outerTouchCircle,
+                                   atOrigin: origin),
+                    !Geometry.point(location,
+                                    isInsideCircle: innerTouchCircle,
+                                    atOrigin: origin) else {
                     return
                 }
+                
                 var opposite: Double
                 var adjacent: Double
                 var quadrantOffset: Double
-                switch (Quadrant(withPoint: location, inCircleWithOrigin: origin)) {
+                var completeRotations: Double = floor(progress)
+                switch (newQuadrant) {
                 case .one:
                     quadrantOffset = 0
                     opposite = location.x - origin.x
                     adjacent = origin.y - location.y
+                    if (lastQuadrant == .four) {
+                        completeRotations = round(progress)
+                        DebugLog.log("Rotate forward #\(completeRotations)")
+                    }
                 case .two:
                     quadrantOffset = Double.pi * 0.5
                     opposite = location.y - origin.y
@@ -65,14 +81,20 @@ struct CounterView: View {
                     quadrantOffset = Double.pi * 1.5
                     opposite = origin.y - location.y
                     adjacent = origin.x - location.x
+                    if (lastQuadrant == .one) {
+                        completeRotations = max(round(progress) - 1, 0)
+                        DebugLog.log("Rotate backward #\(completeRotations)")
+                    }
                 }
+                lastQuadrant = newQuadrant
                 let angle = atan(opposite / adjacent) + quadrantOffset
                 withAnimation(.easeOut(duration: 0.1)) {
-                    usedGrams = round((angle / (2 * Double.pi)) * totalGrams)
+                    usedGrams = (angle / (2 * Double.pi)) * totalGrams + completeRotations * totalGrams
                 }
             }
             .onEnded { gesture in
-                started = false
+                dragStarted = false
+                lastQuadrant = nil
             }
     }
     
@@ -122,35 +144,6 @@ struct CounterView: View {
             Text(mode.rawValue)
                 .font(.headline)
                 .padding()
-        }
-    }
-    
-    func point(_ point: CGPoint, isInsideCircle circleSize: Double, atOrigin origin: CGPoint) -> Bool {
-        return pow(point.x - origin.x, 2) + pow(point.y - origin.y, 2) < pow(circleSize * 0.5, 2)
-    }
-        
-    enum Quadrant {
-        case one
-        case two
-        case three
-        case four
-        
-        init(withPoint point: CGPoint, inCircleWithOrigin origin: CGPoint) {
-            // Quadrant one starts at 0 radians and ends before pi/2
-            // This way we never divide by zero when using arctan
-            if (point.x >= origin.x) {
-                if (point.y < origin.y) {
-                    self = .one
-                } else {
-                    self = .two
-                }
-            } else {
-                if (point.y >= origin.y) {
-                    self = .three
-                } else {
-                    self = .four
-                }
-            }
         }
     }
     
