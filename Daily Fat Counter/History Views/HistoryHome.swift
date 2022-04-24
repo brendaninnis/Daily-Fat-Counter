@@ -14,7 +14,6 @@ struct HistoryHome: View {
         var dailyFat: [DailyFat]
     }
    
-    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var counterData: CounterData
     @State var animateHistory = false
     @Binding var history: [DailyFat]

@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct CounterView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     let circleSize: Double = 160
-    let touchZoneSize: Double = 240
+    let touchZoneSize: Double = 160
     let handleSize: Double = 88
     let mode: Mode = .totalFat
     
@@ -43,14 +41,14 @@ struct CounterView: View {
                     started = true
                 }
                 guard grabbed,
-                    point(location, isInsideCircle: outerTouchCircle),
-                    !point(location, isInsideCircle: innerTouchCircle) else {
+                    point(location, isInsideCircle: outerTouchCircle, atOrigin: origin),
+                    !point(location, isInsideCircle: innerTouchCircle, atOrigin: origin) else {
                     return
                 }
                 var opposite: Double
                 var adjacent: Double
                 var quadrantOffset: Double
-                switch (Quadrant(withPoint: location, inCircleWithSize: circleSize)) {
+                switch (Quadrant(withPoint: location, inCircleWithOrigin: origin)) {
                 case .one:
                     quadrantOffset = 0
                     opposite = location.x - origin.x
@@ -127,11 +125,8 @@ struct CounterView: View {
         }
     }
     
-    func point(_ point: CGPoint, isInsideCircle circleSize: Double) -> Bool {
-        let radius = circleSize * 0.5
-        let offset = (circleSize - circleSize) * 0.5
-        let origin = CGPoint(x: radius + offset, y: radius + offset)
-        return pow(point.x - origin.x, 2) + pow(point.y - origin.y, 2) < pow(radius, 2)
+    func point(_ point: CGPoint, isInsideCircle circleSize: Double, atOrigin origin: CGPoint) -> Bool {
+        return pow(point.x - origin.x, 2) + pow(point.y - origin.y, 2) < pow(circleSize * 0.5, 2)
     }
         
     enum Quadrant {
@@ -140,17 +135,17 @@ struct CounterView: View {
         case three
         case four
         
-        init(withPoint point: CGPoint, inCircleWithSize circleSize: Double) {
+        init(withPoint point: CGPoint, inCircleWithOrigin origin: CGPoint) {
             // Quadrant one starts at 0 radians and ends before pi/2
             // This way we never divide by zero when using arctan
-            if (point.x >= circleSize * 0.5) {
-                if (point.y < circleSize * 0.5) {
+            if (point.x >= origin.x) {
+                if (point.y < origin.y) {
                     self = .one
                 } else {
                     self = .two
                 }
             } else {
-                if (point.y >= circleSize * 0.5) {
+                if (point.y >= origin.y) {
                     self = .three
                 } else {
                     self = .four
