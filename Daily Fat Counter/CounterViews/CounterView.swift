@@ -27,20 +27,10 @@ struct CounterView: View {
     
     var drag: some Gesture {
         let origin = CGPoint(x: circleSize * 0.5, y: circleSize * 0.5)
-        let outerTouchCircle = circleSize + touchZoneSize * 0.5
-        let innerTouchCircle = circleSize - touchZoneSize * 0.5
         
         return DragGesture()
             .onChanged { gesture in
                 let location = gesture.location
-                guard Geometry.point(location,
-                                   isInsideCircle: outerTouchCircle,
-                                   atOrigin: origin),
-                    !Geometry.point(location,
-                                    isInsideCircle: innerTouchCircle,
-                                    atOrigin: origin) else {
-                    return
-                }
                 
                 var opposite: Double
                 var adjacent: Double

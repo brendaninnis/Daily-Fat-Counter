@@ -9,10 +9,6 @@ import Foundation
 import CoreGraphics
 
 class Geometry {
-    static func point(_ point: CGPoint, isInsideCircle circleSize: Double, atOrigin origin: CGPoint) -> Bool {
-        return pow(point.x - origin.x, 2) + pow(point.y - origin.y, 2) < pow(circleSize * 0.5, 2)
-    }
-        
     enum Quadrant {
         case one
         case two
