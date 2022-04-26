@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HistoryGraph: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     let smallHeight: CGFloat = 4
     let largeHeight: CGFloat = 16
     @Binding var isAnimated: Bool
@@ -17,12 +15,10 @@ struct HistoryGraph: View {
     
     var body: some View {
         let startColor = Color.UI.gradientStartColor(
-            withProgress: progress,
-            inColorScheme: colorScheme
+            withProgress: progress
         )
         let endColor = Color.UI.gradientEndColor(
-            withProgress: progress,
-            inColorScheme: colorScheme
+            withProgress: progress
         )
         let linearGradient = LinearGradient(
             gradient: Gradient(colors: [

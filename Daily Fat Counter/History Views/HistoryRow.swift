@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HistoryRow: View {
     let dailyFat: DailyFat
-    @Environment(\.colorScheme) var colorScheme
     @Binding var isAnimated: Bool
     var body: some View {
         HStack(spacing: 8) {

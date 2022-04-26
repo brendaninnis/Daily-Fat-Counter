@@ -66,7 +66,7 @@ final class CounterData: ObservableObject {
         guard lastCheck > 0 else {
             return false
         }
-        let nowDays = timestampInSeconds / SECONDS_PER_DAY
+        let nowDays = (timestampInSeconds - resetTime) / SECONDS_PER_DAY
         let thenDays = (lastCheck - resetTime) / SECONDS_PER_DAY
         DebugLog.log("nowDays=\(nowDays) thendays=\(thenDays) now=\(timestampInSeconds) then=\(lastCheck)")
         return nowDays > thenDays
