@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-fileprivate var lastQuadrant: Geometry.Quadrant?
+fileprivate var lastQuadrant: Geometry.Quadrant = .one
+fileprivate var lastAngle: Double = 0
 
 struct CounterView: View {
     let circleSize: Double = 160
@@ -19,7 +20,6 @@ struct CounterView: View {
     @Binding var totalGrams: Double
     
     @State private var dragStarted = false
-    @State private var dragGrabbed = false
     
     var progress: Double {
         usedGrams / totalGrams
@@ -32,22 +32,8 @@ struct CounterView: View {
         
         return DragGesture()
             .onChanged { gesture in
-                let handleAngle = 2 * Double.pi * progress
-                let handle = CGPoint(
-                    x: CGFloat(origin.x) + CGFloat(origin.x) * sin(handleAngle),
-                    y: origin.y - origin.y * cos(handleAngle)
-                )
                 let location = gesture.location
-                let newQuadrant = Geometry.Quadrant(withPoint: location,
-                                                    inCircleWithOrigin: origin)
-                if (!dragStarted) {
-                    dragGrabbed = abs(location.x - handle.x) < handleSize &&
-                              abs(location.y - handle.y) < handleSize
-                    lastQuadrant = newQuadrant
-                    dragStarted = true
-                }
-                guard dragGrabbed,
-                    Geometry.point(location,
+                guard Geometry.point(location,
                                    isInsideCircle: outerTouchCircle,
                                    atOrigin: origin),
                     !Geometry.point(location,
@@ -59,16 +45,14 @@ struct CounterView: View {
                 var opposite: Double
                 var adjacent: Double
                 var quadrantOffset: Double
-                var completeRotations: Double = floor(progress)
+                
+                let newQuadrant = Geometry.Quadrant(withPoint: location,
+                                                    inCircleWithOrigin: origin)
                 switch (newQuadrant) {
                 case .one:
                     quadrantOffset = 0
                     opposite = location.x - origin.x
                     adjacent = origin.y - location.y
-                    if (lastQuadrant == .four) {
-                        completeRotations = round(progress)
-                        DebugLog.log("Rotate forward #\(completeRotations)")
-                    }
                 case .two:
                     quadrantOffset = Double.pi * 0.5
                     opposite = location.y - origin.y
@@ -81,20 +65,34 @@ struct CounterView: View {
                     quadrantOffset = Double.pi * 1.5
                     opposite = origin.y - location.y
                     adjacent = origin.x - location.x
-                    if (lastQuadrant == .one) {
-                        completeRotations = max(round(progress) - 1, 0)
-                        DebugLog.log("Rotate backward #\(completeRotations)")
+                }
+                let angle = atan(opposite / adjacent) + quadrantOffset
+                
+                if (!dragStarted) {
+                    dragStarted = true
+                    lastAngle = angle
+                    lastQuadrant = newQuadrant
+                    return
+                }
+                var rotationOffset: Double = 0
+                if (newQuadrant == .one && lastQuadrant == .four) {
+                    // Rotation forward
+                    rotationOffset = RADIANS_PER_ROTATION
+                } else if (newQuadrant == .four && lastQuadrant == .one) {
+                    // Rotation backward
+                    rotationOffset = -1 * RADIANS_PER_ROTATION
+                }
+                withAnimation(.easeOut(duration: 0.1)) {
+                    usedGrams += ((angle - lastAngle + rotationOffset) / RADIANS_PER_ROTATION) * totalGrams
+                    if (usedGrams < 0) {
+                        usedGrams = 0
                     }
                 }
+                lastAngle = angle
                 lastQuadrant = newQuadrant
-                let angle = atan(opposite / adjacent) + quadrantOffset
-                withAnimation(.easeOut(duration: 0.1)) {
-                    usedGrams = (angle / (2 * Double.pi)) * totalGrams + completeRotations * totalGrams
-                }
             }
             .onEnded { gesture in
                 dragStarted = false
-                lastQuadrant = nil
             }
     }
     
