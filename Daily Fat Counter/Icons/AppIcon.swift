@@ -68,7 +68,7 @@ struct AppIcon: View {
                         )
                 )
                 path.addPath(
-                    Circle()
+                    Ellipse()
                         .trim(from: 0, to: 0.25)
                         .rotation(.degrees(180))
                         .stroke(style: StrokeStyle(
@@ -76,13 +76,13 @@ struct AppIcon: View {
                         ))
                         .path(in: CGRect(
                             x: 178,
-                            y: 179,
+                            y: 164,
                             width: 110,
-                            height: 110
+                            height: 140
                         ))
                 )
                 path.addPath(
-                    Circle()
+                    Ellipse()
                         .trim(from: 0.1, to: 0.25)
                         .rotation(.degrees(180))
                         .stroke(style: StrokeStyle(
@@ -91,9 +91,9 @@ struct AppIcon: View {
                         ))
                         .path(in: CGRect(
                             x: 178,
-                            y: 179,
+                            y: 164,
                             width: 110,
-                            height: 110
+                            height: 140
                         ))
                 )
             }
