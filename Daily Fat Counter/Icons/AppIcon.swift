@@ -15,7 +15,7 @@ struct AppIcon: View {
         startAngle: .degrees(90),
         endAngle: .degrees(450)
     )
-    let circleDiameter: Double = 372
+    let circleDiameter: Double = 400
     let plusLength: Double = 122
     let lineWidth: Double = 44
     
