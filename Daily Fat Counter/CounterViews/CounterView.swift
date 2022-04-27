@@ -121,7 +121,7 @@ struct CounterView: View {
                     .rotationEffect(.degrees(-90))
                     .frame(width: circleSize, height: circleSize)
                 VStack(alignment: .leading) {
-                    Text(String(format: "%.1fg", usedGrams))
+                    Text(String(format: "%.1fg", round(usedGrams)))
                         .font(.largeTitle)
                         .bold()
                     Text(String(format: "/ %.1fg", totalGrams))
