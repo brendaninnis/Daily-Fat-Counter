@@ -1,9 +1,3 @@
-//
-//  CounterButton.swift
-//  Daily Fat Counter
-//
-//  Created by Brendan Innis on 2022-04-02.
-//
 
 import SwiftUI
 

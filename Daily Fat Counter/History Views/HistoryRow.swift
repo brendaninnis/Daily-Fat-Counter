@@ -1,9 +1,3 @@
-//
-//  HistoryRow.swift
-//  Daily Fat Counter
-//
-//  Created by Brendan Innis on 2022-04-15.
-//
 
 import SwiftUI
 

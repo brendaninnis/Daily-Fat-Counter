@@ -1,9 +1,3 @@
-//
-//  Geometry.swift
-//  Daily Fat Counter
-//
-//  Created by Brendan Innis on 2022-04-24.
-//
 
 import Foundation
 import CoreGraphics

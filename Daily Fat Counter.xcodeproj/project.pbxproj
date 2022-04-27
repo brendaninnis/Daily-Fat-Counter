@@ -127,14 +127,13 @@
 				B8CD9F582809DB1C0009BBDA /* Icons */,
 				B8CD9F572809DB0A0009BBDA /* Models */,
 				B8CD9F542809D6D60009BBDA /* History Views */,
-				B8B131E227FA1C81007ABA20 /* Constants */,
+				B8B131E227FA1C81007ABA20 /* Values */,
 				B8B131E127FA1C63007ABA20 /* CounterViews */,
+				B88B59E6280CA7EB007054D5 /* DebugLog.swift */,
 				B8AFB0E927F1365B008B5AD3 /* DailyFatCounterApp.swift */,
 				B8AFB0EB27F1365B008B5AD3 /* ContentView.swift */,
 				B8AFB0ED27F13661008B5AD3 /* Assets.xcassets */,
 				B8AFB0EF27F13661008B5AD3 /* Preview Content */,
-				B88B59E6280CA7EB007054D5 /* DebugLog.swift */,
-				B8223D392815CBA000EF5F5A /* Geometry.swift */,
 			);
 			path = "Daily Fat Counter";
 			sourceTree = "<group>";
@@ -175,13 +174,14 @@
 			path = CounterViews;
 			sourceTree = "<group>";
 		};
-		B8B131E227FA1C81007ABA20 /* Constants */ = {
+		B8B131E227FA1C81007ABA20 /* Values */ = {
 			isa = PBXGroup;
 			children = (
-				B8B131DB27F8DCBD007ABA20 /* Colours.swift */,
 				B8D8214827FA837000B28F90 /* Numbers.swift */,
+				B8B131DB27F8DCBD007ABA20 /* Colours.swift */,
+				B8223D392815CBA000EF5F5A /* Geometry.swift */,
 			);
-			path = Constants;
+			path = Values;
 			sourceTree = "<group>";
 		};
 		B8CD9F542809D6D60009BBDA /* History Views */ = {
