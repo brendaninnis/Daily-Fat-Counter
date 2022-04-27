@@ -36,7 +36,15 @@ struct CounterSettings: View {
     var body: some View {
         NavigationView {
             List() {
-                Section(header: Text("Total daily fat allowed")) {
+                Section(
+                    header: Text("Total daily fat allowed"),
+                    footer: HStack() {
+                        Spacer(minLength: 24)
+                        Text("Set a goal for your daily fat consumption")
+                            .multilineTextAlignment(.center)
+                        Spacer(minLength: 24)
+                    }
+                ) {
                     Stepper(
                         String(format: "%.1fg", counterData.totalFat),
                         value: $counterData.totalFat,
