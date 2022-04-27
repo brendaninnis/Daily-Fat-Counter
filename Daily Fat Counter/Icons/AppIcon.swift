@@ -15,8 +15,8 @@ struct AppIcon: View {
         startAngle: .degrees(90),
         endAngle: .degrees(450)
     )
-    let circleDiameter: Double = 372
-    let plusLength: Double = 240
+    let circleDiameter: Double = 400
+    let plusLength: Double = 122
     let lineWidth: Double = 44
     
     var body: some View {
@@ -30,9 +30,27 @@ struct AppIcon: View {
             Path { path in
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5)
+                        .path(in: CGRect(
+                            x: 158,
+                            y: Self.appIconSize * 0.5 - lineWidth * 0.5,
+                            width: lineWidth,
+                            height: 136
+                        ))
+                )
+                path.addPath(
+                    RoundedRectangle(cornerRadius: lineWidth * 0.5)
+                        .path(in: CGRect(
+                            x: 113,
+                            y: Self.appIconSize * 0.5 - lineWidth * 0.5,
+                            width: 142,
+                            height: lineWidth
+                        ))
+                )
+                path.addPath(
+                    RoundedRectangle(cornerRadius: lineWidth * 0.5)
                         .path(
                             in: CGRect(
-                                x: Self.appIconSize * 0.5 - plusLength * 0.5,
+                                x: 276,
                                 y: Self.appIconSize * 0.5 - lineWidth * 0.5,
                                 width: plusLength,
                                 height: lineWidth
@@ -42,12 +60,41 @@ struct AppIcon: View {
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5).path(
                             in: CGRect(
-                                x: Self.appIconSize * 0.5 - lineWidth * 0.5,
+                                x: 276 + plusLength * 0.5 - lineWidth * 0.5,
                                 y: Self.appIconSize * 0.5 - plusLength * 0.5,
                                 width: lineWidth,
                                 height: plusLength
                             )
                         )
+                )
+                path.addPath(
+                    Ellipse()
+                        .trim(from: 0, to: 0.25)
+                        .rotation(.degrees(180))
+                        .stroke(style: StrokeStyle(
+                            lineWidth: lineWidth
+                        ))
+                        .path(in: CGRect(
+                            x: 178,
+                            y: 164,
+                            width: 110,
+                            height: 140
+                        ))
+                )
+                path.addPath(
+                    Ellipse()
+                        .trim(from: 0.1, to: 0.25)
+                        .rotation(.degrees(180))
+                        .stroke(style: StrokeStyle(
+                            lineWidth: lineWidth,
+                            lineCap: .round
+                        ))
+                        .path(in: CGRect(
+                            x: 178,
+                            y: 164,
+                            width: 110,
+                            height: 140
+                        ))
                 )
             }
             .fill(
