@@ -16,7 +16,7 @@ struct AppIcon: View {
         endAngle: .degrees(450)
     )
     let circleDiameter: Double = 372
-    let plusLength: Double = 140
+    let plusLength: Double = 122
     let lineWidth: Double = 44
     
     var body: some View {
@@ -28,22 +28,21 @@ struct AppIcon: View {
                 .rotationEffect(.degrees(-90))
                 .frame(width: circleDiameter, height: circleDiameter)
             Path { path in
-                
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5)
                         .path(in: CGRect(
-                            x: 160,
-                            y: 220,
+                            x: 158,
+                            y: Self.appIconSize * 0.5 - lineWidth * 0.5,
                             width: lineWidth,
-                            height: 120
+                            height: 136
                         ))
                 )
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5)
                         .path(in: CGRect(
-                            x: 130,
-                            y: 220,
-                            width: 100,
+                            x: 113,
+                            y: Self.appIconSize * 0.5 - lineWidth * 0.5,
+                            width: 142,
                             height: lineWidth
                         ))
                 )
@@ -51,7 +50,7 @@ struct AppIcon: View {
                     RoundedRectangle(cornerRadius: lineWidth * 0.5)
                         .path(
                             in: CGRect(
-                                x: Self.appIconSize * 0.5 - plusLength * 0.5 + 80,
+                                x: 276,
                                 y: Self.appIconSize * 0.5 - lineWidth * 0.5,
                                 width: plusLength,
                                 height: lineWidth
@@ -61,7 +60,7 @@ struct AppIcon: View {
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5).path(
                             in: CGRect(
-                                x: Self.appIconSize * 0.5 - lineWidth * 0.5 + 80,
+                                x: 276 + plusLength * 0.5 - lineWidth * 0.5,
                                 y: Self.appIconSize * 0.5 - plusLength * 0.5,
                                 width: lineWidth,
                                 height: plusLength
@@ -76,25 +75,25 @@ struct AppIcon: View {
                             lineWidth: lineWidth
                         ))
                         .path(in: CGRect(
-                            x: 180,
-                            y: 180,
-                            width: 80,
-                            height: 80
+                            x: 178,
+                            y: 179,
+                            width: 110,
+                            height: 110
                         ))
                 )
                 path.addPath(
                     Circle()
-                        .trim(from: 0.10, to: 0.25)
+                        .trim(from: 0.1, to: 0.25)
                         .rotation(.degrees(180))
                         .stroke(style: StrokeStyle(
                             lineWidth: lineWidth,
                             lineCap: .round
                         ))
                         .path(in: CGRect(
-                            x: 180,
-                            y: 180,
-                            width: 80,
-                            height: 80
+                            x: 178,
+                            y: 179,
+                            width: 110,
+                            height: 110
                         ))
                 )
             }
