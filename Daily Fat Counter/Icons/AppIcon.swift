@@ -16,7 +16,7 @@ struct AppIcon: View {
         endAngle: .degrees(450)
     )
     let circleDiameter: Double = 372
-    let plusLength: Double = 240
+    let plusLength: Double = 140
     let lineWidth: Double = 44
     
     var body: some View {
@@ -28,11 +28,30 @@ struct AppIcon: View {
                 .rotationEffect(.degrees(-90))
                 .frame(width: circleDiameter, height: circleDiameter)
             Path { path in
+                
+                path.addPath(
+                    RoundedRectangle(cornerRadius: lineWidth * 0.5)
+                        .path(in: CGRect(
+                            x: 160,
+                            y: 220,
+                            width: lineWidth,
+                            height: 120
+                        ))
+                )
+                path.addPath(
+                    RoundedRectangle(cornerRadius: lineWidth * 0.5)
+                        .path(in: CGRect(
+                            x: 130,
+                            y: 220,
+                            width: 100,
+                            height: lineWidth
+                        ))
+                )
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5)
                         .path(
                             in: CGRect(
-                                x: Self.appIconSize * 0.5 - plusLength * 0.5,
+                                x: Self.appIconSize * 0.5 - plusLength * 0.5 + 80,
                                 y: Self.appIconSize * 0.5 - lineWidth * 0.5,
                                 width: plusLength,
                                 height: lineWidth
@@ -42,12 +61,41 @@ struct AppIcon: View {
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5).path(
                             in: CGRect(
-                                x: Self.appIconSize * 0.5 - lineWidth * 0.5,
+                                x: Self.appIconSize * 0.5 - lineWidth * 0.5 + 80,
                                 y: Self.appIconSize * 0.5 - plusLength * 0.5,
                                 width: lineWidth,
                                 height: plusLength
                             )
                         )
+                )
+                path.addPath(
+                    Circle()
+                        .trim(from: 0, to: 0.25)
+                        .rotation(.degrees(180))
+                        .stroke(style: StrokeStyle(
+                            lineWidth: lineWidth
+                        ))
+                        .path(in: CGRect(
+                            x: 180,
+                            y: 180,
+                            width: 80,
+                            height: 80
+                        ))
+                )
+                path.addPath(
+                    Circle()
+                        .trim(from: 0.10, to: 0.25)
+                        .rotation(.degrees(180))
+                        .stroke(style: StrokeStyle(
+                            lineWidth: lineWidth,
+                            lineCap: .round
+                        ))
+                        .path(in: CGRect(
+                            x: 180,
+                            y: 180,
+                            width: 80,
+                            height: 80
+                        ))
                 )
             }
             .fill(
