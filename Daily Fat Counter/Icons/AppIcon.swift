@@ -15,16 +15,24 @@ struct AppIcon: View {
         startAngle: .degrees(90),
         endAngle: .degrees(450)
     )
-    let circleDiameter: Double = 400
+    let circleDiameter: Double = 460
     let plusLength: Double = 122
     let lineWidth: Double = 44
+    let linearGradient = LinearGradient(gradient: Gradient(colors: [
+                                                                Color.ui.paleYellow,
+                                                                Color.ui.paleYellow,
+                                                                Color.ui.paleGreen,
+                                                                Color.ui.paleGreen
+                                                            ]),
+                                        startPoint: .leading,
+                                        endPoint: .trailing)
     
     var body: some View {
         
         ZStack {
-            Color(UIColor.systemBackground)
+            linearGradient
             Circle()
-                .stroke(angularGradient, lineWidth: lineWidth)
+                .fill(Color.black)
                 .rotationEffect(.degrees(-90))
                 .frame(width: circleDiameter, height: circleDiameter)
             Path { path in
@@ -97,18 +105,7 @@ struct AppIcon: View {
                         ))
                 )
             }
-            .fill(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color.ui.paleYellow,
-                        Color.ui.paleYellow,
-                        Color.ui.paleGreen,
-                        Color.ui.paleGreen
-                    ]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
+            .fill(linearGradient)
         }.frame(width: Self.appIconSize, height: Self.appIconSize)
     }
 }
