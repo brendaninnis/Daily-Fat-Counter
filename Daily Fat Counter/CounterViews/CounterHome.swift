@@ -48,6 +48,5 @@ struct CounterHome_Previews: PreviewProvider {
     static var previews: some View {
         CounterHome()
             .environmentObject(CounterData())
-            .previewInterfaceOrientation(.portrait)
     }
 }

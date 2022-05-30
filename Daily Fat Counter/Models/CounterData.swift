@@ -5,8 +5,8 @@ import Combine
 
 final class CounterData: ObservableObject {
     private var timer: Timer? = nil
-    private var delegate: CounterDataDelegate?
     private var started = false
+    private weak var delegate: CounterDataDelegate?
     
     @AppStorage("last_check") var lastCheck: Int = 0
     @AppStorage("reset_time") var resetTime: Int = 0 {
@@ -122,6 +122,6 @@ final class CounterData: ObservableObject {
 
 }
 
-protocol CounterDataDelegate {
+protocol CounterDataDelegate: AnyObject {
     func newDailyFat(_ dailyFat: DailyFat)
 }

@@ -11,14 +11,14 @@ struct CounterSettings: View {
         (counterData.resetTime % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
     }
     private var displayTime: String {
-        let period: String;
-        var hoursForDisplay = hours;
-        if (hours > 12) {
+        let period: String
+        var hoursForDisplay = hours
+        if (hoursForDisplay > 12) {
             period = "p.m."
-            hoursForDisplay = hours - 12;
-        } else if (hours == 12) {
+            hoursForDisplay -= 12
+        } else if (hoursForDisplay == 12) {
             period = "p.m."
-        } else if (hours == 0) {
+        } else if (hoursForDisplay == 0) {
             hoursForDisplay = 12
             period = "a.m."
         } else {
@@ -68,8 +68,17 @@ struct CounterSettings: View {
                     Button("Give Feedback") {
                         
                     }
-                    Button("Report a bug", role: .destructive) {
-                        
+                    if #available(iOS 15.0, *) {
+                        Button("Report a bug", role: .destructive) {
+                            
+                        }
+                    } else {
+                        Button() {
+                            
+                        } label: {
+                            Text("Report a bug")
+                                .foregroundColor(Color.red)
+                        }
                     }
                 }
             }.navigationTitle("Settings")

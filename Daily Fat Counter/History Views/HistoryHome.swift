@@ -40,9 +40,19 @@ struct HistoryHome: View {
         } else {
             List() {
                 ForEach(months) { month in
-                    Section(month.name) {
-                        ForEach(month.dailyFat) { dailyFat in
-                            HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
+                    if #available(iOS 15.0, *) {
+                        Section(month.name) {
+                            ForEach(month.dailyFat) { dailyFat in
+                                HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
+                            }
+                        }
+                    } else {
+                        Section() {
+                            ForEach(month.dailyFat) { dailyFat in
+                                HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
+                            }
+                        } header: {
+                            Text(month.name)
                         }
                     }
                 }

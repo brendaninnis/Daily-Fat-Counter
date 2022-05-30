@@ -26,9 +26,9 @@ struct CounterView: View {
             .onChanged { gesture in
                 let location = gesture.location
                 
-                var opposite: Double
-                var adjacent: Double
-                var quadrantOffset: Double
+                let opposite: Double
+                let adjacent: Double
+                let quadrantOffset: Double
                 
                 let newQuadrant = Geometry.Quadrant(withPoint: location,
                                                     inCircleWithOrigin: origin)
