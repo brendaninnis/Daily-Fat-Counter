@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B8223D3A2815CBA000EF5F5A /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8223D392815CBA000EF5F5A /* Geometry.swift */; };
+		B84AE35C2845B4AE00A9FB83 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84AE35B2845B4AE00A9FB83 /* MailView.swift */; };
 		B88B59E7280CA7EB007054D5 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88B59E6280CA7EB007054D5 /* DebugLog.swift */; };
 		B8AB4B7128036BAF00A55E8D /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB4B7028036BAF00A55E8D /* AppIcon.swift */; };
 		B8AFB0EA27F1365B008B5AD3 /* DailyFatCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB0E927F1365B008B5AD3 /* DailyFatCounterApp.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		B8223D392815CBA000EF5F5A /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		B84AE35B2845B4AE00A9FB83 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		B88B59E6280CA7EB007054D5 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		B8AB4B7028036BAF00A55E8D /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		B8AFB0E627F1365B008B5AD3 /* Daily Fat Counter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Fat Counter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B84AE35A2845B48E00A9FB83 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B8B131E527FA3E71007ABA20 /* CounterSettings.swift */,
+				B84AE35B2845B4AE00A9FB83 /* MailView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		B8AFB0DD27F1365B008B5AD3 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +135,7 @@
 		B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */ = {
 			isa = PBXGroup;
 			children = (
+				B84AE35A2845B48E00A9FB83 /* Settings */,
 				B8CD9F582809DB1C0009BBDA /* Icons */,
 				B8CD9F572809DB0A0009BBDA /* Models */,
 				B8CD9F542809D6D60009BBDA /* History Views */,
@@ -169,7 +181,6 @@
 				B8AFB11327F136D0008B5AD3 /* CounterView.swift */,
 				B8B131DD27F900F8007ABA20 /* CounterHome.swift */,
 				B8B131DF27F914ED007ABA20 /* CounterButton.swift */,
-				B8B131E527FA3E71007ABA20 /* CounterSettings.swift */,
 			);
 			path = CounterViews;
 			sourceTree = "<group>";
@@ -357,6 +368,7 @@
 				B8CD9F5D2809E1900009BBDA /* DailyFatStore.swift in Sources */,
 				B8AFB0EC27F1365B008B5AD3 /* ContentView.swift in Sources */,
 				B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */,
+				B84AE35C2845B4AE00A9FB83 /* MailView.swift in Sources */,
 				B8AFB0EA27F1365B008B5AD3 /* DailyFatCounterApp.swift in Sources */,
 				B8AFB11427F136D0008B5AD3 /* CounterView.swift in Sources */,
 				B8B131DE27F900F8007ABA20 /* CounterHome.swift in Sources */,

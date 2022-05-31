@@ -1,10 +1,14 @@
 - - - MVP - - -
 
-* iOS 14 compat
-* Implmenet "Give Feedback"
-* Implement "Report a Bug"
+✅ iOS 14 compat
+✅ Implmenet "Give Feedback"
+✅ Implement "Report a Bug"
 * Fix time and date related bugs ;)
 * Localization (Think language, but also time and date)
+
+- - - BETA - - -
+
+* Update app id in "Give Feedback"
 
 - - - RELEASE - - -
 
