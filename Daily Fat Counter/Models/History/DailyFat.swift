@@ -1,32 +1,38 @@
 
 import Foundation
 
-// ID in the format 0xYYYYMMDD
-let DAY_MASK   = 0x000000FF
-let MONTH_MASK = 0x0000FF00
-let YEAR_MASK  = 0xFFFF0000
-
-let MONTH_SHIFT = 8
-let YEAR_SHIFT  = 16
-
 struct DailyFat: Identifiable, Codable {
-    let id      : Int
-    let usedFat : Double
-    let totalFat: Double
+    let id          : Int
+    let start       : Double
+    let usedFat     : Double
+    let totalFat    : Double
+    let dateLabel   : String
+    let monthLabel  : String
     
-    var dateLabel: String {
-        let year  = (id & YEAR_MASK) >> YEAR_SHIFT
-        let day   = (id & DAY_MASK)
-        return String(format: "%@ %02d, %04d", monthLabel, day, year)
+    internal init(id: Int, start: Double, usedFat: Double, totalFat: Double) {
+        self.id         = id
+        self.start      = start
+        self.usedFat    = usedFat
+        self.totalFat   = totalFat
+        self.dateLabel  = mdyFormatter.string(from: Date(timeIntervalSince1970: start))
+        self.monthLabel = monthFormatter.string(from: Date(timeIntervalSince1970: start))
+    }
+   
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id          = try values.decode(Int.self, forKey: .id)
+        start       = try values.decode(Double.self, forKey: .start)
+        usedFat     = try values.decode(Double.self, forKey: .usedFat)
+        totalFat    = try values.decode(Double.self, forKey: .totalFat)
+        dateLabel   = mdyFormatter.string(from: Date(timeIntervalSince1970: start))
+        monthLabel  = monthFormatter.string(from: Date(timeIntervalSince1970: start))
     }
     
-    var monthLabel: String {
-        let month = (id & MONTH_MASK) >> MONTH_SHIFT
-        return DateFormatter().monthSymbols[month - 1]
-    }
-    
-    static func createDailyFat(year: Int, month: Int, day: Int, usedFat: Double, totalFat: Double) -> DailyFat {
-        let id = year << YEAR_SHIFT + month << MONTH_SHIFT + day
-        return DailyFat(id: id, usedFat: usedFat, totalFat: totalFat)
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case start
+        case usedFat
+        case totalFat
     }
 }

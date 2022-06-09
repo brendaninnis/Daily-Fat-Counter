@@ -28,7 +28,7 @@ struct DailyFatCounterApp: App {
                 .onChange(of: scenePhase) { newPhase in
                     if (newPhase == .active) {
                         DebugLog.log("App did become active")
-                        counterData.initializeDailyFatReset(Int(Date().timeIntervalSince1970))
+                        counterData.initializeDailyFatReset(Date().timeIntervalSince1970)
                     }
                 }
         }
