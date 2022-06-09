@@ -66,12 +66,13 @@ struct CounterView: View {
                     // Rotation backward
                     rotationOffset = -1 * RADIANS_PER_ROTATION
                 }
-                withAnimation(.easeOut(duration: 0.1)) {
-                    usedGrams += ((angle - lastAngle + rotationOffset) / RADIANS_PER_ROTATION) * totalGrams
-                    if (usedGrams < 0) {
-                        usedGrams = 0
-                    }
+                
+                // Updates the UI
+                usedGrams += ((angle - lastAngle + rotationOffset) / RADIANS_PER_ROTATION) * totalGrams
+                if (usedGrams < 0) {
+                    usedGrams = 0
                 }
+                
                 lastAngle = angle
                 lastQuadrant = newQuadrant
             }
