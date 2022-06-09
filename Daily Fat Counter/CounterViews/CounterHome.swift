@@ -2,19 +2,13 @@
 import SwiftUI
 
 struct CounterHome: View {
-    static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMMM d"
-        formatter.timeZone = TimeZone(abbreviation: "PST")
-        return formatter
-    }()
-    
+
     let date = Date()
     @EnvironmentObject var counterData: CounterData
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(CounterHome.dateFormatter.string(from: date))
+            Text(currentDateFormatter.string(from: date))
                 .font(.title)
             Spacer()
             HStack {

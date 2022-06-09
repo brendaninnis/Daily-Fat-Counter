@@ -8,31 +8,8 @@ struct CounterSettings: View {
     @State private var showingFeedbackAlert = false
     @State private var showingMail = false
     @State var result: Result<MFMailComposeResult, Error>? = nil
-    // Note: Replace the XXXXXXXXXX below with the App Store ID for your app
-    //       You can find the App Store ID in your app's product URL
+    // TODO: Replace the XXXXXXXXXX below with the App Store ID
     private let feedbackUrl = "https://apps.apple.com/app/idXXXXXXXXXX?action=write-review"
-    private var hours: Int {
-        counterData.resetTime / SECONDS_PER_HOUR
-    }
-    private var minutes: Int {
-        (counterData.resetTime % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
-    }
-    private var displayTime: String {
-        let period: String
-        var hoursForDisplay = hours
-        if (hoursForDisplay > 12) {
-            period = "p.m."
-            hoursForDisplay -= 12
-        } else if (hoursForDisplay == 12) {
-            period = "p.m."
-        } else if (hoursForDisplay == 0) {
-            hoursForDisplay = 12
-            period = "a.m."
-        } else {
-            period = "a.m."
-        }
-        return String(format: "%d:%02d %@", hoursForDisplay, minutes, period)
-    }
     
     struct FooterCompat<Content: View>: View {
         let content: Content

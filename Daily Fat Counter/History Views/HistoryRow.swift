@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct HistoryRow: View {
-    let dailyFat: DailyFat
+    var dailyFat: DailyFat
     @Binding var isAnimated: Bool
     var body: some View {
         HStack(spacing: 8) {
@@ -15,6 +15,10 @@ struct HistoryRow: View {
 
 struct HistoryRow_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryRow(dailyFat: DailyFat(id: 0x07E60809, usedFat: 35, totalFat: 45), isAnimated: .constant(false))
+        HistoryRow(dailyFat: DailyFat(id: 0,
+                                      start: 1654637866,
+                                      usedFat: 35,
+                                      totalFat: 45),
+                   isAnimated: .constant(false))
     }
 }
