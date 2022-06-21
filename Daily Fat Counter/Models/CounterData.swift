@@ -20,6 +20,7 @@ final class CounterData: ObservableObject {
             if (dateForResetSelection.timeIntervalSince1970 != nextReset) {
                 dateForResetSelection = Date(timeIntervalSince1970: nextReset)
             }
+            startResetTimer()
         }
     }
     @AppStorage("reset_hour") var resetHour: Int = 0 {
@@ -54,7 +55,6 @@ final class CounterData: ObservableObject {
             if (dateForResetSelection.timeIntervalSince1970 != nextReset) {
                 nextReset = dateForResetSelection.timeIntervalSince1970
             }
-            startResetTimer()
         }
     }
     
@@ -70,19 +70,12 @@ final class CounterData: ObservableObject {
             DebugLog.log("CounterData not started -- don't initialize daily fat reset")
             return
         }
-        if (resetTimeElapsed(timestamp)) {
+        if (timestamp >= nextReset && nextReset > 0) {
             DebugLog.log("Reset time elapsed")
             resetUsedFat()
         } else {
             nextReset = calculateNextReset(timestamp)
         }
-    }
-    
-    private func resetTimeElapsed(_ timestamp: TimeInterval) -> Bool {
-        guard nextReset > 0 else {
-            return false
-        }
-        return timestamp >= nextReset
     }
     
     private func startResetTimer() {

@@ -3,16 +3,17 @@
 ✅ iOS 14 compat
 ✅ Implmenet "Give Feedback"
 ✅ Implement "Report a Bug"
-* Fix time and date related bugs ;)
-* Localization (Think language, but also time and date)
+✅ Fix time and date related bugs ;)
+✅ Round app icon
 
 - - - BETA - - -
 
 * Update app id in "Give Feedback"
+* Localization (Think language, but also time and date)
 
 - - - RELEASE - - -
 
 * Search feature (Canadian food information database)
 * Create a widget
-* Sync between devices
 * Notifications
+* Sync between devices
