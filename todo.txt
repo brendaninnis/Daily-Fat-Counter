@@ -8,6 +8,7 @@
 
 - - - BETA - - -
 
+* Timezone change bug
 * Update app id in "Give Feedback"
 * Localization (Think language, but also time and date)
 
