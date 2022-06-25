@@ -8,8 +8,7 @@ struct CounterSettings: View {
     @State private var showingFeedbackAlert = false
     @State private var showingMail = false
     @State var result: Result<MFMailComposeResult, Error>? = nil
-    // TODO: Replace the XXXXXXXXXX below with the App Store ID
-    private let feedbackUrl = "https://apps.apple.com/app/idXXXXXXXXXX?action=write-review"
+    private let feedbackUrl = "https://apps.apple.com/app/id1631074004?action=write-review"
     
     struct FooterCompat<Content: View>: View {
         let content: Content

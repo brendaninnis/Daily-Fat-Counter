@@ -5,6 +5,11 @@
 ✅ Implement "Report a Bug"
 ✅ Fix time and date related bugs ;)
 ✅ Round app icon
+* Screenshots
+* SSL for website
+* Web landing page
+* Google Developer account
+* App Store description
 
 - - - BETA - - -
 
