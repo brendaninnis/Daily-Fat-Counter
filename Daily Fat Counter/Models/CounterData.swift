@@ -41,7 +41,7 @@ final class CounterData: ObservableObject {
             objectWillChange.send()
         }
     }
-    @AppStorage("total_fat") var totalFat: Double = 45.0 {
+    @AppStorage("total_fat") var totalFat: Double = 50.0 {
         willSet {
             // Publish changes
             objectWillChange.send()

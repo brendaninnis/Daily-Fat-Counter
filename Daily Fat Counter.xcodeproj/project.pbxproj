@@ -72,6 +72,7 @@
 		B8B131DF27F914ED007ABA20 /* CounterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterButton.swift; sourceTree = "<group>"; };
 		B8B131E327FA2219007ABA20 /* CounterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterData.swift; sourceTree = "<group>"; };
 		B8B131E527FA3E71007ABA20 /* CounterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSettings.swift; sourceTree = "<group>"; };
+		B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Daily-Fat-Counter-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryHome.swift; sourceTree = "<group>"; };
 		B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFat.swift; sourceTree = "<group>"; };
 		B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFatStore.swift; sourceTree = "<group>"; };
@@ -137,6 +138,7 @@
 		B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */ = {
 			isa = PBXGroup;
 			children = (
+				B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */,
 				B84AE35A2845B48E00A9FB83 /* Settings */,
 				B8CD9F582809DB1C0009BBDA /* Icons */,
 				B8CD9F572809DB0A0009BBDA /* Models */,
@@ -539,16 +541,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter/Preview Content\"";
 				DEVELOPMENT_TEAM = NVX5R79A76;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Daily-Fat-Counter-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -569,16 +573,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter/Preview Content\"";
 				DEVELOPMENT_TEAM = NVX5R79A76;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Daily-Fat-Counter-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
