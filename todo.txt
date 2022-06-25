@@ -6,10 +6,10 @@
 ✅ Fix time and date related bugs ;)
 ✅ Round app icon
 * Screenshots
-* SSL for website
-* Web landing page
+✅ SSL for website
+✅ Web landing page
 * Google Developer account
-* App Store description
+✅ App Store description
 
 - - - BETA - - -
 
