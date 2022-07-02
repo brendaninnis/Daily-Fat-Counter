@@ -5,20 +5,22 @@
 ✅ Implement "Report a Bug"
 ✅ Fix time and date related bugs ;)
 ✅ Round app icon
-* Screenshots
+✅ Screenshots
 ✅ SSL for website
 ✅ Web landing page
-* Google Developer account
+✅ Google Developer account
 ✅ App Store description
+✅ Goole Play app setup
+✅ Privacy Policy
 
 - - - BETA - - -
 
-* Timezone change bug
-* Update app id in "Give Feedback"
-* Localization (Think language, but also time and date)
+✅ Update app id in "Give Feedback"
 
 - - - RELEASE - - -
 
+* Localization (Think language, but also time and date)
+* Timezone change bug
 * Search feature (Canadian food information database)
 * Create a widget
 * Notifications
