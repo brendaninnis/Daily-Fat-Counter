@@ -16,12 +16,13 @@
 - - - BETA - - -
 
 ✅ Update app id in "Give Feedback"
+✅ Redo keyword strategy for fat-restricted diet
 
 - - - RELEASE - - -
 
+* Create a widget
+* Search feature (Canadian food information database)
 * Localization (Think language, but also time and date)
 * Timezone change bug
-* Search feature (Canadian food information database)
-* Create a widget
 * Notifications
 * Sync between devices
