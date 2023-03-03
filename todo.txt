@@ -21,6 +21,7 @@
 - - - RELEASE - - -
 
 * Create a widget
+* Watch companion app
 * Search feature (Canadian food information database)
 * Localization (Think language, but also time and date)
 * Timezone change bug
