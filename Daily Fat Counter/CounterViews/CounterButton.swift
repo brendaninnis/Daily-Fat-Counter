@@ -2,11 +2,11 @@
 import SwiftUI
 
 struct CounterButton: View {
-    let value: Int;
+    let value: Int
     var text: String {
         String(format: "+ %dg", value)
     }
-    let action: () -> Void;
+    let action: () -> Void
      
     struct OutlineButton: ButtonStyle {
         func makeBody(configuration: Configuration) -> some View {
