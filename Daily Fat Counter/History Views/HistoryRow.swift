@@ -16,7 +16,7 @@ struct HistoryRow: View {
 struct HistoryRow_Previews: PreviewProvider {
     static var previews: some View {
         HistoryRow(dailyFat: DailyFat(id: 0,
-                                      start: 1654637866,
+                                      start: 1_654_637_866,
                                       usedFat: 35,
                                       totalFat: 45),
                    isAnimated: .constant(false))

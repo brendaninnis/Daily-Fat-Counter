@@ -7,38 +7,38 @@ struct HistoryHome: View {
         let name: String
         var dailyFat: [DailyFat]
     }
-   
+
     @EnvironmentObject var counterData: CounterData
     @State var animateHistory = false
     @Binding var history: [DailyFat]
-    
+
     private var months: [Month] {
         var months = [Month]()
         var currentMonth: Month?
         for (index, dailyFat) in history.enumerated() {
             let month = dailyFat.monthLabel
-            if (currentMonth == nil || currentMonth!.name != month) {
-                if (currentMonth != nil) {
+            if currentMonth == nil || currentMonth!.name != month {
+                if currentMonth != nil {
                     months.append(currentMonth!)
                 }
                 currentMonth = Month(id: index, name: month, dailyFat: [])
             }
             currentMonth?.dailyFat.append(dailyFat)
         }
-        if (currentMonth != nil) {
+        if currentMonth != nil {
             months.append(currentMonth!)
         }
         return months
     }
-    
+
     var body: some View {
-        if (history.isEmpty) {
+        if history.isEmpty {
             Text("A history of your daily fat consumtion will be displayed here once a day has passed.")
                 .multilineTextAlignment(.center)
                 .font(.headline)
                 .padding()
         } else {
-            List() {
+            List {
                 ForEach(months) { month in
                     if #available(iOS 15.0, *) {
                         Section(month.name) {
@@ -47,7 +47,7 @@ struct HistoryHome: View {
                             }
                         }
                     } else {
-                        Section() {
+                        Section {
                             ForEach(month.dailyFat) { dailyFat in
                                 HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
                             }
@@ -58,14 +58,14 @@ struct HistoryHome: View {
                 }
             }
             .listStyle(.plain)
-            .onAppear() {
+            .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                     withAnimation(.easeInOut) {
                         animateHistory = true
                     }
                 }
             }
-            .onDisappear() {
+            .onDisappear {
                 animateHistory = false
             }
         }
@@ -75,7 +75,7 @@ struct HistoryHome: View {
 struct HistoryHome_Previews: PreviewProvider {
     static var previews: some View {
         HistoryHome(history: .constant([
-//            DailyFat(id: 0x07E60709, usedFat: 25, totalFat: 45),
+            //            DailyFat(id: 0x07E60709, usedFat: 25, totalFat: 45),
 //            DailyFat(id: 0x07E6070A, usedFat: 145, totalFat: 45),
 //            DailyFat(id: 0x07E6070B, usedFat: 105, totalFat: 45),
 //            DailyFat(id: 0x07E6070C, usedFat: 30, totalFat: 45),

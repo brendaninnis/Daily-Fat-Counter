@@ -1,38 +1,38 @@
 
 import SwiftUI
 
-fileprivate var lastQuadrant: Geometry.Quadrant = .one
-fileprivate var lastAngle: Double = 0
+private var lastQuadrant: Geometry.Quadrant = .one
+private var lastAngle: Double = 0
 
 struct CounterView: View {
     let circleSize: Double = 160
     let touchZoneSize: Double = 160
     let handleSize: Double = 88
     let mode: Mode = .totalFat
-    
+
     @Binding var usedGrams: Double
     @Binding var totalGrams: Double
-    
+
     @State private var dragStarted = false
-    
+
     var progress: Double {
         usedGrams / totalGrams
     }
-    
+
     var drag: some Gesture {
         let origin = CGPoint(x: circleSize * 0.5, y: circleSize * 0.5)
-        
+
         return DragGesture()
             .onChanged { gesture in
                 let location = gesture.location
-                
+
                 let opposite: Double
                 let adjacent: Double
                 let quadrantOffset: Double
-                
+
                 let newQuadrant = Geometry.Quadrant(withPoint: location,
                                                     inCircleWithOrigin: origin)
-                switch (newQuadrant) {
+                switch newQuadrant {
                 case .one:
                     quadrantOffset = 0
                     opposite = location.x - origin.x
@@ -51,36 +51,36 @@ struct CounterView: View {
                     adjacent = origin.x - location.x
                 }
                 let angle = atan(opposite / adjacent) + quadrantOffset
-                
-                if (!dragStarted) {
+
+                if !dragStarted {
                     dragStarted = true
                     lastAngle = angle
                     lastQuadrant = newQuadrant
                     return
                 }
                 var rotationOffset: Double = 0
-                if (newQuadrant == .one && lastQuadrant == .four) {
+                if newQuadrant == .one && lastQuadrant == .four {
                     // Rotation forward
                     rotationOffset = RADIANS_PER_ROTATION
-                } else if (newQuadrant == .four && lastQuadrant == .one) {
+                } else if newQuadrant == .four && lastQuadrant == .one {
                     // Rotation backward
                     rotationOffset = -1 * RADIANS_PER_ROTATION
                 }
-                
+
                 // Updates the UI
                 usedGrams += ((angle - lastAngle + rotationOffset) / RADIANS_PER_ROTATION) * totalGrams
-                if (usedGrams < 0) {
+                if usedGrams < 0 {
                     usedGrams = 0
                 }
-                
+
                 lastAngle = angle
                 lastQuadrant = newQuadrant
             }
-            .onEnded { gesture in
+            .onEnded { _ in
                 dragStarted = false
             }
     }
-    
+
     var body: some View {
         let startColor = Color.UI.gradientStartColor(withProgress: progress)
         let endColor = Color.UI.gradientEndColor(withProgress: progress)
@@ -88,7 +88,7 @@ struct CounterView: View {
             startColor,
             endColor,
             endColor,
-            startColor
+            startColor,
         ])
         let angularGradient = AngularGradient(
             gradient: gradient,
@@ -129,7 +129,7 @@ struct CounterView: View {
                 .padding()
         }
     }
-    
+
     enum Mode: String, CaseIterable, Codable {
         case totalFat = "Total Fat"
         case remainingFat = "Remaining Fat"

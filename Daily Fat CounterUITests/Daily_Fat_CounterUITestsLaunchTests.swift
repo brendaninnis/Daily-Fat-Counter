@@ -8,7 +8,6 @@
 import XCTest
 
 class Daily_Fat_CounterUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

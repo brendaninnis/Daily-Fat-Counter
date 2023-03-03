@@ -4,17 +4,18 @@ import SwiftUI
 
 class DailyFatStore: ObservableObject {
     @Published var history: [DailyFat] = []
-    
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
-            create: false)
+            create: false
+        )
         .appendingPathComponent("history.data")
     }
-    
-    static func load(completion: @escaping (Result<[DailyFat], Error>)->Void) {
+
+    static func load(completion: @escaping (Result<[DailyFat], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let fileURL = try fileURL()
@@ -35,8 +36,8 @@ class DailyFatStore: ObservableObject {
             }
         }
     }
-    
-    static func save(history: [DailyFat], completion: @escaping (Result<Int, Error>)->Void) {
+
+    static func save(history: [DailyFat], completion: @escaping (Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let data = try JSONEncoder().encode(history)
@@ -55,6 +56,7 @@ class DailyFatStore: ObservableObject {
 }
 
 // MARK: CounterDataDelegate
+
 extension DailyFatStore: CounterDataDelegate {
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double) {
         history.insert(DailyFat(id: history.count,
@@ -64,9 +66,9 @@ extension DailyFatStore: CounterDataDelegate {
                        at: 0)
         Self.save(history: history) { result in
             switch result {
-            case .success(let count):
+            case let .success(count):
                 DebugLog.log("Daily fat #\(count) saved.")
-            case .failure(let error):
+            case let .failure(error):
                 DebugLog.log("Failed to save daily fat: \(error.localizedDescription)")
             }
         }

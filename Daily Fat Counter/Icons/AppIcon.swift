@@ -2,14 +2,13 @@
 import SwiftUI
 
 struct AppIcon: View {
-    
     static let appIconSize: Double = 512
     let angularGradient = AngularGradient(
         gradient: Gradient(colors: [
             Color.ui.paleGreen,
             Color.ui.paleYellow,
             Color.ui.paleYellow,
-            Color.ui.paleGreen
+            Color.ui.paleGreen,
         ]),
         center: .center,
         startAngle: .degrees(90),
@@ -18,9 +17,8 @@ struct AppIcon: View {
     let circleDiameter: Double = 400
     let plusLength: Double = 122
     let lineWidth: Double = 44
-    
+
     var body: some View {
-        
         ZStack {
             Color(UIColor.systemBackground)
             Circle()
@@ -59,13 +57,13 @@ struct AppIcon: View {
                 )
                 path.addPath(
                     RoundedRectangle(cornerRadius: lineWidth * 0.5).path(
-                            in: CGRect(
-                                x: 276 + plusLength * 0.5 - lineWidth * 0.5,
-                                y: Self.appIconSize * 0.5 - plusLength * 0.5,
-                                width: lineWidth,
-                                height: plusLength
-                            )
+                        in: CGRect(
+                            x: 276 + plusLength * 0.5 - lineWidth * 0.5,
+                            y: Self.appIconSize * 0.5 - plusLength * 0.5,
+                            width: lineWidth,
+                            height: plusLength
                         )
+                    )
                 )
                 path.addPath(
                     Ellipse()
@@ -103,7 +101,7 @@ struct AppIcon: View {
                         Color.ui.paleYellow,
                         Color.ui.paleYellow,
                         Color.ui.paleGreen,
-                        Color.ui.paleGreen
+                        Color.ui.paleGreen,
                     ]),
                     startPoint: .leading,
                     endPoint: .trailing

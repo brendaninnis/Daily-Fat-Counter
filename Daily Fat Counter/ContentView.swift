@@ -5,7 +5,7 @@ struct ContentView: View {
     @EnvironmentObject var counterData: CounterData
     @EnvironmentObject var dailyData: DailyFatStore
     @State private var selection: Tab = .counter
-    
+
     enum Tab {
         case counter
         case history
@@ -19,7 +19,7 @@ struct ContentView: View {
                     Label("Counter", systemImage: "timer")
                 }
                 .tag(Tab.counter)
-            
+
             HistoryHome(history: $dailyData.history)
                 .clipped()
                 .tabItem {

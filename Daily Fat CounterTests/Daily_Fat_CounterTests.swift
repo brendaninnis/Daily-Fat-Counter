@@ -5,11 +5,10 @@
 //  Created by Brendan Innis on 2022-03-27.
 //
 
-import XCTest
 @testable import Daily_Fat_Counter
+import XCTest
 
 class Daily_Fat_CounterTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -28,9 +27,8 @@ class Daily_Fat_CounterTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

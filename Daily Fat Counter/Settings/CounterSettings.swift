@@ -1,15 +1,15 @@
 
-import SwiftUI
 import MessageUI
+import SwiftUI
 
 struct CounterSettings: View {
     @EnvironmentObject var counterData: CounterData
-    
+
     @State private var showingFeedbackAlert = false
     @State private var showingMail = false
     @State var result: Result<MFMailComposeResult, Error>? = nil
     private let feedbackUrl = "https://apps.apple.com/app/id1631074004?action=write-review"
-    
+
     struct FooterCompat<Content: View>: View {
         let content: Content
 
@@ -26,11 +26,11 @@ struct CounterSettings: View {
             }
         }
     }
-    
+
     private var totalFatSection: some View {
         Section(
             header: Text("Total daily fat allowed"),
-            footer: HStack() {
+            footer: HStack {
                 Spacer(minLength: 24)
                 FooterCompat {
                     Text("Set a goal for your daily fat consumption")
@@ -41,16 +41,16 @@ struct CounterSettings: View {
             Stepper(
                 String(format: "%.1fg", counterData.totalFat),
                 value: $counterData.totalFat,
-                in: 1...Double.infinity,
+                in: 1 ... Double.infinity,
                 step: 1.0
             )
         }
     }
-    
+
     private var resetFatSection: some View {
         Section(
             header: Text("Reset daily fat time"),
-            footer: HStack() {
+            footer: HStack {
                 Spacer(minLength: 24)
                 FooterCompat {
                     Text("Each day at the chosen time, the amount of fat used during the day will be reset to 0.0g")
@@ -59,17 +59,16 @@ struct CounterSettings: View {
             }
         ) {
             DatePicker("Daily reset",
-                selection: $counterData.dateForResetSelection,
-                displayedComponents: .hourAndMinute
-            )
+                       selection: $counterData.dateForResetSelection,
+                       displayedComponents: .hourAndMinute)
             Button("Reset fat used now") {
                 counterData.usedFat = 0
             }
         }
     }
-    
+
     private var feedbackSection: some View {
-        Section() {
+        Section {
             Button("Give Feedback") {
                 guard let writeReviewURL = URL(string: feedbackUrl) else {
                     fatalError("Expected a valid URL")
@@ -81,7 +80,7 @@ struct CounterSettings: View {
                     showReportBugFlow()
                 }
             } else {
-                Button() {
+                Button {
                     showReportBugFlow()
                 } label: {
                     Text("Report a bug")
@@ -90,7 +89,7 @@ struct CounterSettings: View {
             }
         }
     }
-    
+
     private func showReportBugFlow() {
         if !MFMailComposeViewController.canSendMail() {
             showingFeedbackAlert = true
@@ -98,10 +97,10 @@ struct CounterSettings: View {
         }
         showingMail = true
     }
-    
+
     var body: some View {
         NavigationView {
-            List() {
+            List {
                 totalFatSection
                 resetFatSection
                 feedbackSection

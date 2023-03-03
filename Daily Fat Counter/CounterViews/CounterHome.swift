@@ -2,10 +2,9 @@
 import SwiftUI
 
 struct CounterHome: View {
-
     let date = Date()
     @EnvironmentObject var counterData: CounterData
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(currentDateFormatter.string(from: date))

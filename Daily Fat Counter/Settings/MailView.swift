@@ -5,28 +5,28 @@
 //  Created by Brendan Innis on 2022-05-30.
 //
 
-import SwiftUI
 import MessageUI
+import SwiftUI
 
 struct MailView: UIViewControllerRepresentable {
-
     @Binding var isShowing: Bool
     @Binding var result: Result<MFMailComposeResult, Error>?
 
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
-
         @Binding var isShowing: Bool
         @Binding var result: Result<MFMailComposeResult, Error>?
 
         init(isShowing: Binding<Bool>,
-             result: Binding<Result<MFMailComposeResult, Error>?>) {
+             result: Binding<Result<MFMailComposeResult, Error>?>)
+        {
             _isShowing = isShowing
             _result = result
         }
 
-        func mailComposeController(_ controller: MFMailComposeViewController,
+        func mailComposeController(_: MFMailComposeViewController,
                                    didFinishWith result: MFMailComposeResult,
-                                   error: Error?) {
+                                   error: Error?)
+        {
             defer {
                 isShowing = false
             }
@@ -52,8 +52,6 @@ struct MailView: UIViewControllerRepresentable {
         return vc
     }
 
-    func updateUIViewController(_ uiViewController: MFMailComposeViewController,
-                                context: UIViewControllerRepresentableContext<MailView>) {
-
-    }
+    func updateUIViewController(_: MFMailComposeViewController,
+                                context _: UIViewControllerRepresentableContext<MailView>) {}
 }

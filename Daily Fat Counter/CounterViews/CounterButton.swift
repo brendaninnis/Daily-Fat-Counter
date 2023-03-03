@@ -6,8 +6,9 @@ struct CounterButton: View {
     var text: String {
         String(format: "+ %dg", value)
     }
+
     let action: () -> Void
-     
+
     struct OutlineButton: ButtonStyle {
         func makeBody(configuration: Configuration) -> some View {
             configuration
@@ -25,14 +26,14 @@ struct CounterButton: View {
                         style: .continuous
                     ).fill(
                         configuration.isPressed ?
-                           Color.ui.paleYellow
-                           : Color.ui.paleGreen
+                            Color.ui.paleYellow
+                            : Color.ui.paleGreen
                     )
                 )
                 .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
         }
     }
-    
+
     var body: some View {
         Button(text, action: action)
             .buttonStyle(OutlineButton())
@@ -41,15 +42,11 @@ struct CounterButton: View {
 
 struct CounterButton_Previews: PreviewProvider {
     static var previews: some View {
-        CounterButton(value: 1) {
-           
-        }
-        .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
-        
-        CounterButton(value: 1) {
-            
-        }
-        .preferredColorScheme(.dark)
-        .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
+        CounterButton(value: 1) {}
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
+
+        CounterButton(value: 1) {}
+            .preferredColorScheme(.dark)
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
     }
 }

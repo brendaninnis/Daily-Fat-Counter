@@ -6,7 +6,7 @@ struct HistoryGraph: View {
     let largeHeight: CGFloat = 16
     @Binding var isAnimated: Bool
     var progress: CGFloat
-    
+
     var body: some View {
         let startColor = Color.UI.gradientStartColor(
             withProgress: progress
@@ -17,7 +17,7 @@ struct HistoryGraph: View {
         let linearGradient = LinearGradient(
             gradient: Gradient(colors: [
                 startColor,
-                endColor
+                endColor,
             ]),
             startPoint: .leading,
             endPoint: .trailing
@@ -29,7 +29,8 @@ struct HistoryGraph: View {
                         x: 0,
                         y: geometry.size.height * 0.5 - smallHeight * 0.5,
                         width: geometry.size.width,
-                        height: smallHeight))
+                        height: smallHeight
+                    ))
                     .fill(linearGradient)
                 Path { path in
                     path.move(to: CGPoint(x: 0, y: geometry.size.height * 0.5))
