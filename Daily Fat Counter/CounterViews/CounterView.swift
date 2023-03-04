@@ -1,84 +1,19 @@
+//
+//  CounterView.swift
+//  Daily Fat Counter
+//
+//  Created by Brendan Innis on 2023-03-03.
+//
 
 import SwiftUI
 
-private var lastQuadrant: Geometry.Quadrant = .one
-private var lastAngle: Double = 0
-
 struct CounterView: View {
-    let circleSize: Double = 160
-    let touchZoneSize: Double = 160
-    let handleSize: Double = 88
-    let mode: Mode = .totalFat
-
-    @Binding var usedGrams: Double
-    @Binding var totalGrams: Double
-
-    @State private var dragStarted = false
+    let circleSize: Double
+    let usedGrams: Double
+    let totalGrams: Double
 
     var progress: Double {
         usedGrams / totalGrams
-    }
-
-    var drag: some Gesture {
-        let origin = CGPoint(x: circleSize * 0.5, y: circleSize * 0.5)
-
-        return DragGesture()
-            .onChanged { gesture in
-                let location = gesture.location
-
-                let opposite: Double
-                let adjacent: Double
-                let quadrantOffset: Double
-
-                let newQuadrant = Geometry.Quadrant(withPoint: location,
-                                                    inCircleWithOrigin: origin)
-                switch newQuadrant {
-                case .one:
-                    quadrantOffset = 0
-                    opposite = location.x - origin.x
-                    adjacent = origin.y - location.y
-                case .two:
-                    quadrantOffset = Double.pi * 0.5
-                    opposite = location.y - origin.y
-                    adjacent = location.x - origin.x
-                case .three:
-                    quadrantOffset = Double.pi
-                    opposite = origin.x - location.x
-                    adjacent = location.y - origin.y
-                case .four:
-                    quadrantOffset = Double.pi * 1.5
-                    opposite = origin.y - location.y
-                    adjacent = origin.x - location.x
-                }
-                let angle = atan(opposite / adjacent) + quadrantOffset
-
-                if !dragStarted {
-                    dragStarted = true
-                    lastAngle = angle
-                    lastQuadrant = newQuadrant
-                    return
-                }
-                var rotationOffset: Double = 0
-                if newQuadrant == .one && lastQuadrant == .four {
-                    // Rotation forward
-                    rotationOffset = RADIANS_PER_ROTATION
-                } else if newQuadrant == .four && lastQuadrant == .one {
-                    // Rotation backward
-                    rotationOffset = -1 * RADIANS_PER_ROTATION
-                }
-
-                // Updates the UI
-                usedGrams += ((angle - lastAngle + rotationOffset) / RADIANS_PER_ROTATION) * totalGrams
-                if usedGrams < 0 {
-                    usedGrams = 0
-                }
-
-                lastAngle = angle
-                lastQuadrant = newQuadrant
-            }
-            .onEnded { _ in
-                dragStarted = false
-            }
     }
 
     var body: some View {
@@ -123,22 +58,13 @@ struct CounterView: View {
                         .font(.subheadline)
                         .bold()
                 }
-            }.gesture(drag)
-            Text(mode.rawValue)
-                .font(.headline)
-                .padding()
+            }
         }
-    }
-
-    enum Mode: String, CaseIterable, Codable {
-        case totalFat = "Total Fat"
-        case remainingFat = "Remaining Fat"
     }
 }
 
 struct CounterView_Previews: PreviewProvider {
     static var previews: some View {
-        CounterView(usedGrams: .constant(28.0), totalGrams: .constant(45.0))
-            .preferredColorScheme(.dark)
+        CounterView(circleSize: 160.0, usedGrams: 28.0, totalGrams: 45.0)
     }
 }

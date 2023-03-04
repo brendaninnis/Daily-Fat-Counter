@@ -19,7 +19,7 @@
 		B8AFB0FB27F13662008B5AD3 /* Daily_Fat_CounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB0FA27F13662008B5AD3 /* Daily_Fat_CounterTests.swift */; };
 		B8AFB10527F13662008B5AD3 /* Daily_Fat_CounterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB10427F13662008B5AD3 /* Daily_Fat_CounterUITests.swift */; };
 		B8AFB10727F13662008B5AD3 /* Daily_Fat_CounterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB10627F13662008B5AD3 /* Daily_Fat_CounterUITestsLaunchTests.swift */; };
-		B8AFB11427F136D0008B5AD3 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB11327F136D0008B5AD3 /* CounterView.swift */; };
+		B8AFB11427F136D0008B5AD3 /* InteractiveCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB11327F136D0008B5AD3 /* InteractiveCounter.swift */; };
 		B8B131DC27F8DCBD007ABA20 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DB27F8DCBD007ABA20 /* Colours.swift */; };
 		B8B131DE27F900F8007ABA20 /* CounterHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DD27F900F8007ABA20 /* CounterHome.swift */; };
 		B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DF27F914ED007ABA20 /* CounterButton.swift */; };
@@ -30,6 +30,16 @@
 		B8CD9F5D2809E1900009BBDA /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
 		B8CD9F5F2809EB730009BBDA /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */; };
 		B8CD9F612809F2240009BBDA /* HistoryGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F602809F2240009BBDA /* HistoryGraph.swift */; };
+		B8CEB38C29B2ED81004CE824 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CEB38B29B2ED81004CE824 /* WidgetKit.framework */; };
+		B8CEB38E29B2ED81004CE824 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CEB38D29B2ED81004CE824 /* SwiftUI.framework */; };
+		B8CEB39129B2ED81004CE824 /* Daily_Fat_Counter_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CEB39029B2ED81004CE824 /* Daily_Fat_Counter_WidgetBundle.swift */; };
+		B8CEB39329B2ED81004CE824 /* Daily_Fat_Counter_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CEB39229B2ED81004CE824 /* Daily_Fat_Counter_Widget.swift */; };
+		B8CEB39529B2ED83004CE824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CEB39429B2ED83004CE824 /* Assets.xcassets */; };
+		B8CEB39929B2ED83004CE824 /* Daily Fat Counter WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B8CEB38929B2ED81004CE824 /* Daily Fat Counter WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B8CEB3A029B2F1F1004CE824 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CEB39F29B2F1F0004CE824 /* CounterView.swift */; };
+		B8CEB3A129B2F1F1004CE824 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CEB39F29B2F1F0004CE824 /* CounterView.swift */; };
+		B8CEB3A229B2F352004CE824 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DB27F8DCBD007ABA20 /* Colours.swift */; };
+		B8CEB3A329B2F5B8004CE824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8AFB0ED27F13661008B5AD3 /* Assets.xcassets */; };
 		B8D8214927FA837000B28F90 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8214827FA837000B28F90 /* Numbers.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +58,28 @@
 			remoteGlobalIDString = B8AFB0E527F1365B008B5AD3;
 			remoteInfo = "Daily Fat Counter";
 		};
+		B8CEB39729B2ED83004CE824 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8AFB0DE27F1365B008B5AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B8CEB38829B2ED81004CE824;
+			remoteInfo = "Daily Fat Counter WidgetExtension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B8CEB39A29B2ED83004CE824 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B8CEB39929B2ED83004CE824 /* Daily Fat Counter WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B8223D392815CBA000EF5F5A /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
@@ -66,7 +97,7 @@
 		B8AFB10027F13662008B5AD3 /* Daily Fat CounterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily Fat CounterUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8AFB10427F13662008B5AD3 /* Daily_Fat_CounterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily_Fat_CounterUITests.swift; sourceTree = "<group>"; };
 		B8AFB10627F13662008B5AD3 /* Daily_Fat_CounterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily_Fat_CounterUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B8AFB11327F136D0008B5AD3 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		B8AFB11327F136D0008B5AD3 /* InteractiveCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveCounter.swift; sourceTree = "<group>"; };
 		B8B131DB27F8DCBD007ABA20 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		B8B131DD27F900F8007ABA20 /* CounterHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterHome.swift; sourceTree = "<group>"; };
 		B8B131DF27F914ED007ABA20 /* CounterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterButton.swift; sourceTree = "<group>"; };
@@ -78,6 +109,14 @@
 		B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFatStore.swift; sourceTree = "<group>"; };
 		B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
 		B8CD9F602809F2240009BBDA /* HistoryGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGraph.swift; sourceTree = "<group>"; };
+		B8CEB38929B2ED81004CE824 /* Daily Fat Counter WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Daily Fat Counter WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8CEB38B29B2ED81004CE824 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B8CEB38D29B2ED81004CE824 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B8CEB39029B2ED81004CE824 /* Daily_Fat_Counter_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily_Fat_Counter_WidgetBundle.swift; sourceTree = "<group>"; };
+		B8CEB39229B2ED81004CE824 /* Daily_Fat_Counter_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily_Fat_Counter_Widget.swift; sourceTree = "<group>"; };
+		B8CEB39429B2ED83004CE824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B8CEB39629B2ED83004CE824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8CEB39F29B2F1F0004CE824 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		B8D8214827FA837000B28F90 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +142,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B8CEB38629B2ED81004CE824 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8CEB38E29B2ED81004CE824 /* SwiftUI.framework in Frameworks */,
+				B8CEB38C29B2ED81004CE824 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -121,6 +169,8 @@
 				B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */,
 				B8AFB0F927F13662008B5AD3 /* Daily Fat CounterTests */,
 				B8AFB10327F13662008B5AD3 /* Daily Fat CounterUITests */,
+				B8CEB38F29B2ED81004CE824 /* Daily Fat Counter Widget */,
+				B8CEB38A29B2ED81004CE824 /* Frameworks */,
 				B8AFB0E727F1365B008B5AD3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +181,7 @@
 				B8AFB0E627F1365B008B5AD3 /* Daily Fat Counter.app */,
 				B8AFB0F627F13662008B5AD3 /* Daily Fat CounterTests.xctest */,
 				B8AFB10027F13662008B5AD3 /* Daily Fat CounterUITests.xctest */,
+				B8CEB38929B2ED81004CE824 /* Daily Fat Counter WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,9 +233,10 @@
 		B8B131E127FA1C63007ABA20 /* CounterViews */ = {
 			isa = PBXGroup;
 			children = (
-				B8AFB11327F136D0008B5AD3 /* CounterView.swift */,
+				B8AFB11327F136D0008B5AD3 /* InteractiveCounter.swift */,
 				B8B131DD27F900F8007ABA20 /* CounterHome.swift */,
 				B8B131DF27F914ED007ABA20 /* CounterButton.swift */,
+				B8CEB39F29B2F1F0004CE824 /* CounterView.swift */,
 			);
 			path = CounterViews;
 			sourceTree = "<group>";
@@ -236,6 +288,26 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		B8CEB38A29B2ED81004CE824 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8CEB38B29B2ED81004CE824 /* WidgetKit.framework */,
+				B8CEB38D29B2ED81004CE824 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8CEB38F29B2ED81004CE824 /* Daily Fat Counter Widget */ = {
+			isa = PBXGroup;
+			children = (
+				B8CEB39029B2ED81004CE824 /* Daily_Fat_Counter_WidgetBundle.swift */,
+				B8CEB39229B2ED81004CE824 /* Daily_Fat_Counter_Widget.swift */,
+				B8CEB39429B2ED83004CE824 /* Assets.xcassets */,
+				B8CEB39629B2ED83004CE824 /* Info.plist */,
+			);
+			path = "Daily Fat Counter Widget";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -246,10 +318,12 @@
 				B8AFB0E227F1365B008B5AD3 /* Sources */,
 				B8AFB0E327F1365B008B5AD3 /* Frameworks */,
 				B8AFB0E427F1365B008B5AD3 /* Resources */,
+				B8CEB39A29B2ED83004CE824 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B8CEB39829B2ED83004CE824 /* PBXTargetDependency */,
 			);
 			name = "Daily Fat Counter";
 			productName = "Daily Fat Counter";
@@ -292,6 +366,23 @@
 			productReference = B8AFB10027F13662008B5AD3 /* Daily Fat CounterUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B8CEB38829B2ED81004CE824 /* Daily Fat Counter WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8CEB39D29B2ED83004CE824 /* Build configuration list for PBXNativeTarget "Daily Fat Counter WidgetExtension" */;
+			buildPhases = (
+				B8CEB38529B2ED81004CE824 /* Sources */,
+				B8CEB38629B2ED81004CE824 /* Frameworks */,
+				B8CEB38729B2ED81004CE824 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Daily Fat Counter WidgetExtension";
+			productName = "Daily Fat Counter WidgetExtension";
+			productReference = B8CEB38929B2ED81004CE824 /* Daily Fat Counter WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -299,7 +390,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					B8AFB0E527F1365B008B5AD3 = {
@@ -312,6 +403,9 @@
 					B8AFB0FF27F13662008B5AD3 = {
 						CreatedOnToolsVersion = 13.3;
 						TestTargetID = B8AFB0E527F1365B008B5AD3;
+					};
+					B8CEB38829B2ED81004CE824 = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -331,6 +425,7 @@
 				B8AFB0E527F1365B008B5AD3 /* Daily Fat Counter */,
 				B8AFB0F527F13662008B5AD3 /* Daily Fat CounterTests */,
 				B8AFB0FF27F13662008B5AD3 /* Daily Fat CounterUITests */,
+				B8CEB38829B2ED81004CE824 /* Daily Fat Counter WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +454,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B8CEB38729B2ED81004CE824 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8CEB3A329B2F5B8004CE824 /* Assets.xcassets in Resources */,
+				B8CEB39529B2ED83004CE824 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -376,7 +480,7 @@
 				B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */,
 				B84AE35C2845B4AE00A9FB83 /* MailView.swift in Sources */,
 				B8AFB0EA27F1365B008B5AD3 /* DailyFatCounterApp.swift in Sources */,
-				B8AFB11427F136D0008B5AD3 /* CounterView.swift in Sources */,
+				B8AFB11427F136D0008B5AD3 /* InteractiveCounter.swift in Sources */,
 				B8B131DE27F900F8007ABA20 /* CounterHome.swift in Sources */,
 				B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */,
 				B8CD9F5B2809DBF10009BBDA /* DailyFat.swift in Sources */,
@@ -385,6 +489,7 @@
 				B8B131DC27F8DCBD007ABA20 /* Colours.swift in Sources */,
 				B8B131E427FA2219007ABA20 /* CounterData.swift in Sources */,
 				B8D8214927FA837000B28F90 /* Numbers.swift in Sources */,
+				B8CEB3A029B2F1F1004CE824 /* CounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +510,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B8CEB38529B2ED81004CE824 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8CEB39329B2ED81004CE824 /* Daily_Fat_Counter_Widget.swift in Sources */,
+				B8CEB39129B2ED81004CE824 /* Daily_Fat_Counter_WidgetBundle.swift in Sources */,
+				B8CEB3A129B2F1F1004CE824 /* CounterView.swift in Sources */,
+				B8CEB3A229B2F352004CE824 /* Colours.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -417,6 +533,11 @@
 			isa = PBXTargetDependency;
 			target = B8AFB0E527F1365B008B5AD3 /* Daily Fat Counter */;
 			targetProxy = B8AFB10127F13662008B5AD3 /* PBXContainerItemProxy */;
+		};
+		B8CEB39829B2ED83004CE824 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B8CEB38829B2ED81004CE824 /* Daily Fat Counter WidgetExtension */;
+			targetProxy = B8CEB39729B2ED83004CE824 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -471,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -525,7 +646,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -538,6 +659,7 @@
 		B8AFB10B27F13662008B5AD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -572,6 +694,7 @@
 		B8AFB10C27F13662008B5AD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -679,6 +802,64 @@
 			};
 			name = Release;
 		};
+		B8CEB39B29B2ED83004CE824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NVX5R79A76;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Daily Fat Counter Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Daily Fat Counter Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.brendaninnis.dailyfatcounter.Daily-Fat-Counter-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B8CEB39C29B2ED83004CE824 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NVX5R79A76;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Daily Fat Counter Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Daily Fat Counter Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.brendaninnis.dailyfatcounter.Daily-Fat-Counter-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -714,6 +895,15 @@
 			buildConfigurations = (
 				B8AFB11127F13662008B5AD3 /* Debug */,
 				B8AFB11227F13662008B5AD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8CEB39D29B2ED83004CE824 /* Build configuration list for PBXNativeTarget "Daily Fat Counter WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8CEB39B29B2ED83004CE824 /* Debug */,
+				B8CEB39C29B2ED83004CE824 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
