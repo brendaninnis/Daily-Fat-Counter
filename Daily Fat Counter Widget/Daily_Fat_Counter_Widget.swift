@@ -5,23 +5,23 @@
 //  Created by Brendan Innis on 2023-03-03.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct Provider: TimelineProvider {
     @AppStorage("used_fat") var usedFat: Double = 0.0
     @AppStorage("total_fat") var totalFat: Double = 50.0
-    
-    func placeholder(in context: Context) -> FatCounterEntry {
+
+    func placeholder(in _: Context) -> FatCounterEntry {
         FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (FatCounterEntry) -> ()) {
+    func getSnapshot(in _: Context, completion: @escaping (FatCounterEntry) -> Void) {
         let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
         let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
@@ -34,7 +34,7 @@ struct FatCounterEntry: TimelineEntry {
     let totalGrams: Double
 }
 
-struct Daily_Fat_Counter_WidgetEntryView : View {
+struct Daily_Fat_Counter_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {

@@ -6,11 +6,11 @@ private var lastAngle: Double = 0
 
 struct InteractiveCounter: View {
     static let circleSize: Double = 160
-    
+
     let touchZoneSize: Double = Self.circleSize
     let handleSize: Double = Self.circleSize * 0.5 + 8
     let mode: Mode = .totalFat
-    
+
     @Binding var usedGrams: Double
     @Binding var totalGrams: Double
 
@@ -85,7 +85,7 @@ struct InteractiveCounter: View {
             .font(.headline)
             .padding()
     }
-    
+
     enum Mode: String, CaseIterable, Codable {
         case totalFat = "Total Fat"
         case remainingFat = "Remaining Fat"

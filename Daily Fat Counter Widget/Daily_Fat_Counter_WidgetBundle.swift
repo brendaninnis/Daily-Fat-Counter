@@ -5,8 +5,8 @@
 //  Created by Brendan Innis on 2023-03-03.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 @main
 struct Daily_Fat_Counter_WidgetBundle: WidgetBundle {
