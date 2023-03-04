@@ -4,6 +4,8 @@ import Foundation
 import SwiftUI
 
 final class CounterData: ObservableObject {
+    static let defaults = UserDefaults(suiteName: "group.ca.brendaninnis.dailyfatcounter")
+
     private var timer: Timer?
     private var started = false
     private weak var delegate: CounterDataDelegate?
@@ -11,7 +13,7 @@ final class CounterData: ObservableObject {
         Calendar.autoupdatingCurrent
     }
 
-    @AppStorage("next_reset") var nextReset: TimeInterval = 0.0 {
+    @AppStorage("next_reset", store: defaults) var nextReset: TimeInterval = 0.0 {
         willSet {
             // Publish changes
             objectWillChange.send()
@@ -24,28 +26,28 @@ final class CounterData: ObservableObject {
         }
     }
 
-    @AppStorage("reset_hour") var resetHour: Int = 0 {
+    @AppStorage("reset_hour", store: defaults) var resetHour: Int = 0 {
         willSet {
             // Publish changes
             objectWillChange.send()
         }
     }
 
-    @AppStorage("reset_minute") var resetMinute: Int = 0 {
+    @AppStorage("reset_minute", store: defaults) var resetMinute: Int = 0 {
         willSet {
             // Publish changes
             objectWillChange.send()
         }
     }
 
-    @AppStorage("used_fat") var usedFat: Double = 0.0 {
+    @AppStorage("used_fat", store: defaults) var usedFat: Double = 0.0 {
         willSet {
             // Publish changes
             objectWillChange.send()
         }
     }
 
-    @AppStorage("total_fat") var totalFat: Double = 50.0 {
+    @AppStorage("total_fat", store: defaults) var totalFat: Double = 50.0 {
         willSet {
             // Publish changes
             objectWillChange.send()

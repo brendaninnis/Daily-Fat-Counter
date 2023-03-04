@@ -9,8 +9,10 @@ import SwiftUI
 import WidgetKit
 
 struct Provider: TimelineProvider {
-    @AppStorage("used_fat") var usedFat: Double = 0.0
-    @AppStorage("total_fat") var totalFat: Double = 50.0
+    static let defaults = UserDefaults(suiteName: "group.ca.brendaninnis.dailyfatcounter")
+
+    @AppStorage("used_fat", store: Self.defaults) var usedFat: Double = 0.0
+    @AppStorage("total_fat", store: Self.defaults) var totalFat: Double = 50.0
 
     func placeholder(in _: Context) -> FatCounterEntry {
         FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0)
@@ -35,10 +37,12 @@ struct FatCounterEntry: TimelineEntry {
 }
 
 struct Daily_Fat_Counter_WidgetEntryView: View {
+    static let circleSize: Double = 128
+
     var entry: Provider.Entry
 
     var body: some View {
-        CounterView(circleSize: 130, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+        CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
     }
 }
 

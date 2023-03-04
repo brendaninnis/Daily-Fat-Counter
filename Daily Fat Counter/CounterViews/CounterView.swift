@@ -50,7 +50,7 @@ struct CounterView: View {
                     )
                     .rotationEffect(.degrees(-90))
                     .frame(width: circleSize, height: circleSize)
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text(String(format: "%.1fg", round(usedGrams)))
                         .font(.largeTitle)
                         .bold()

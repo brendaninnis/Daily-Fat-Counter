@@ -1,5 +1,6 @@
 
 import SwiftUI
+import WidgetKit
 
 @main
 struct DailyFatCounterApp: App {
@@ -29,6 +30,9 @@ struct DailyFatCounterApp: App {
                     if newPhase == .active {
                         DebugLog.log("App did become active")
                         counterData.initializeDailyFatReset(Date().timeIntervalSince1970)
+                    } else if newPhase == .inactive {
+                        DebugLog.log("App did become inactive")
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                 }
         }

@@ -117,6 +117,8 @@
 		B8CEB39429B2ED83004CE824 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8CEB39629B2ED83004CE824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8CEB39F29B2F1F0004CE824 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		B8CEB3A429B2FDD4004CE824 /* Daily Fat Counter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Daily Fat Counter.entitlements"; sourceTree = "<group>"; };
+		B8CEB3A529B2FE15004CE824 /* Daily Fat Counter WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Daily Fat Counter WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		B8D8214827FA837000B28F90 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +168,7 @@
 		B8AFB0DD27F1365B008B5AD3 = {
 			isa = PBXGroup;
 			children = (
+				B8CEB3A529B2FE15004CE824 /* Daily Fat Counter WidgetExtension.entitlements */,
 				B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */,
 				B8AFB0F927F13662008B5AD3 /* Daily Fat CounterTests */,
 				B8AFB10327F13662008B5AD3 /* Daily Fat CounterUITests */,
@@ -189,6 +192,7 @@
 		B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */ = {
 			isa = PBXGroup;
 			children = (
+				B8CEB3A429B2FDD4004CE824 /* Daily Fat Counter.entitlements */,
 				B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */,
 				B84AE35A2845B48E00A9FB83 /* Settings */,
 				B8CD9F582809DB1C0009BBDA /* Icons */,
@@ -662,6 +666,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Daily Fat Counter/Daily Fat Counter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter/Preview Content\"";
@@ -697,6 +702,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Daily Fat Counter/Daily Fat Counter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter/Preview Content\"";
@@ -808,6 +814,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Daily Fat Counter WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NVX5R79A76;
@@ -837,6 +844,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Daily Fat Counter WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NVX5R79A76;
