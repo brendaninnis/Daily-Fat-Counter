@@ -15,7 +15,7 @@ struct Provider: TimelineProvider {
     @AppStorage("total_fat", store: Self.defaults) var totalFat: Double = 50.0
 
     func placeholder(in _: Context) -> FatCounterEntry {
-        FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0)
+        FatCounterEntry(date: Date(), usedGrams: 0, totalGrams: 0)
     }
 
     func getSnapshot(in _: Context, completion: @escaping (FatCounterEntry) -> Void) {
@@ -36,7 +36,7 @@ struct FatCounterEntry: TimelineEntry {
     let totalGrams: Double
 }
 
-struct Daily_Fat_Counter_WidgetEntryView: View {
+struct DailyFatCounterWidgetView: View {
     static let circleSize: Double = 128
 
     var entry: Provider.Entry
@@ -46,12 +46,12 @@ struct Daily_Fat_Counter_WidgetEntryView: View {
     }
 }
 
-struct Daily_Fat_Counter_Widget: Widget {
+struct DailyFatCounterWidget: Widget {
     let kind: String = "Daily_Fat_Counter_Widget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            Daily_Fat_Counter_WidgetEntryView(entry: entry)
+            DailyFatCounterWidgetView(entry: entry)
         }
         .configurationDisplayName("Today's goal")
         .description("Check your dietary fat against your daily goal.")
@@ -59,12 +59,9 @@ struct Daily_Fat_Counter_Widget: Widget {
     }
 }
 
-struct Daily_Fat_Counter_Widget_Previews: PreviewProvider {
+struct DailyFatCounterWidgetPreviews: PreviewProvider {
     static var previews: some View {
-        Daily_Fat_Counter_WidgetEntryView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
+        DailyFatCounterWidgetView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-        Daily_Fat_Counter_WidgetEntryView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .preferredColorScheme(.dark)
     }
 }

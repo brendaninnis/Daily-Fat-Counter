@@ -11,6 +11,6 @@ import WidgetKit
 @main
 struct Daily_Fat_Counter_WidgetBundle: WidgetBundle {
     var body: some Widget {
-        Daily_Fat_Counter_Widget()
+        DailyFatCounterWidget()
     }
 }
