@@ -38,6 +38,7 @@ struct FatCounterEntry: TimelineEntry {
 
 struct DailyFatCounterWidgetView: View {
     static let circleSize: Double = 128
+
     
     @Environment(\.widgetFamily) var family: WidgetFamily
 
@@ -49,11 +50,63 @@ struct DailyFatCounterWidgetView: View {
         case .systemSmall:
             CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         case .systemMedium:
-            CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+            DailyFatCounterMediumWidget(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         case .systemLarge:
             CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         default:
             fatalError("Widget size not supported")
+        }
+    }
+}
+
+struct DailyFatCounterMediumWidget: View {
+    let usedGrams: Double
+    let totalGrams: Double
+    let history: [DailyFat] = [
+        DailyFat(id: 0,
+                 start: 1_654_637_866,
+                 usedFat: 35,
+                 totalFat: 45),
+        DailyFat(id: 0,
+                 start: 1_654_637_866,
+                 usedFat: 35,
+                 totalFat: 45),
+        DailyFat(id: 0,
+                 start: 1_654_637_866,
+                 usedFat: 35,
+                 totalFat: 45),
+        DailyFat(id: 0,
+                 start: 1_654_637_866,
+                 usedFat: 35,
+                 totalFat: 45),
+    ]
+    
+    var body: some View {
+        HStack {
+            CounterView(circleSize: DailyFatCounterWidgetView.circleSize,
+                        usedGrams: usedGrams,
+                        totalGrams: totalGrams)
+                .padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 0))
+            VStack(alignment: .leading) {
+                Text("Recent history")
+                    .font(.subheadline)
+                if history.isEmpty {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text("A history of your daily fat consumtion will be displayed here once a day has passed.")
+                            .multilineTextAlignment(.center)
+                            .font(.headline)
+                        Spacer()
+                    }
+                    Spacer()
+                } else {
+                    ForEach(history, id: \.id) { dailyFat in
+                        HistoryRow(dailyFat: history.first!, useShortDate: true, isAnimated: .constant(true))
+                    }
+                    Spacer()
+                }
+            }.padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 12))
         }
     }
 }
