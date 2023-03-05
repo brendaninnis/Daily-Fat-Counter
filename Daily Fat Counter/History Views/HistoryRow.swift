@@ -10,8 +10,11 @@ struct HistoryRow: View {
     var body: some View {
         HStack(spacing: 8) {
             Text(useShortDate ? dailyFat.shortDateLabel : dailyFat.dateLabel)
-                .frame(minWidth: 160, alignment: .leading)
+                .frame(width: useShortDate ? 60 : 160,
+                       height: 22,
+                       alignment: .leading)
             HistoryGraph(isAnimated: $isAnimated, progress: CGFloat(dailyFat.usedFat) / CGFloat(dailyFat.totalFat))
+                .frame(height: 22)
         }
     }
     
