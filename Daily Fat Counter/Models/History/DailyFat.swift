@@ -9,6 +9,9 @@ struct DailyFat: Identifiable, Codable {
     var dateLabel: String {
         mdyFormatter.string(from: Date(timeIntervalSince1970: start))
     }
+    var shortDateLabel: String {
+        shortDateFormatter.string(from: Date(timeIntervalSince1970: start))
+    }
     var monthLabel: String {
         monthFormatter.string(from: Date(timeIntervalSince1970: start))
     }
@@ -22,7 +25,6 @@ struct DailyFat: Identifiable, Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-
         id = try values.decode(Int.self, forKey: .id)
         start = try values.decode(Double.self, forKey: .start)
         usedFat = try values.decode(Double.self, forKey: .usedFat)

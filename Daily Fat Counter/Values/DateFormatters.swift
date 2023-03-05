@@ -21,6 +21,13 @@ let mdyFormatter: DateFormatter = {
     return formatter
 }()
 
+let shortDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM dd"
+    formatter.timeZone = TimeZone.autoupdatingCurrent
+    return formatter
+}()
+
 let monthFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "MMMM"

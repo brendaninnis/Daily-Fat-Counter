@@ -2,14 +2,23 @@
 import SwiftUI
 
 struct HistoryRow: View {
-    var dailyFat: DailyFat
+    let dailyFat: DailyFat
+    let useShortDate: Bool
+    
     @Binding var isAnimated: Bool
+    
     var body: some View {
         HStack(spacing: 8) {
-            Text(dailyFat.dateLabel)
+            Text(useShortDate ? dailyFat.shortDateLabel : dailyFat.dateLabel)
                 .frame(minWidth: 160, alignment: .leading)
             HistoryGraph(isAnimated: $isAnimated, progress: CGFloat(dailyFat.usedFat) / CGFloat(dailyFat.totalFat))
         }
+    }
+    
+    init(dailyFat: DailyFat, useShortDate: Bool = false, isAnimated: Binding<Bool>) {
+        self.dailyFat = dailyFat
+        self.useShortDate = useShortDate
+        self._isAnimated = isAnimated
     }
 }
 

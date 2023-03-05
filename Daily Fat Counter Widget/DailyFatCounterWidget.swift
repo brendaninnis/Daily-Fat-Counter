@@ -38,11 +38,23 @@ struct FatCounterEntry: TimelineEntry {
 
 struct DailyFatCounterWidgetView: View {
     static let circleSize: Double = 128
+    
+    @Environment(\.widgetFamily) var family: WidgetFamily
 
     var entry: Provider.Entry
 
+    @ViewBuilder
     var body: some View {
-        CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+        switch family {
+        case .systemSmall:
+            CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+        case .systemMedium:
+            CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+        case .systemLarge:
+            CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+        default:
+            fatalError("Widget size not supported")
+        }
     }
 }
 
@@ -55,13 +67,13 @@ struct DailyFatCounterWidget: Widget {
         }
         .configurationDisplayName("Today's goal")
         .description("Check your dietary fat against your daily goal.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
 struct DailyFatCounterWidgetPreviews: PreviewProvider {
     static var previews: some View {
         DailyFatCounterWidgetView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
