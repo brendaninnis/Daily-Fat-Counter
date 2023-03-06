@@ -37,9 +37,8 @@ struct FatCounterEntry: TimelineEntry {
 }
 
 struct DailyFatCounterWidgetView: View {
-    static let circleSize: Double = 128
+    static let circleSize: Double = 116
 
-    
     @Environment(\.widgetFamily) var family: WidgetFamily
 
     var entry: Provider.Entry
@@ -86,8 +85,8 @@ struct DailyFatCounterMediumWidget: View {
             CounterView(circleSize: DailyFatCounterWidgetView.circleSize,
                         usedGrams: usedGrams,
                         totalGrams: totalGrams)
-                .padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 0))
-            VStack(alignment: .leading) {
+                .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 0))
+            VStack(alignment: .leading, spacing: 4) {
                 Text("Recent history")
                     .font(.subheadline)
                 if history.isEmpty {
@@ -106,7 +105,7 @@ struct DailyFatCounterMediumWidget: View {
                     }
                     Spacer()
                 }
-            }.padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 12))
+            }.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
         }
     }
 }
@@ -126,6 +125,8 @@ struct DailyFatCounterWidget: Widget {
 
 struct DailyFatCounterWidgetPreviews: PreviewProvider {
     static var previews: some View {
+        DailyFatCounterWidgetView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
         DailyFatCounterWidgetView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
