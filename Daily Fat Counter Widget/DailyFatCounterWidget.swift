@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct Provider: TimelineProvider {
-    static let defaults = UserDefaults(suiteName: "group.ca.brendaninnis.dailyfatcounter")
+    static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
 
     @AppStorage("used_fat", store: Self.defaults) var usedFat: Double = 0.0
     @AppStorage("total_fat", store: Self.defaults) var totalFat: Double = 50.0
@@ -18,15 +18,52 @@ struct Provider: TimelineProvider {
         FatCounterEntry(date: Date(), usedGrams: 0, totalGrams: 0)
     }
 
-    func getSnapshot(in _: Context, completion: @escaping (FatCounterEntry) -> Void) {
-        let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
-        completion(entry)
+    func getSnapshot(in context: Context, completion: @escaping (FatCounterEntry) -> Void) {
+        switch (context.family) {
+        case .systemSmall:
+            let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
+            completion(entry)
+        case .systemMedium, .systemLarge:
+            DailyFatStore.load { result in
+                switch result {
+                case .success(let success):
+                    let entry = FatCounterEntry(date: Date(),
+                                                usedGrams: usedFat,
+                                                totalGrams: totalFat,
+                                                recentHistory: Array(success.suffix(4)))
+                    completion(entry)
+                case .failure(let failure):
+                    DebugLog.log("Failed to load Daily Fat history \(failure.localizedDescription)")
+                }
+            }
+        default:
+            fatalError("Widget size not supported")
+        }
     }
 
-    func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
-        let timeline = Timeline(entries: [entry], policy: .never)
-        completion(timeline)
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+        switch (context.family) {
+        case .systemSmall:
+            let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
+            let timeline = Timeline(entries: [entry], policy: .never)
+            completion(timeline)
+        case .systemMedium, .systemLarge:
+            DailyFatStore.load { result in
+                switch result {
+                case .success(let success):
+                    let entry = FatCounterEntry(date: Date(),
+                                                usedGrams: usedFat,
+                                                totalGrams: totalFat,
+                                                recentHistory: Array(success.suffix(4)))
+                    let timeline = Timeline(entries: [entry], policy: .never)
+                    completion(timeline)
+                case .failure(let failure):
+                    DebugLog.log("Failed to load Daily Fat history \(failure.localizedDescription)")
+                }
+            }
+        default:
+            fatalError("Widget size not supported")
+        }
     }
 }
 
@@ -34,6 +71,14 @@ struct FatCounterEntry: TimelineEntry {
     let date: Date
     let usedGrams: Double
     let totalGrams: Double
+    let recentHistory: [DailyFat]
+    
+    internal init(date: Date, usedGrams: Double, totalGrams: Double, recentHistory: [DailyFat] = []) {
+        self.date = date
+        self.usedGrams = usedGrams
+        self.totalGrams = totalGrams
+        self.recentHistory = recentHistory
+    }
 }
 
 struct DailyFatCounterWidgetView: View {
@@ -49,7 +94,7 @@ struct DailyFatCounterWidgetView: View {
         case .systemSmall:
             CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         case .systemMedium:
-            DailyFatCounterMediumWidget(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+            DailyFatCounterMediumWidget(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams, history: entry.recentHistory)
         case .systemLarge:
             CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         default:
@@ -61,24 +106,24 @@ struct DailyFatCounterWidgetView: View {
 struct DailyFatCounterMediumWidget: View {
     let usedGrams: Double
     let totalGrams: Double
-    let history: [DailyFat] = [
-        DailyFat(id: 0,
-                 start: 1_654_637_866,
-                 usedFat: 35,
-                 totalFat: 45),
-        DailyFat(id: 0,
-                 start: 1_654_637_866,
-                 usedFat: 35,
-                 totalFat: 45),
-        DailyFat(id: 0,
-                 start: 1_654_637_866,
-                 usedFat: 35,
-                 totalFat: 45),
-        DailyFat(id: 0,
-                 start: 1_654_637_866,
-                 usedFat: 35,
-                 totalFat: 45),
-    ]
+    let history: [DailyFat]// = [
+//        DailyFat(id: 3,
+//                 start: 1_654_865_401,
+//                 usedFat: 35,
+//                 totalFat: 45),
+//        DailyFat(id: 2,
+//                 start: 1_654_779_001,
+//                 usedFat: 35,
+//                 totalFat: 45),
+//        DailyFat(id: 1,
+//                 start: 1_654_692_601,
+//                 usedFat: 35,
+//                 totalFat: 45),
+//        DailyFat(id: 0,
+//                 start: 1_654_637_866,
+//                 usedFat: 35,
+//                 totalFat: 45),
+//    ]
     
     var body: some View {
         HStack {
@@ -93,7 +138,7 @@ struct DailyFatCounterMediumWidget: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Text("A history of your daily fat consumtion will be displayed here once a day has passed.")
+                        Text("No history yet.")
                             .multilineTextAlignment(.center)
                             .font(.headline)
                         Spacer()
@@ -101,7 +146,7 @@ struct DailyFatCounterMediumWidget: View {
                     Spacer()
                 } else {
                     ForEach(history, id: \.id) { dailyFat in
-                        HistoryRow(dailyFat: history.first!, useShortDate: true, isAnimated: .constant(true))
+                        HistoryRow(dailyFat: dailyFat, useShortDate: true, isAnimated: .constant(true))
                     }
                     Spacer()
                 }

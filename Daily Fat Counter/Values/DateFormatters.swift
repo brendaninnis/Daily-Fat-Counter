@@ -23,7 +23,7 @@ let mdyFormatter: DateFormatter = {
 
 let shortDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "MMM dd"
+    formatter.dateFormat = "MMM d"
     formatter.timeZone = TimeZone.autoupdatingCurrent
     return formatter
 }()

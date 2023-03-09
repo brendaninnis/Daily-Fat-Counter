@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		B8223D3A2815CBA000EF5F5A /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8223D392815CBA000EF5F5A /* Geometry.swift */; };
 		B84AE35C2845B4AE00A9FB83 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84AE35B2845B4AE00A9FB83 /* MailView.swift */; };
+		B84D695129B5AD45005096AF /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
+		B84D695229B5AD89005096AF /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88B59E6280CA7EB007054D5 /* DebugLog.swift */; };
+		B84D695329B5AEF9005096AF /* CounterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E327FA2219007ABA20 /* CounterData.swift */; };
+		B84D695429B5AF12005096AF /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8214827FA837000B28F90 /* Numbers.swift */; };
 		B87F2AAC29B4F96B009D41A3 /* HistoryGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F602809F2240009BBDA /* HistoryGraph.swift */; };
 		B87F2AAD29B4F96B009D41A3 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */; };
 		B87F2AAE29B4F977009D41A3 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88975A6284FFA2D00CF697B /* DateFormatters.swift */; };
@@ -29,6 +33,8 @@
 		B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DF27F914ED007ABA20 /* CounterButton.swift */; };
 		B8B131E427FA2219007ABA20 /* CounterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E327FA2219007ABA20 /* CounterData.swift */; };
 		B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E527FA3E71007ABA20 /* CounterSettings.swift */; };
+		B8C841BA29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
+		B8C841BB29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
 		B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */; };
 		B8CD9F5B2809DBF10009BBDA /* DailyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */; };
 		B8CD9F5D2809E1900009BBDA /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
@@ -108,6 +114,7 @@
 		B8B131E327FA2219007ABA20 /* CounterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterData.swift; sourceTree = "<group>"; };
 		B8B131E527FA3E71007ABA20 /* CounterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSettings.swift; sourceTree = "<group>"; };
 		B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Daily-Fat-Counter-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B8C841B929B6AEFE00318B6B /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryHome.swift; sourceTree = "<group>"; };
 		B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFat.swift; sourceTree = "<group>"; };
 		B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFatStore.swift; sourceTree = "<group>"; };
@@ -256,6 +263,7 @@
 				B8B131DB27F8DCBD007ABA20 /* Colours.swift */,
 				B8223D392815CBA000EF5F5A /* Geometry.swift */,
 				B88975A6284FFA2D00CF697B /* DateFormatters.swift */,
+				B8C841B929B6AEFE00318B6B /* Strings.swift */,
 			);
 			path = Values;
 			sourceTree = "<group>";
@@ -491,6 +499,7 @@
 				B8AFB11427F136D0008B5AD3 /* InteractiveCounter.swift in Sources */,
 				B8B131DE27F900F8007ABA20 /* CounterHome.swift in Sources */,
 				B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */,
+				B8C841BA29B6AEFE00318B6B /* Strings.swift in Sources */,
 				B8CD9F5B2809DBF10009BBDA /* DailyFat.swift in Sources */,
 				B8CD9F5F2809EB730009BBDA /* HistoryRow.swift in Sources */,
 				B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */,
@@ -522,11 +531,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B84D695229B5AD89005096AF /* DebugLog.swift in Sources */,
 				B87F2AAC29B4F96B009D41A3 /* HistoryGraph.swift in Sources */,
 				B8CEB39329B2ED81004CE824 /* DailyFatCounterWidget.swift in Sources */,
+				B84D695129B5AD45005096AF /* DailyFatStore.swift in Sources */,
 				B8CEB39129B2ED81004CE824 /* Daily_Fat_Counter_WidgetBundle.swift in Sources */,
 				B87F2AAD29B4F96B009D41A3 /* HistoryRow.swift in Sources */,
+				B84D695329B5AEF9005096AF /* CounterData.swift in Sources */,
+				B8C841BB29B6AEFE00318B6B /* Strings.swift in Sources */,
 				B8CEB3A129B2F1F1004CE824 /* CounterView.swift in Sources */,
+				B84D695429B5AF12005096AF /* Numbers.swift in Sources */,
 				B8CEB3A229B2F352004CE824 /* Colours.swift in Sources */,
 				B87F2AAE29B4F977009D41A3 /* DateFormatters.swift in Sources */,
 				B87F2AAF29B4F9D3009D41A3 /* DailyFat.swift in Sources */,

@@ -4,7 +4,7 @@ import Foundation
 import SwiftUI
 
 final class CounterData: ObservableObject {
-    static let defaults = UserDefaults(suiteName: "group.ca.brendaninnis.dailyfatcounter")
+    static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
 
     private var timer: Timer?
     private var started = false
