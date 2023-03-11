@@ -14,7 +14,7 @@ class DailyFatStore: ObservableObject {
         )
         .appendingPathComponent("history.data")
     }
-    
+
     private static func fileURL() throws -> URL {
         guard let url = FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: APP_GROUP_IDENTIFIER)?
@@ -27,10 +27,9 @@ class DailyFatStore: ObservableObject {
 
     static func load(completion: @escaping (Result<[DailyFat], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            
             // If there is a Daily Fat store file from an old install, we need to first copy that data to the new file
             migrateStoreIfNeeded()
-            
+
             do {
                 let fileURL = try fileURL()
                 guard let file = try? FileHandle(forReadingFrom: fileURL) else {
@@ -67,7 +66,7 @@ class DailyFatStore: ObservableObject {
             }
         }
     }
-    
+
     private static func migrateStoreIfNeeded() {
         do {
             let oldUrl = try oldFileUrl()

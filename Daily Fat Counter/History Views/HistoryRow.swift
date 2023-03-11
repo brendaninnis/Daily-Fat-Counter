@@ -4,9 +4,9 @@ import SwiftUI
 struct HistoryRow: View {
     let dailyFat: DailyFat
     let useShortDate: Bool
-    
+
     @Binding var isAnimated: Bool
-    
+
     var body: some View {
         HStack(spacing: 8) {
             Text(useShortDate ? dailyFat.shortDateLabel : dailyFat.dateLabel)
@@ -17,11 +17,11 @@ struct HistoryRow: View {
                 .frame(height: 22)
         }
     }
-    
+
     init(dailyFat: DailyFat, useShortDate: Bool = false, isAnimated: Binding<Bool>) {
         self.dailyFat = dailyFat
         self.useShortDate = useShortDate
-        self._isAnimated = isAnimated
+        _isAnimated = isAnimated
     }
 }
 

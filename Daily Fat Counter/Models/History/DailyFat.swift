@@ -9,9 +9,11 @@ struct DailyFat: Identifiable, Codable {
     var dateLabel: String {
         mdyFormatter.string(from: Date(timeIntervalSince1970: start))
     }
+
     var shortDateLabel: String {
         shortDateFormatter.string(from: Date(timeIntervalSince1970: start))
     }
+
     var monthLabel: String {
         monthFormatter.string(from: Date(timeIntervalSince1970: start))
     }
