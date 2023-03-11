@@ -8,64 +8,94 @@
 import SwiftUI
 import WidgetKit
 
-struct Provider: TimelineProvider {
+/// Provides data to Daily Fat Counter widgets and invokes resets according to the timeline.
+struct DailyFatTimelineProvider {
     static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
 
     @AppStorage("used_fat", store: Self.defaults) var usedFat: Double = 0.0
     @AppStorage("total_fat", store: Self.defaults) var totalFat: Double = 50.0
-
-    func placeholder(in _: Context) -> FatCounterEntry {
-        FatCounterEntry(date: Date(), usedGrams: 0, totalGrams: 0)
+    private var counterData = CounterData()
+    private var dailyData = DailyFatStore()
+    
+    enum FetchEntryError: Error {
+        case ioError(_ reason: String)
+        case widgetFamilyNotSupported
     }
-
-    func getSnapshot(in context: Context, completion: @escaping (FatCounterEntry) -> Void) {
+    
+    typealias FetchEntryCompletion = ((Result<FatCounterEntry, FetchEntryError>) -> Void)
+    
+    private func loadHistoryAndStartCounter(_ completion: @escaping () -> Void) {
+        DailyFatStore.load { result in
+            switch result {
+            case .success(let history):
+                dailyData.history = history
+            case .failure(let failure):
+                fatalError(failure.localizedDescription)
+            }
+            counterData.start(withDelegate: dailyData)
+            completion()
+        }
+    }
+    
+    private func fetchEntry(for context: Context, _ completion: @escaping FetchEntryCompletion) {
         switch (context.family) {
         case .systemSmall:
             let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
-            completion(entry)
-        case .systemMedium, .systemLarge:
+            completion(.success(entry))
+        case .systemMedium:
             DailyFatStore.load { result in
                 switch result {
-                case .success(let success):
+                case .success(let history):
                     let entry = FatCounterEntry(date: Date(),
                                                 usedGrams: usedFat,
                                                 totalGrams: totalFat,
-                                                recentHistory: Array(success.prefix(4)))
-                    completion(entry)
+                                                recentHistory: Array(history.prefix(4)))
+                    completion(.success(entry))
                 case .failure(let failure):
-                    DebugLog.log("Failed to load Daily Fat history \(failure.localizedDescription)")
+                    completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
                 }
             }
         default:
-            fatalError("Widget size not supported")
+            completion(.failure(FetchEntryError.widgetFamilyNotSupported))
+        }
+    }
+}
+
+// MARK: - TimelineProvider
+
+extension DailyFatTimelineProvider: TimelineProvider {
+    func placeholder(in _: Context) -> FatCounterEntry {
+        DebugLog.log("TimelineProvider providing placeholder")
+        return FatCounterEntry(date: Date(), usedGrams: 0, totalGrams: 0)
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (FatCounterEntry) -> Void) {
+        DebugLog.log("TimelineProvider providing snapshot in context \(context)")
+        fetchEntry(for: context) { result in
+            switch result {
+            case .failure(let error):
+                DebugLog.log("Failed to load TimelineProvider entry \(error)")
+                completion(placeholder(in: context))
+            case .success(let entry):
+                completion(entry)
+            }
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        switch (context.family) {
-        case .systemSmall:
-            let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
-            let timeline = Timeline(entries: [entry], policy: .never)
-            completion(timeline)
-        case .systemMedium, .systemLarge:
-            DailyFatStore.load { result in
-                switch result {
-                case .success(let success):
-                    let entry = FatCounterEntry(date: Date(),
-                                                usedGrams: usedFat,
-                                                totalGrams: totalFat,
-                                                recentHistory: Array(success.prefix(4)))
-                    let timeline = Timeline(entries: [entry], policy: .never)
-                    completion(timeline)
-                case .failure(let failure):
-                    DebugLog.log("Failed to load Daily Fat history \(failure.localizedDescription)")
-                }
-            }
-        default:
-            fatalError("Widget size not supported")
+        DebugLog.log("TimelineProvider providing timeline in context \(context)")
+        loadHistoryAndStartCounter {
+            let entry = FatCounterEntry(date: Date(),
+                                        usedGrams: usedFat,
+                                        totalGrams: totalFat,
+                                        recentHistory: Array(dailyData.history.prefix(4)))
+            let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
+            completion(Timeline(entries: [entry], policy: .after(nextResetDate)))
         }
     }
 }
+
+// MARK: - Data model
 
 struct FatCounterEntry: TimelineEntry {
     let date: Date
@@ -81,12 +111,14 @@ struct FatCounterEntry: TimelineEntry {
     }
 }
 
+// MARK: - Widget SwiftUI Views
+
 struct DailyFatCounterWidgetView: View {
     static let circleSize: Double = 116
 
     @Environment(\.widgetFamily) var family: WidgetFamily
 
-    var entry: Provider.Entry
+    var entry: DailyFatTimelineProvider.Entry
 
     @ViewBuilder
     var body: some View {
@@ -95,8 +127,6 @@ struct DailyFatCounterWidgetView: View {
             CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         case .systemMedium:
             DailyFatCounterMediumWidget(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams, history: entry.recentHistory)
-        case .systemLarge:
-            CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
         default:
             fatalError("Widget size not supported")
         }
@@ -117,6 +147,7 @@ struct DailyFatCounterMediumWidget: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Recent history")
                     .font(.subheadline)
+                    .bold()
                 if history.isEmpty {
                     Spacer()
                     HStack {
@@ -138,18 +169,22 @@ struct DailyFatCounterMediumWidget: View {
     }
 }
 
+// MARK: - Widget
+
 struct DailyFatCounterWidget: Widget {
     let kind: String = "Daily_Fat_Counter_Widget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: DailyFatTimelineProvider()) { entry in
             DailyFatCounterWidgetView(entry: entry)
         }
         .configurationDisplayName("Today's goal")
         .description("Check your dietary fat against your daily goal.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
+
+// MARK: - Previews
 
 struct DailyFatCounterWidgetPreviews: PreviewProvider {
     static var previews: some View {

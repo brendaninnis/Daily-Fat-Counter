@@ -18,6 +18,7 @@ final class CounterData: ObservableObject {
             // Publish changes
             objectWillChange.send()
         }
+        @available(iOSApplicationExtension, unavailable)
         didSet {
             if dateForResetSelection.timeIntervalSince1970 != nextReset {
                 dateForResetSelection = Date(timeIntervalSince1970: nextReset)
