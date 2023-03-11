@@ -30,7 +30,7 @@ struct Provider: TimelineProvider {
                     let entry = FatCounterEntry(date: Date(),
                                                 usedGrams: usedFat,
                                                 totalGrams: totalFat,
-                                                recentHistory: Array(success.suffix(4)))
+                                                recentHistory: Array(success.prefix(4)))
                     completion(entry)
                 case .failure(let failure):
                     DebugLog.log("Failed to load Daily Fat history \(failure.localizedDescription)")
@@ -54,7 +54,7 @@ struct Provider: TimelineProvider {
                     let entry = FatCounterEntry(date: Date(),
                                                 usedGrams: usedFat,
                                                 totalGrams: totalFat,
-                                                recentHistory: Array(success.suffix(4)))
+                                                recentHistory: Array(success.prefix(4)))
                     let timeline = Timeline(entries: [entry], policy: .never)
                     completion(timeline)
                 case .failure(let failure):
@@ -106,31 +106,14 @@ struct DailyFatCounterWidgetView: View {
 struct DailyFatCounterMediumWidget: View {
     let usedGrams: Double
     let totalGrams: Double
-    let history: [DailyFat]// = [
-//        DailyFat(id: 3,
-//                 start: 1_654_865_401,
-//                 usedFat: 35,
-//                 totalFat: 45),
-//        DailyFat(id: 2,
-//                 start: 1_654_779_001,
-//                 usedFat: 35,
-//                 totalFat: 45),
-//        DailyFat(id: 1,
-//                 start: 1_654_692_601,
-//                 usedFat: 35,
-//                 totalFat: 45),
-//        DailyFat(id: 0,
-//                 start: 1_654_637_866,
-//                 usedFat: 35,
-//                 totalFat: 45),
-//    ]
+    let history: [DailyFat]
     
     var body: some View {
         HStack {
             CounterView(circleSize: DailyFatCounterWidgetView.circleSize,
                         usedGrams: usedGrams,
                         totalGrams: totalGrams)
-                .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 0))
+                .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 0))
             VStack(alignment: .leading, spacing: 4) {
                 Text("Recent history")
                     .font(.subheadline)
@@ -150,7 +133,7 @@ struct DailyFatCounterMediumWidget: View {
                     }
                     Spacer()
                 }
-            }.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+            }.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 16))
         }
     }
 }
@@ -170,9 +153,30 @@ struct DailyFatCounterWidget: Widget {
 
 struct DailyFatCounterWidgetPreviews: PreviewProvider {
     static var previews: some View {
-        DailyFatCounterWidgetView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
+        let entry = FatCounterEntry(date: Date(),
+                                    usedGrams: 40.0,
+                                    totalGrams: 45.0,
+                                    recentHistory: [
+                                        DailyFat(id: 3,
+                                                 start: 1_654_865_401,
+                                                 usedFat: 55,
+                                                 totalFat: 45),
+                                        DailyFat(id: 2,
+                                                 start: 1_654_779_001,
+                                                 usedFat: 100,
+                                                 totalFat: 45),
+                                        DailyFat(id: 1,
+                                                 start: 1_654_692_601,
+                                                 usedFat: 35,
+                                                 totalFat: 45),
+                                        DailyFat(id: 0,
+                                                 start: 1_654_637_866,
+                                                 usedFat: 42,
+                                                 totalFat: 45),
+                                    ])
+        DailyFatCounterWidgetView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-        DailyFatCounterWidgetView(entry: FatCounterEntry(date: Date(), usedGrams: 28.0, totalGrams: 45.0))
+        DailyFatCounterWidgetView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
