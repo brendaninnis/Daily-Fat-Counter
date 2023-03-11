@@ -12,19 +12,6 @@ import WidgetKit
 struct DailyFatTimelineProvider {
     
     // MARK: Data fields
-    private let counterData = CounterData()
-    private let dailyData = DailyFatStore()
-    
-    // MARK: Convenience vars
-    private var usedFat: Double {
-        counterData.usedFat
-    }
-    private var totalFat: Double {
-        counterData.totalFat
-    }
-    private var nextReset: TimeInterval {
-        counterData.nextReset
-    }
     
     enum FetchEntryError: Error {
         case ioError(_ reason: String)
@@ -32,19 +19,24 @@ struct DailyFatTimelineProvider {
     }
     
     typealias FetchEntryCompletion = ((Result<FatCounterEntry, FetchEntryError>) -> Void)
+    typealias FetchTimelineCompletion = ((Result<Timeline<FatCounterEntry>, FetchEntryError>) -> Void)
     
     private func fetchEntry(for context: Context, _ completion: @escaping FetchEntryCompletion) {
+        let counterData = CounterData()
+        
         switch (context.family) {
         case .systemSmall:
-            let entry = FatCounterEntry(date: Date(), usedGrams: usedFat, totalGrams: totalFat)
+            let entry = FatCounterEntry(date: Date(),
+                                        usedGrams: counterData.usedFat,
+                                        totalGrams: counterData.totalFat)
             completion(.success(entry))
         case .systemMedium:
             DailyFatStore.load { result in
                 switch result {
                 case .success(let history):
                     let entry = FatCounterEntry(date: Date(),
-                                                usedGrams: usedFat,
-                                                totalGrams: totalFat,
+                                                usedGrams: counterData.usedFat,
+                                                totalGrams: counterData.totalFat,
                                                 recentHistory: Array(history.prefix(4)))
                     completion(.success(entry))
                 case .failure(let failure):
@@ -56,16 +48,26 @@ struct DailyFatTimelineProvider {
         }
     }
      
-    private func loadHistoryAndStartCounter(_ completion: @escaping () -> Void) {
+    private func fetchTimeline(_ completion: @escaping FetchTimelineCompletion) {
+        let dailyData = DailyFatStore()
+        let counterData = CounterData()
+
         DailyFatStore.load { result in
             switch result {
             case .success(let history):
                 dailyData.history = history
+                let entry = FatCounterEntry(date: Date(),
+                                            usedGrams: counterData.usedFat,
+                                            totalGrams: counterData.totalFat,
+                                            recentHistory: Array(dailyData.history.prefix(4)))
+                let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
+                counterData.start(withDelegate: dailyData)
+                let timeline = Timeline(entries: [entry], policy: .after(nextResetDate))
+                completion(.success(timeline))
             case .failure(let failure):
-                fatalError(failure.localizedDescription)
+                completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
             }
-            counterData.start(withDelegate: dailyData)
-            completion()
+            
         }
     }
 }
@@ -93,13 +95,14 @@ extension DailyFatTimelineProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         DebugLog.log("TimelineProvider providing timeline in context \(context)")
-        loadHistoryAndStartCounter {
-            let entry = FatCounterEntry(date: Date(),
-                                        usedGrams: usedFat,
-                                        totalGrams: totalFat,
-                                        recentHistory: Array(dailyData.history.prefix(4)))
-            let nextResetDate = Date(timeIntervalSince1970: nextReset)
-            completion(Timeline(entries: [entry], policy: .after(nextResetDate)))
+        fetchTimeline { result in
+            switch result {
+            case .failure(let error):
+                DebugLog.log("Failed to load TimelineProvider timeline \(error)")
+                completion(Timeline(entries: [placeholder(in: context)], policy: .never))
+            case .success(let timeline):
+                completion(timeline)
+            }
         }
     }
 }
