@@ -10,12 +10,21 @@ import WidgetKit
 
 /// Provides data to Daily Fat Counter widgets and invokes resets according to the timeline.
 struct DailyFatTimelineProvider {
-    static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
-
-    @AppStorage("used_fat", store: Self.defaults) var usedFat: Double = 0.0
-    @AppStorage("total_fat", store: Self.defaults) var totalFat: Double = 50.0
-    private var counterData = CounterData()
-    private var dailyData = DailyFatStore()
+    
+    // MARK: Data fields
+    private let counterData = CounterData()
+    private let dailyData = DailyFatStore()
+    
+    // MARK: Convenience vars
+    private var usedFat: Double {
+        counterData.usedFat
+    }
+    private var totalFat: Double {
+        counterData.totalFat
+    }
+    private var nextReset: TimeInterval {
+        counterData.nextReset
+    }
     
     enum FetchEntryError: Error {
         case ioError(_ reason: String)
@@ -23,19 +32,6 @@ struct DailyFatTimelineProvider {
     }
     
     typealias FetchEntryCompletion = ((Result<FatCounterEntry, FetchEntryError>) -> Void)
-    
-    private func loadHistoryAndStartCounter(_ completion: @escaping () -> Void) {
-        DailyFatStore.load { result in
-            switch result {
-            case .success(let history):
-                dailyData.history = history
-            case .failure(let failure):
-                fatalError(failure.localizedDescription)
-            }
-            counterData.start(withDelegate: dailyData)
-            completion()
-        }
-    }
     
     private func fetchEntry(for context: Context, _ completion: @escaping FetchEntryCompletion) {
         switch (context.family) {
@@ -57,6 +53,19 @@ struct DailyFatTimelineProvider {
             }
         default:
             completion(.failure(FetchEntryError.widgetFamilyNotSupported))
+        }
+    }
+     
+    private func loadHistoryAndStartCounter(_ completion: @escaping () -> Void) {
+        DailyFatStore.load { result in
+            switch result {
+            case .success(let history):
+                dailyData.history = history
+            case .failure(let failure):
+                fatalError(failure.localizedDescription)
+            }
+            counterData.start(withDelegate: dailyData)
+            completion()
         }
     }
 }
@@ -89,7 +98,7 @@ extension DailyFatTimelineProvider: TimelineProvider {
                                         usedGrams: usedFat,
                                         totalGrams: totalFat,
                                         recentHistory: Array(dailyData.history.prefix(4)))
-            let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
+            let nextResetDate = Date(timeIntervalSince1970: nextReset)
             completion(Timeline(entries: [entry], policy: .after(nextResetDate)))
         }
     }
