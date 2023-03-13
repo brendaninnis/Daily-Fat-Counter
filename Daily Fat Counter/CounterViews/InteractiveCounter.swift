@@ -79,7 +79,8 @@ struct InteractiveCounter: View {
     }
 
     var body: some View {
-        CounterView(circleSize: Self.circleSize, usedGrams: usedGrams, totalGrams: totalGrams)
+        CounterView(usedGrams: usedGrams, totalGrams: totalGrams)
+            .frame(width: Self.circleSize, height: Self.circleSize)
             .gesture(drag)
         Text(mode.rawValue)
             .font(.headline)

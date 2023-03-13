@@ -131,8 +131,14 @@ struct DailyFatCounterWidgetView: View {
     @ViewBuilder
     var body: some View {
         switch family {
+        case .accessoryInline, .accessoryCircular, .accessoryRectangular:
+            ZStack {
+                CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+                    .frame(width: 52, height: 52)
+            }
         case .systemSmall:
-            CounterView(circleSize: Self.circleSize, usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+            CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+                .frame(width: Self.circleSize, height: Self.circleSize)
         case .systemMedium:
             DailyFatCounterMediumWidget(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams, history: entry.recentHistory)
         default:
@@ -148,9 +154,8 @@ struct DailyFatCounterMediumWidget: View {
 
     var body: some View {
         HStack {
-            CounterView(circleSize: DailyFatCounterWidgetView.circleSize,
-                        usedGrams: usedGrams,
-                        totalGrams: totalGrams)
+            CounterView(usedGrams: usedGrams, totalGrams: totalGrams)
+                .frame(width: DailyFatCounterWidgetView.circleSize, height: DailyFatCounterWidgetView.circleSize)
                 .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 0))
             VStack(alignment: .leading, spacing: 4) {
                 Text("Recent history")
@@ -181,6 +186,18 @@ struct DailyFatCounterMediumWidget: View {
 
 struct DailyFatCounterWidget: Widget {
     let kind: String = "Daily_Fat_Counter_Widget"
+    
+    var supportedFamilies: [WidgetFamily] {
+        #if os(watchOS)
+        return [.accessoryCircular, .accessoryRectangular, .accessoryInline]
+        #else
+        if #available(iOSApplicationExtension 16.0, *) {
+            return [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
+        } else {
+            return [.systemSmall, .systemMedium]
+        }
+        #endif
+    }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: DailyFatTimelineProvider()) { entry in
@@ -188,7 +205,7 @@ struct DailyFatCounterWidget: Widget {
         }
         .configurationDisplayName("Today's goal")
         .description("Check your dietary fat against your daily goal.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies(supportedFamilies)
     }
 }
 
@@ -221,5 +238,13 @@ struct DailyFatCounterWidgetPreviews: PreviewProvider {
             .previewContext(WidgetPreviewContext(family: .systemSmall))
         DailyFatCounterWidgetView(entry: entry)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
+        if #available(iOSApplicationExtension 16.0, *) {
+            DailyFatCounterWidgetView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+            DailyFatCounterWidgetView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+            DailyFatCounterWidgetView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .accessoryInline))
+        }
     }
 }
