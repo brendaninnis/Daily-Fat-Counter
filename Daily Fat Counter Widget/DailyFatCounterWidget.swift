@@ -57,8 +57,8 @@ struct DailyFatTimelineProvider {
                                             usedGrams: counterData.usedFat,
                                             totalGrams: counterData.totalFat,
                                             recentHistory: Array(dailyData.history.prefix(4)))
-                let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
                 counterData.start(withDelegate: dailyData)
+                let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
                 let timeline = Timeline(entries: [entry], policy: .after(nextResetDate))
                 completion(.success(timeline))
             case let .failure(failure):
