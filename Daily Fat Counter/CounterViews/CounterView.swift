@@ -10,25 +10,24 @@ import SwiftUI
 struct CounterView: View {
     let usedGrams: Double
     let totalGrams: Double
+    let useSmallFont: Bool
 
     var progress: Double {
         usedGrams / totalGrams
     }
     
+    init(usedGrams: Double, totalGrams: Double, useSmallFont: Bool = false) {
+        self.usedGrams = usedGrams
+        self.totalGrams = totalGrams
+        self.useSmallFont = useSmallFont
+    }
+    
     private var counterFont: Font {
-        if Bundle.main.bundlePath.hasSuffix(".appex") {
-            // App extension (Widget)
-            return .caption
-        }
-        return .largeTitle
+        return useSmallFont ? .caption : .largeTitle
     }
     
     private var goalFont: Font {
-        if Bundle.main.bundlePath.hasSuffix(".appex") {
-            // App extension (Widget)
-            return .caption
-        }
-        return .headline
+        return useSmallFont ? .caption : .headline
     }
 
     var body: some View {

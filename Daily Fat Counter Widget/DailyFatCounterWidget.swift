@@ -132,13 +132,18 @@ struct DailyFatCounterWidgetView: View {
     var body: some View {
         switch family {
         case .accessoryInline, .accessoryCircular, .accessoryRectangular:
-            CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+            CounterView(usedGrams: entry.usedGrams,
+                        totalGrams: entry.totalGrams,
+                        useSmallFont: true)
                 .frame(width: 52, height: 52)
         case .systemSmall:
-            CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+            CounterView(usedGrams: entry.usedGrams,
+                        totalGrams: entry.totalGrams)
                 .frame(width: Self.circleSize, height: Self.circleSize)
         case .systemMedium:
-            DailyFatCounterMediumWidget(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams, history: entry.recentHistory)
+            DailyFatCounterMediumWidget(usedGrams: entry.usedGrams,
+                                        totalGrams: entry.totalGrams,
+                                        history: entry.recentHistory)
         default:
             fatalError("Widget size not supported")
         }
