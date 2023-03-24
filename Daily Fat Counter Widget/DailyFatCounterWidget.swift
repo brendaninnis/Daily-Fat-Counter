@@ -132,10 +132,8 @@ struct DailyFatCounterWidgetView: View {
     var body: some View {
         switch family {
         case .accessoryInline, .accessoryCircular, .accessoryRectangular:
-            ZStack {
-                CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
-                    .frame(width: 52, height: 52)
-            }
+            CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
+                .frame(width: 52, height: 52)
         case .systemSmall:
             CounterView(usedGrams: entry.usedGrams, totalGrams: entry.totalGrams)
                 .frame(width: Self.circleSize, height: Self.circleSize)
