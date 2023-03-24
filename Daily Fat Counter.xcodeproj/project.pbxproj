@@ -36,6 +36,21 @@
 		B8B8C5A129CE332E006DAA02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8C5A029CE332E006DAA02 /* ContentView.swift */; };
 		B8B8C5A329CE3333006DAA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B8C5A229CE3333006DAA02 /* Assets.xcassets */; };
 		B8B8C5A629CE3333006DAA02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */; };
+		B8B8C5AA29CE33FE006DAA02 /* DailyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */; };
+		B8B8C5AB29CE33FE006DAA02 /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
+		B8B8C5AC29CE33FE006DAA02 /* HistoryGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F602809F2240009BBDA /* HistoryGraph.swift */; };
+		B8B8C5AD29CE33FE006DAA02 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88B59E6280CA7EB007054D5 /* DebugLog.swift */; };
+		B8B8C5AE29CE33FE006DAA02 /* CounterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E327FA2219007ABA20 /* CounterData.swift */; };
+		B8B8C5AF29CE33FE006DAA02 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5E2809EB730009BBDA /* HistoryRow.swift */; };
+		B8B8C5B029CE33FE006DAA02 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8214827FA837000B28F90 /* Numbers.swift */; };
+		B8B8C5B129CE33FE006DAA02 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8223D392815CBA000EF5F5A /* Geometry.swift */; };
+		B8B8C5B229CE33FE006DAA02 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88975A6284FFA2D00CF697B /* DateFormatters.swift */; };
+		B8B8C5B329CE33FE006DAA02 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DB27F8DCBD007ABA20 /* Colours.swift */; };
+		B8B8C5B429CE33FE006DAA02 /* InteractiveCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB11327F136D0008B5AD3 /* InteractiveCounter.swift */; };
+		B8B8C5B529CE33FE006DAA02 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
+		B8B8C5B629CE33FE006DAA02 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CEB39F29B2F1F0004CE824 /* CounterView.swift */; };
+		B8B8C5B729CE33FE006DAA02 /* DailyFatCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AFB0E927F1365B008B5AD3 /* DailyFatCounterApp.swift */; };
+		B8B8C5B929CE347B006DAA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8AFB0ED27F13661008B5AD3 /* Assets.xcassets */; };
 		B8C841BA29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
 		B8C841BB29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
 		B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */; };
@@ -530,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8B8C5A629CE3333006DAA02 /* Preview Assets.xcassets in Resources */,
+				B8B8C5B929CE347B006DAA02 /* Assets.xcassets in Resources */,
 				B8B8C5A329CE3333006DAA02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,7 +611,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8B8C5AD29CE33FE006DAA02 /* DebugLog.swift in Sources */,
+				B8B8C5B429CE33FE006DAA02 /* InteractiveCounter.swift in Sources */,
 				B8B8C5A129CE332E006DAA02 /* ContentView.swift in Sources */,
+				B8B8C5B629CE33FE006DAA02 /* CounterView.swift in Sources */,
+				B8B8C5B329CE33FE006DAA02 /* Colours.swift in Sources */,
+				B8B8C5AF29CE33FE006DAA02 /* HistoryRow.swift in Sources */,
+				B8B8C5AE29CE33FE006DAA02 /* CounterData.swift in Sources */,
+				B8B8C5B029CE33FE006DAA02 /* Numbers.swift in Sources */,
+				B8B8C5B529CE33FE006DAA02 /* Strings.swift in Sources */,
+				B8B8C5AC29CE33FE006DAA02 /* HistoryGraph.swift in Sources */,
+				B8B8C5B229CE33FE006DAA02 /* DateFormatters.swift in Sources */,
+				B8B8C5AA29CE33FE006DAA02 /* DailyFat.swift in Sources */,
+				B8B8C5B129CE33FE006DAA02 /* Geometry.swift in Sources */,
+				B8B8C5AB29CE33FE006DAA02 /* DailyFatStore.swift in Sources */,
+				B8B8C5B729CE33FE006DAA02 /* DailyFatCounterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

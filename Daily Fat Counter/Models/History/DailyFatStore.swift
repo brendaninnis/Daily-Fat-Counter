@@ -71,7 +71,7 @@ class DailyFatStore: ObservableObject {
         do {
             let oldUrl = try oldFileUrl()
             let path: String
-            if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, watchOS 9.0, *) {
                 path = oldUrl.path()
             } else {
                 path = oldUrl.path

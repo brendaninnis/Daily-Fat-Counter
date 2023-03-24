@@ -32,7 +32,9 @@ struct DailyFatCounterApp: App {
                         counterData.initializeDailyFatReset(Date().timeIntervalSince1970)
                     } else if newPhase == .inactive {
                         DebugLog.log("App did become inactive")
-                        WidgetCenter.shared.reloadAllTimelines()
+                        if #available(watchOS 9.0, *) {
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
                     }
                 }
         }

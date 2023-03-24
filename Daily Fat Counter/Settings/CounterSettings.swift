@@ -1,5 +1,7 @@
 
+#if canImport(MessageUI)
 import MessageUI
+#endif
 import SwiftUI
 
 struct CounterSettings: View {
@@ -7,7 +9,9 @@ struct CounterSettings: View {
 
     @State private var showingFeedbackAlert = false
     @State private var showingMail = false
+    #if canImport(MessageUI)
     @State var result: Result<MFMailComposeResult, Error>? = nil
+    #endif
     private let feedbackUrl = "https://apps.apple.com/app/id1631074004?action=write-review"
 
     struct FooterCompat<Content: View>: View {
@@ -105,9 +109,12 @@ struct CounterSettings: View {
                 resetFatSection
                 feedbackSection
             }.navigationTitle("Settings")
-        }.sheet(isPresented: $showingMail) {
+        }
+        #if canImport(MessageUI)
+        .sheet(isPresented: $showingMail) {
             MailView(isShowing: $showingMail, result: $result)
         }
+        #endif
         .alert(isPresented: $showingFeedbackAlert) {
             Alert(title: Text("Email not configured"),
                   message: Text("Your device is not setup to send email. Please email the developer of Daily Fat Counter at brendaninnis@icloud.com"))
