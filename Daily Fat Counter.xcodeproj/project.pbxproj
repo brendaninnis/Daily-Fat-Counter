@@ -33,6 +33,9 @@
 		B8B131E027F914ED007ABA20 /* CounterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DF27F914ED007ABA20 /* CounterButton.swift */; };
 		B8B131E427FA2219007ABA20 /* CounterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E327FA2219007ABA20 /* CounterData.swift */; };
 		B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E527FA3E71007ABA20 /* CounterSettings.swift */; };
+		B8B8C5A129CE332E006DAA02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8C5A029CE332E006DAA02 /* ContentView.swift */; };
+		B8B8C5A329CE3333006DAA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B8C5A229CE3333006DAA02 /* Assets.xcassets */; };
+		B8B8C5A629CE3333006DAA02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */; };
 		B8C841BA29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
 		B8C841BB29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
 		B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */; };
@@ -113,6 +116,10 @@
 		B8B131DF27F914ED007ABA20 /* CounterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterButton.swift; sourceTree = "<group>"; };
 		B8B131E327FA2219007ABA20 /* CounterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterData.swift; sourceTree = "<group>"; };
 		B8B131E527FA3E71007ABA20 /* CounterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSettings.swift; sourceTree = "<group>"; };
+		B8B8C59C29CE332E006DAA02 /* Daily Fat Counter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Fat Counter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8B8C5A029CE332E006DAA02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B8B8C5A229CE3333006DAA02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Daily-Fat-Counter-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B8C841B929B6AEFE00318B6B /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryHome.swift; sourceTree = "<group>"; };
@@ -155,6 +162,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B8B8C59929CE332E006DAA02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8CEB38629B2ED81004CE824 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,6 +198,7 @@
 				B8AFB0F927F13662008B5AD3 /* Daily Fat CounterTests */,
 				B8AFB10327F13662008B5AD3 /* Daily Fat CounterUITests */,
 				B8CEB38F29B2ED81004CE824 /* Daily Fat Counter Widget */,
+				B8B8C59D29CE332E006DAA02 /* Daily Fat Counter Watch Watch App */,
 				B8CEB38A29B2ED81004CE824 /* Frameworks */,
 				B8AFB0E727F1365B008B5AD3 /* Products */,
 			);
@@ -196,6 +211,7 @@
 				B8AFB0F627F13662008B5AD3 /* Daily Fat CounterTests.xctest */,
 				B8AFB10027F13662008B5AD3 /* Daily Fat CounterUITests.xctest */,
 				B8CEB38929B2ED81004CE824 /* Daily Fat Counter WidgetExtension.appex */,
+				B8B8C59C29CE332E006DAA02 /* Daily Fat Counter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,6 +282,24 @@
 				B8C841B929B6AEFE00318B6B /* Strings.swift */,
 			);
 			path = Values;
+			sourceTree = "<group>";
+		};
+		B8B8C59D29CE332E006DAA02 /* Daily Fat Counter Watch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				B8B8C5A029CE332E006DAA02 /* ContentView.swift */,
+				B8B8C5A229CE3333006DAA02 /* Assets.xcassets */,
+				B8B8C5A429CE3333006DAA02 /* Preview Content */,
+			);
+			path = "Daily Fat Counter Watch Watch App";
+			sourceTree = "<group>";
+		};
+		B8B8C5A429CE3333006DAA02 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		B8CD9F542809D6D60009BBDA /* History Views */ = {
@@ -382,6 +416,23 @@
 			productReference = B8AFB10027F13662008B5AD3 /* Daily Fat CounterUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B8B8C59B29CE332E006DAA02 /* Daily Fat Counter Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8B8C5A929CE3333006DAA02 /* Build configuration list for PBXNativeTarget "Daily Fat Counter Watch Watch App" */;
+			buildPhases = (
+				B8B8C59829CE332E006DAA02 /* Sources */,
+				B8B8C59929CE332E006DAA02 /* Frameworks */,
+				B8B8C59A29CE332E006DAA02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Daily Fat Counter Watch Watch App";
+			productName = "Daily Fat Counter Watch Watch App";
+			productReference = B8B8C59C29CE332E006DAA02 /* Daily Fat Counter.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B8CEB38829B2ED81004CE824 /* Daily Fat Counter WidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8CEB39D29B2ED83004CE824 /* Build configuration list for PBXNativeTarget "Daily Fat Counter WidgetExtension" */;
@@ -420,6 +471,9 @@
 						CreatedOnToolsVersion = 13.3;
 						TestTargetID = B8AFB0E527F1365B008B5AD3;
 					};
+					B8B8C59B29CE332E006DAA02 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					B8CEB38829B2ED81004CE824 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -442,6 +496,7 @@
 				B8AFB0F527F13662008B5AD3 /* Daily Fat CounterTests */,
 				B8AFB0FF27F13662008B5AD3 /* Daily Fat CounterUITests */,
 				B8CEB38829B2ED81004CE824 /* Daily Fat Counter WidgetExtension */,
+				B8B8C59B29CE332E006DAA02 /* Daily Fat Counter Watch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -467,6 +522,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8B8C59A29CE332E006DAA02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8B8C5A629CE3333006DAA02 /* Preview Assets.xcassets in Resources */,
+				B8B8C5A329CE3333006DAA02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +588,14 @@
 			files = (
 				B8AFB10527F13662008B5AD3 /* Daily_Fat_CounterUITests.swift in Sources */,
 				B8AFB10727F13662008B5AD3 /* Daily_Fat_CounterUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8B8C59829CE332E006DAA02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8B8C5A129CE332E006DAA02 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +902,68 @@
 			};
 			name = Release;
 		};
+		B8B8C5A729CE3333006DAA02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = NVX5R79A76;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "Daily Fat Counter";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		B8B8C5A829CE3333006DAA02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = NVX5R79A76;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
+				PRODUCT_NAME = "Daily Fat Counter";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
 		B8CEB39B29B2ED83004CE824 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -925,6 +1059,15 @@
 			buildConfigurations = (
 				B8AFB11127F13662008B5AD3 /* Debug */,
 				B8AFB11227F13662008B5AD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8B8C5A929CE3333006DAA02 /* Build configuration list for PBXNativeTarget "Daily Fat Counter Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8B8C5A729CE3333006DAA02 /* Debug */,
+				B8B8C5A829CE3333006DAA02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
