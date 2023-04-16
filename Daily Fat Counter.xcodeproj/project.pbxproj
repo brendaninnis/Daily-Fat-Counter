@@ -36,7 +36,6 @@
 		B8B131E427FA2219007ABA20 /* CounterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E327FA2219007ABA20 /* CounterData.swift */; };
 		B8B131E627FA3E72007ABA20 /* CounterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131E527FA3E71007ABA20 /* CounterSettings.swift */; };
 		B8B8C5A129CE332E006DAA02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8C5A029CE332E006DAA02 /* ContentView.swift */; };
-		B8B8C5A329CE3333006DAA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B8C5A229CE3333006DAA02 /* Assets.xcassets */; };
 		B8B8C5A629CE3333006DAA02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */; };
 		B8B8C5AA29CE33FE006DAA02 /* DailyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */; };
 		B8B8C5AB29CE33FE006DAA02 /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
@@ -138,7 +137,6 @@
 		B8B131E527FA3E71007ABA20 /* CounterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSettings.swift; sourceTree = "<group>"; };
 		B8B8C59C29CE332E006DAA02 /* Daily Fat Counter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Fat Counter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B8C5A029CE332E006DAA02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B8B8C5A229CE3333006DAA02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Daily-Fat-Counter-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B8C841B929B6AEFE00318B6B /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -320,7 +318,6 @@
 				B8381DAA29EB5B400075C3B0 /* Daily Fat Counter Watch Watch App.entitlements */,
 				B8381DB029EC28B00075C3B0 /* Watch UI */,
 				B8B8C5A029CE332E006DAA02 /* ContentView.swift */,
-				B8B8C5A229CE3333006DAA02 /* Assets.xcassets */,
 				B8B8C5A429CE3333006DAA02 /* Preview Content */,
 			);
 			path = "Daily Fat Counter Watch Watch App";
@@ -563,7 +560,6 @@
 			files = (
 				B8B8C5A629CE3333006DAA02 /* Preview Assets.xcassets in Resources */,
 				B8B8C5B929CE347B006DAA02 /* Assets.xcassets in Resources */,
-				B8B8C5A329CE3333006DAA02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
