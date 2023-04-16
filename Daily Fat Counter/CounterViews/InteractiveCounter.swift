@@ -83,12 +83,15 @@ struct InteractiveCounter: View {
             CounterView(usedGrams: usedGrams, totalGrams: totalGrams)
                 .frame(width: Self.circleSize, height: Self.circleSize)
                 .gesture(drag)
+            #if os(watchOS)
                 .focusable()
                 .digitalCrownRotation($usedGrams,
                                       from: 0,
                                       through: totalGrams * 5,
                                       by: 1.0,
                                       sensitivity: .medium)
+            #endif
+            
             #if os(watchOS)
             // Compact view for watch
             #else
