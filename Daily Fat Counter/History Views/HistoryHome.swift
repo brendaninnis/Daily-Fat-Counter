@@ -11,6 +11,12 @@ struct HistoryHome: View {
     @EnvironmentObject var counterData: CounterData
     @State var animateHistory = false
     @Binding var history: [DailyFat]
+    
+    #if os(watchOS)
+    private let useShortDate = true
+    #else
+    private let useShortDate = false
+    #endif
 
     private var months: [Month] {
         var months = [Month]()
@@ -43,13 +49,17 @@ struct HistoryHome: View {
                     if #available(iOS 15.0, watchOS 8.0, *) {
                         Section(month.name) {
                             ForEach(month.dailyFat) { dailyFat in
-                                HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
+                                HistoryRow(dailyFat: dailyFat,
+                                           useShortDate: useShortDate,
+                                           isAnimated: $animateHistory)
                             }
                         }
                     } else {
                         Section {
                             ForEach(month.dailyFat) { dailyFat in
-                                HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)
+                                HistoryRow(dailyFat: dailyFat,
+                                           useShortDate: useShortDate,
+                                           isAnimated: $animateHistory)
                             }
                         } header: {
                             Text(month.name)

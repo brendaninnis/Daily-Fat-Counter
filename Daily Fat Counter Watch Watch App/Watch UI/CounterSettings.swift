@@ -4,30 +4,12 @@ import SwiftUI
 struct CounterSettings: View {
     @EnvironmentObject var counterData: CounterData
 
-    struct FooterCompat<Content: View>: View {
-        let content: Content
-
-        init(@ViewBuilder _ content: () -> Content) {
-            self.content = content()
-        }
-
-        var body: some View {
-            content.multilineTextAlignment(.center)
-        }
-    }
-
     private var totalFatSection: some View {
         Section(
             header: Text("Total daily fat allowed"),
-            footer: HStack {
-                Spacer(minLength: 24)
-                FooterCompat {
-                    Text("Set a goal for your daily fat consumption")
-                }
-                Spacer(minLength: 24)
-            }
+            footer: Text("Tap to set a goal for your daily fat consumption")
         ) {
-            HStack {
+            NavigationLink(destination: GoalSetting(totalGrams: $counterData.totalFat)) {
                 Text(String(format: "%.1fg", counterData.totalFat))
             }
         }
@@ -36,13 +18,7 @@ struct CounterSettings: View {
     private var resetFatSection: some View {
         Section(
             header: Text("Reset daily fat time"),
-            footer: HStack {
-                Spacer(minLength: 24)
-                FooterCompat {
-                    Text("Each day at the chosen time, the amount of fat used during the day will be reset to 0.0g")
-                }
-                Spacer(minLength: 24)
-            }
+            footer: Text("Each day at the chosen time, the amount of fat used during the day will be reset to 0.0g")
         ) {
             #if os(iOS)
             DatePicker("Daily reset",

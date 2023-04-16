@@ -55,6 +55,7 @@
 		B8B8C5B929CE347B006DAA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8AFB0ED27F13661008B5AD3 /* Assets.xcassets */; };
 		B8C841BA29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
 		B8C841BB29B6AEFE00318B6B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C841B929B6AEFE00318B6B /* Strings.swift */; };
+		B8CCC38229EC3AFD00D1FD4C /* GoalSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CCC38129EC3AFD00D1FD4C /* GoalSetting.swift */; };
 		B8CD9F562809D6EE0009BBDA /* HistoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */; };
 		B8CD9F5B2809DBF10009BBDA /* DailyFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */; };
 		B8CD9F5D2809E1900009BBDA /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
@@ -141,6 +142,7 @@
 		B8B8C5A529CE3333006DAA02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8BF81FB2867A09A00525C50 /* Daily-Fat-Counter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Daily-Fat-Counter-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B8C841B929B6AEFE00318B6B /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		B8CCC38129EC3AFD00D1FD4C /* GoalSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetting.swift; sourceTree = "<group>"; };
 		B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryHome.swift; sourceTree = "<group>"; };
 		B8CD9F5A2809DBF10009BBDA /* DailyFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFat.swift; sourceTree = "<group>"; };
 		B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFatStore.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				B8381DAE29EC28A70075C3B0 /* CounterSettings.swift */,
+				B8CCC38129EC3AFD00D1FD4C /* GoalSetting.swift */,
 			);
 			path = "Watch UI";
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				B8B8C5B329CE33FE006DAA02 /* Colours.swift in Sources */,
 				B8381DAF29EC28A70075C3B0 /* CounterSettings.swift in Sources */,
 				B8B8C5AF29CE33FE006DAA02 /* HistoryRow.swift in Sources */,
+				B8CCC38229EC3AFD00D1FD4C /* GoalSetting.swift in Sources */,
 				B8B8C5AE29CE33FE006DAA02 /* CounterData.swift in Sources */,
 				B8381DAC29EB5D360075C3B0 /* HistoryHome.swift in Sources */,
 				B8B8C5B029CE33FE006DAA02 /* Numbers.swift in Sources */,
