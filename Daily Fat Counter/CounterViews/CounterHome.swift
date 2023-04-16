@@ -12,12 +12,10 @@ struct CounterHome: View {
             Spacer()
             HStack {
                 Spacer()
-                VStack {
                     InteractiveCounter(
                         usedGrams: $counterData.usedFat,
                         totalGrams: $counterData.totalFat
                     )
-                }
                 Spacer()
             }
             Spacer()

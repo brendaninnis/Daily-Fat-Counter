@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var counterData: CounterData
+    @EnvironmentObject var dailyData: DailyFatStore
+    @State private var selection: Tab = .counter
+
+    enum Tab {
+        case counter
+        case history
+        case settings
+    }
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selection) {
+            InteractiveCounter(
+                usedGrams: $counterData.usedFat,
+                totalGrams: $counterData.totalFat
+            )
+            .tag(Tab.counter)
+
+            HistoryHome(history: $dailyData.history)
+            .clipped()
+            .tag(Tab.history)
+
+            CounterSettings()
+            .tag(Tab.settings)
         }
-        .padding()
     }
 }
 

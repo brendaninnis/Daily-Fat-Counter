@@ -40,7 +40,7 @@ struct HistoryHome: View {
         } else {
             List {
                 ForEach(months) { month in
-                    if #available(iOS 15.0, *) {
+                    if #available(iOS 15.0, watchOS 8.0, *) {
                         Section(month.name) {
                             ForEach(month.dailyFat) { dailyFat in
                                 HistoryRow(dailyFat: dailyFat, isAnimated: $animateHistory)

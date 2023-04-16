@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B8223D3A2815CBA000EF5F5A /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8223D392815CBA000EF5F5A /* Geometry.swift */; };
+		B8381DAC29EB5D360075C3B0 /* HistoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F552809D6EE0009BBDA /* HistoryHome.swift */; };
+		B8381DAF29EC28A70075C3B0 /* CounterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8381DAE29EC28A70075C3B0 /* CounterSettings.swift */; };
 		B84AE35C2845B4AE00A9FB83 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84AE35B2845B4AE00A9FB83 /* MailView.swift */; };
 		B84D695129B5AD45005096AF /* DailyFatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD9F5C2809E1900009BBDA /* DailyFatStore.swift */; };
 		B84D695229B5AD89005096AF /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88B59E6280CA7EB007054D5 /* DebugLog.swift */; };
@@ -111,6 +113,8 @@
 
 /* Begin PBXFileReference section */
 		B8223D392815CBA000EF5F5A /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		B8381DAA29EB5B400075C3B0 /* Daily Fat Counter Watch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Daily Fat Counter Watch Watch App.entitlements"; sourceTree = "<group>"; };
+		B8381DAE29EC28A70075C3B0 /* CounterSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterSettings.swift; sourceTree = "<group>"; };
 		B84AE35B2845B4AE00A9FB83 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		B88975A6284FFA2D00CF697B /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		B88B59E6280CA7EB007054D5 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
@@ -196,6 +200,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8381DB029EC28B00075C3B0 /* Watch UI */ = {
+			isa = PBXGroup;
+			children = (
+				B8381DAE29EC28A70075C3B0 /* CounterSettings.swift */,
+			);
+			path = "Watch UI";
+			sourceTree = "<group>";
+		};
 		B84AE35A2845B48E00A9FB83 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +314,8 @@
 		B8B8C59D29CE332E006DAA02 /* Daily Fat Counter Watch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				B8381DAA29EB5B400075C3B0 /* Daily Fat Counter Watch Watch App.entitlements */,
+				B8381DB029EC28B00075C3B0 /* Watch UI */,
 				B8B8C5A029CE332E006DAA02 /* ContentView.swift */,
 				B8B8C5A229CE3333006DAA02 /* Assets.xcassets */,
 				B8B8C5A429CE3333006DAA02 /* Preview Content */,
@@ -616,8 +630,10 @@
 				B8B8C5A129CE332E006DAA02 /* ContentView.swift in Sources */,
 				B8B8C5B629CE33FE006DAA02 /* CounterView.swift in Sources */,
 				B8B8C5B329CE33FE006DAA02 /* Colours.swift in Sources */,
+				B8381DAF29EC28A70075C3B0 /* CounterSettings.swift in Sources */,
 				B8B8C5AF29CE33FE006DAA02 /* HistoryRow.swift in Sources */,
 				B8B8C5AE29CE33FE006DAA02 /* CounterData.swift in Sources */,
+				B8381DAC29EB5D360075C3B0 /* HistoryHome.swift in Sources */,
 				B8B8C5B029CE33FE006DAA02 /* Numbers.swift in Sources */,
 				B8B8C5B529CE33FE006DAA02 /* Strings.swift in Sources */,
 				B8B8C5AC29CE33FE006DAA02 /* HistoryGraph.swift in Sources */,
@@ -938,6 +954,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Daily Fat Counter Watch Watch App/Daily Fat Counter Watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter Watch Watch App/Preview Content\"";
@@ -969,6 +986,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Daily Fat Counter Watch Watch App/Daily Fat Counter Watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Daily Fat Counter Watch Watch App/Preview Content\"";

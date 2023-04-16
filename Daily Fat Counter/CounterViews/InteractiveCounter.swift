@@ -79,12 +79,18 @@ struct InteractiveCounter: View {
     }
 
     var body: some View {
-        CounterView(usedGrams: usedGrams, totalGrams: totalGrams)
-            .frame(width: Self.circleSize, height: Self.circleSize)
-            .gesture(drag)
-        Text(mode.rawValue)
-            .font(.headline)
-            .padding()
+        VStack {
+            CounterView(usedGrams: usedGrams, totalGrams: totalGrams)
+                .frame(width: Self.circleSize, height: Self.circleSize)
+                .gesture(drag)
+            #if os(watchOS)
+            // Compact view for watch
+            #else
+            Text(mode.rawValue)
+                .font(.headline)
+                .padding()
+            #endif
+        }
     }
 
     enum Mode: String, CaseIterable, Codable {
