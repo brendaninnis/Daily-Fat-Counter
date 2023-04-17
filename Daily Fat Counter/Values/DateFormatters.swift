@@ -34,3 +34,10 @@ let monthFormatter: DateFormatter = {
     formatter.timeZone = TimeZone.autoupdatingCurrent
     return formatter
 }()
+
+let timeFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "hh:mm"
+    formatter.timeZone = TimeZone.autoupdatingCurrent
+    return formatter
+}()

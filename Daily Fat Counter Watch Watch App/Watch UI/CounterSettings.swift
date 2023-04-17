@@ -1,5 +1,6 @@
 
 import SwiftUI
+import WatchDatePicker
 
 struct CounterSettings: View {
     @EnvironmentObject var counterData: CounterData
@@ -20,12 +21,11 @@ struct CounterSettings: View {
             header: Text("Reset daily fat time"),
             footer: Text("Each day at the chosen time, the amount of fat used during the day will be reset to 0.0g")
         ) {
-            #if os(iOS)
-            DatePicker("Daily reset",
-                       selection: $counterData.dateForResetSelection,
-                       displayedComponents: .hourAndMinute)
-            #else
-            #endif
+            DatePicker(
+                "Daily reset",
+                selection: $counterData.dateForResetSelection,
+                displayedComponents: .hourAndMinute
+            )
             Button("Reset fat used now") {
                 counterData.usedFat = 0
             }

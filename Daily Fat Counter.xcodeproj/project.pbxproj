@@ -71,6 +71,7 @@
 		B8CEB3A229B2F352004CE824 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B131DB27F8DCBD007ABA20 /* Colours.swift */; };
 		B8CEB3A329B2F5B8004CE824 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8AFB0ED27F13661008B5AD3 /* Assets.xcassets */; };
 		B8D8214927FA837000B28F90 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D8214827FA837000B28F90 /* Numbers.swift */; };
+		B8FA8EFE29ECD0DC00D198CC /* WatchDatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA8EFD29ECD0DC00D198CC /* WatchDatePicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,7 @@
 		B8CEB3A429B2FDD4004CE824 /* Daily Fat Counter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Daily Fat Counter.entitlements"; sourceTree = "<group>"; };
 		B8CEB3A529B2FE15004CE824 /* Daily Fat Counter WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Daily Fat Counter WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		B8D8214827FA837000B28F90 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
+		B8FA8EFC29ECD0CA00D198CC /* watch-date-picker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "watch-date-picker"; path = "../watch-date-picker"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8FA8EFE29ECD0DC00D198CC /* WatchDatePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +224,7 @@
 		B8AFB0DD27F1365B008B5AD3 = {
 			isa = PBXGroup;
 			children = (
+				B8FA8EFB29ECD0CA00D198CC /* Packages */,
 				B8CEB3A529B2FE15004CE824 /* Daily Fat Counter WidgetExtension.entitlements */,
 				B8AFB0E827F1365B008B5AD3 /* Daily Fat Counter */,
 				B8AFB0F927F13662008B5AD3 /* Daily Fat CounterTests */,
@@ -387,6 +391,14 @@
 			path = "Daily Fat Counter Widget";
 			sourceTree = "<group>";
 		};
+		B8FA8EFB29ECD0CA00D198CC /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				B8FA8EFC29ECD0CA00D198CC /* watch-date-picker */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -458,6 +470,9 @@
 			dependencies = (
 			);
 			name = "Daily Fat Counter Watch Watch App";
+			packageProductDependencies = (
+				B8FA8EFD29ECD0DC00D198CC /* WatchDatePicker */,
+			);
 			productName = "Daily Fat Counter Watch Watch App";
 			productReference = B8B8C59C29CE332E006DAA02 /* Daily Fat Counter.app */;
 			productType = "com.apple.product-type.application";
@@ -517,6 +532,8 @@
 				Base,
 			);
 			mainGroup = B8AFB0DD27F1365B008B5AD3;
+			packageReferences = (
+			);
 			productRefGroup = B8AFB0E727F1365B008B5AD3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -976,7 +993,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -1008,7 +1025,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -1130,6 +1147,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B8FA8EFD29ECD0DC00D198CC /* WatchDatePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WatchDatePicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B8AFB0DE27F1365B008B5AD3 /* Project object */;
 }
