@@ -26,7 +26,7 @@ class DailyFatStore: ObservableObject {
     }
 
     static func load(completion: @escaping (Result<[DailyFat], Error>) -> Void) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             // If there is a Daily Fat store file from an old install, we need to first copy that data to the new file
             migrateStoreIfNeeded()
 
@@ -51,7 +51,7 @@ class DailyFatStore: ObservableObject {
     }
 
     static func save(history: [DailyFat], completion: @escaping (Result<Int, Error>) -> Void) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             do {
                 let data = try JSONEncoder().encode(history)
                 let outfile = try fileURL()
