@@ -4,7 +4,7 @@ import SwiftUI
 
 class DailyFatStore: ObservableObject {
     @Published var history: [DailyFat] = []
-
+    
     private static func oldFileUrl() throws -> URL {
         try FileManager.default.url(
             for: .documentDirectory,

@@ -20,9 +20,12 @@
 
 - - - RELEASE - - -
 
-* Create a widget
-* Prompt for feedback
-* Watch companion app
+✅ Create a widget
+✅ Prompt for feedback
+✅ Watch companion app
+
+- - - 1.1 RELEASE - - -
+
 * Search feature (Canadian food information database)
 * Localization (Think language, but also time and date)
 * Timezone change bug
