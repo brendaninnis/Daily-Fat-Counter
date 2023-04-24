@@ -2,8 +2,9 @@
 import Combine
 import Foundation
 import SwiftUI
+import WatchConnectivity
 
-final class CounterData: ObservableObject {
+final class CounterData: NSObject, ObservableObject {
     static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
 
     private var timer: Timer?
@@ -63,6 +64,15 @@ final class CounterData: ObservableObject {
             if dateForResetSelection.timeIntervalSince1970 != nextReset {
                 nextReset = dateForResetSelection.timeIntervalSince1970
             }
+        }
+    }
+    
+    override init() {
+        super.init()
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
         }
     }
 
@@ -129,6 +139,23 @@ final class CounterData: ObservableObject {
         }
         return result
     }
+}
+
+extension CounterData: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        DebugLog.log("WCSession activation complete with state: \(activationState), error: \(error?.localizedDescription ?? "")")
+    }
+    
+    #if os(iOS)
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        DebugLog.log("WCSession did become inactive")
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        DebugLog.log("WCSession did deactivate")
+        session.activate()
+    }
+    #endif
 }
 
 protocol CounterDataDelegate: AnyObject {
