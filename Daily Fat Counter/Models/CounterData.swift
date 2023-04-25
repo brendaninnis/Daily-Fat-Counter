@@ -156,6 +156,14 @@ extension CounterData: WCSessionDelegate {
         session.activate()
     }
     #endif
+    
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
+        // Incoming CounterData
+    }
+    
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+        // Incoming HistoryFile
+    }
 }
 
 protocol CounterDataDelegate: AnyObject {

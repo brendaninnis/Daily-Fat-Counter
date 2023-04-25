@@ -9,18 +9,31 @@ import SwiftUI
 import WidgetKit
 
 /// Provides data to Daily Fat Counter widgets and invokes resets according to the timeline.
-struct DailyFatTimelineProvider {
+class DailyFatTimelineProvider: NSObject {
     enum FetchEntryError: Error {
         case ioError(_ reason: String)
         case widgetFamilyNotSupported
     }
 
     typealias FetchEntryCompletion = (Result<FatCounterEntry, FetchEntryError>) -> Void
-    typealias FetchTimelineCompletion = (Result<Timeline<FatCounterEntry>, FetchEntryError>) -> Void
-
+    typealias DailyFatTimeline = Timeline<FatCounterEntry>
+    typealias FetchTimelineCompletion = (Result<DailyFatTimeline, FetchEntryError>) -> Void
+    
+    private let dailyData = DailyFatStore()
+    private let counterData = CounterData()
+    private var timelineCompletion: FetchTimelineCompletion?
+    
+    private var timeline: DailyFatTimeline {
+        let entry = FatCounterEntry(date: Date(),
+                                    usedGrams: counterData.usedFat,
+                                    totalGrams: counterData.totalFat,
+                                    recentHistory: Array(dailyData.history.prefix(4)))
+        counterData.start(withDelegate: dailyData)
+        let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
+        return Timeline(entries: [entry], policy: .after(nextResetDate))
+    }
+ 
     private func fetchEntry(for context: Context, _ completion: @escaping FetchEntryCompletion) {
-        let counterData = CounterData()
-
         switch context.family {
         case .systemSmall:
             let entry = FatCounterEntry(date: Date(),
@@ -28,7 +41,10 @@ struct DailyFatTimelineProvider {
                                         totalGrams: counterData.totalFat)
             completion(.success(entry))
         case .systemMedium:
-            DailyFatStore.load { result in
+            DailyFatStore.load { [weak self] result in
+                guard let self else {
+                    return
+                }
                 switch result {
                 case let .success(history):
                     let entry = FatCounterEntry(date: Date(),
@@ -46,24 +62,50 @@ struct DailyFatTimelineProvider {
     }
 
     private func fetchTimeline(_ completion: @escaping FetchTimelineCompletion) {
-        let dailyData = DailyFatStore()
-        let counterData = CounterData()
+        timelineCompletion = completion
 
-        DailyFatStore.load { result in
+        DailyFatStore.load { [weak self] result in
+            guard let self else {
+                return
+            }
             switch result {
             case let .success(history):
                 dailyData.history = history
-                let entry = FatCounterEntry(date: Date(),
-                                            usedGrams: counterData.usedFat,
-                                            totalGrams: counterData.totalFat,
-                                            recentHistory: Array(dailyData.history.prefix(4)))
-                counterData.start(withDelegate: dailyData)
-                let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
-                let timeline = Timeline(entries: [entry], policy: .after(nextResetDate))
-                completion(.success(timeline))
+                counterData.start(withDelegate: self)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    // Give 1 second to update and save a new daily fat entry, if there is one
+                    timelineCompletion?(.success(timeline))
+                }
             case let .failure(failure):
                 completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
             }
+        }
+    }
+}
+
+
+extension DailyFatTimelineProvider: CounterDataDelegate {
+    func newDailyFat(start: Double, usedFat: Double, totalFat: Double) {
+        dailyData.history.insert(DailyFat(id: dailyData.history.count,
+                                          start: start,
+                                          usedFat: usedFat,
+                                          totalFat: totalFat),
+                                 at: 0)
+        DailyFatStore.save(history: dailyData.history) { [weak self] result in
+            guard let self else {
+                return
+            }
+            switch result {
+            case let .success(count):
+                DebugLog.log("Daily fat #\(count) saved.")
+            case let .failure(error):
+                DebugLog.log("Failed to save daily fat: \(error.localizedDescription)")
+            }
+            timelineCompletion?(.success(timeline))
+            timelineCompletion = nil
         }
     }
 }
@@ -78,7 +120,10 @@ extension DailyFatTimelineProvider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (FatCounterEntry) -> Void) {
         DebugLog.log("TimelineProvider providing snapshot in context \(context)")
-        fetchEntry(for: context) { result in
+        fetchEntry(for: context) { [weak self] result in
+            guard let self else {
+                return
+            }
             switch result {
             case let .failure(error):
                 DebugLog.log("Failed to load TimelineProvider entry \(error)")
@@ -91,7 +136,10 @@ extension DailyFatTimelineProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         DebugLog.log("TimelineProvider providing timeline in context \(context)")
-        fetchTimeline { result in
+        fetchTimeline { [weak self] result in
+            guard let self else {
+                return
+            }
             switch result {
             case let .failure(error):
                 DebugLog.log("Failed to load TimelineProvider timeline \(error)")
