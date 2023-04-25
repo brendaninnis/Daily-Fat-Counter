@@ -22,42 +22,42 @@ class DailyFatTimelineProvider: NSObject {
     private let dailyData = DailyFatStore()
     private let counterData = CounterData()
     private var timelineCompletion: FetchTimelineCompletion?
+    private var entryCompletion: FetchEntryCompletion?
+    
+    private var entry: FatCounterEntry {
+        FatCounterEntry(date: Date(),
+                        usedGrams: counterData.usedFat,
+                        totalGrams: counterData.totalFat,
+                        recentHistory: Array(dailyData.history.prefix(4)))
+    }
     
     private var timeline: DailyFatTimeline {
-        let entry = FatCounterEntry(date: Date(),
-                                    usedGrams: counterData.usedFat,
-                                    totalGrams: counterData.totalFat,
-                                    recentHistory: Array(dailyData.history.prefix(4)))
-        counterData.start(withDelegate: dailyData)
         let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
         return Timeline(entries: [entry], policy: .after(nextResetDate))
     }
  
     private func fetchEntry(for context: Context, _ completion: @escaping FetchEntryCompletion) {
-        switch context.family {
-        case .systemSmall:
-            let entry = FatCounterEntry(date: Date(),
-                                        usedGrams: counterData.usedFat,
-                                        totalGrams: counterData.totalFat)
-            completion(.success(entry))
-        case .systemMedium:
-            DailyFatStore.load { [weak self] result in
-                guard let self else {
-                    return
-                }
-                switch result {
-                case let .success(history):
-                    let entry = FatCounterEntry(date: Date(),
-                                                usedGrams: counterData.usedFat,
-                                                totalGrams: counterData.totalFat,
-                                                recentHistory: Array(history.prefix(4)))
-                    completion(.success(entry))
-                case let .failure(failure):
-                    completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
-                }
+        entryCompletion = completion
+
+        DailyFatStore.load { [weak self] result in
+            guard let self else {
+                return
             }
-        default:
-            completion(.failure(FetchEntryError.widgetFamilyNotSupported))
+            switch result {
+            case let .success(history):
+                dailyData.history = history
+                counterData.start(withDelegate: self)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    // Give 1 second to update and save a new daily fat entry, if there is one
+                    entryCompletion?(.success(entry))
+                    entryCompletion = nil
+                }
+            case let .failure(failure):
+                completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
+            }
         }
     }
 
@@ -78,6 +78,7 @@ class DailyFatTimelineProvider: NSObject {
                     }
                     // Give 1 second to update and save a new daily fat entry, if there is one
                     timelineCompletion?(.success(timeline))
+                    timelineCompletion = nil
                 }
             case let .failure(failure):
                 completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
@@ -106,6 +107,8 @@ extension DailyFatTimelineProvider: CounterDataDelegate {
             }
             timelineCompletion?(.success(timeline))
             timelineCompletion = nil
+            entryCompletion?(.success(entry))
+            entryCompletion = nil
         }
     }
 }
