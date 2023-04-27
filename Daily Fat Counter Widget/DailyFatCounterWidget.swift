@@ -90,6 +90,7 @@ class DailyFatTimelineProvider: NSObject {
 
 extension DailyFatTimelineProvider: CounterDataDelegate {
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double) {
+        DebugLog.log("New daily fat log")
         dailyData.history.insert(DailyFat(id: dailyData.history.count,
                                           start: start,
                                           usedFat: usedFat,
@@ -132,6 +133,7 @@ extension DailyFatTimelineProvider: TimelineProvider {
                 DebugLog.log("Failed to load TimelineProvider entry \(error)")
                 completion(placeholder(in: context))
             case let .success(entry):
+                DebugLog.log("Calling entry completion")
                 completion(entry)
             }
         }
@@ -148,6 +150,7 @@ extension DailyFatTimelineProvider: TimelineProvider {
                 DebugLog.log("Failed to load TimelineProvider timeline \(error)")
                 completion(Timeline(entries: [placeholder(in: context)], policy: .never))
             case let .success(timeline):
+                DebugLog.log("Calling timeline completion")
                 completion(timeline)
             }
         }
