@@ -1,6 +1,6 @@
 
 #if canImport(MessageUI)
-import MessageUI
+    import MessageUI
 #endif
 import SwiftUI
 
@@ -10,7 +10,7 @@ struct CounterSettings: View {
     @State private var showingFeedbackAlert = false
     @State private var showingMail = false
     #if canImport(MessageUI)
-    @State var result: Result<MFMailComposeResult, Error>? = nil
+        @State var result: Result<MFMailComposeResult, Error>? = nil
     #endif
     private let feedbackUrl = "https://apps.apple.com/app/id1631074004?action=write-review"
 

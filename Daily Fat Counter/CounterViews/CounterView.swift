@@ -15,17 +15,17 @@ struct CounterView: View {
     var progress: Double {
         usedGrams / totalGrams
     }
-    
+
     init(usedGrams: Double, totalGrams: Double, useSmallFont: Bool = false) {
         self.usedGrams = usedGrams
         self.totalGrams = totalGrams
         self.useSmallFont = useSmallFont
     }
-    
+
     private var counterFont: Font {
         return useSmallFont ? .caption : .largeTitle
     }
-    
+
     private var goalFont: Font {
         return useSmallFont ? .caption : .headline
     }

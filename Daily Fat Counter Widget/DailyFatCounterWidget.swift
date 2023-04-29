@@ -18,25 +18,25 @@ class DailyFatTimelineProvider: NSObject {
     typealias FetchEntryCompletion = (Result<FatCounterEntry, FetchEntryError>) -> Void
     typealias DailyFatTimeline = Timeline<FatCounterEntry>
     typealias FetchTimelineCompletion = (Result<DailyFatTimeline, FetchEntryError>) -> Void
-    
+
     private let dailyData = DailyFatStore()
     private let counterData = CounterData()
     private var timelineCompletion: FetchTimelineCompletion?
     private var entryCompletion: FetchEntryCompletion?
-    
+
     private var entry: FatCounterEntry {
         FatCounterEntry(date: Date(),
                         usedGrams: counterData.usedFat,
                         totalGrams: counterData.totalFat,
                         recentHistory: Array(dailyData.history.prefix(4)))
     }
-    
+
     private var timeline: DailyFatTimeline {
         let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
         return Timeline(entries: [entry], policy: .after(nextResetDate))
     }
- 
-    private func fetchEntry(for context: Context, _ completion: @escaping FetchEntryCompletion) {
+
+    private func fetchEntry(for _: Context, _ completion: @escaping FetchEntryCompletion) {
         entryCompletion = completion
 
         DailyFatStore.load { [weak self] result in
@@ -86,7 +86,6 @@ class DailyFatTimelineProvider: NSObject {
         }
     }
 }
-
 
 extension DailyFatTimelineProvider: CounterDataDelegate {
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double) {
@@ -243,16 +242,16 @@ struct DailyFatCounterMediumWidget: View {
 
 struct DailyFatCounterWidget: Widget {
     let kind: String = "Daily_Fat_Counter_Widget"
-    
+
     var supportedFamilies: [WidgetFamily] {
         #if os(watchOS)
-        return [.accessoryCircular, .accessoryRectangular, .accessoryInline]
+            return [.accessoryCircular, .accessoryRectangular, .accessoryInline]
         #else
-        if #available(iOSApplicationExtension 16.0, *) {
-            return [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
-        } else {
-            return [.systemSmall, .systemMedium]
-        }
+            if #available(iOSApplicationExtension 16.0, *) {
+                return [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
+            } else {
+                return [.systemSmall, .systemMedium]
+            }
         #endif
     }
 

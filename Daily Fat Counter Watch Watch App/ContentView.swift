@@ -27,11 +27,11 @@ struct ContentView: View {
             .tag(Tab.counter)
 
             HistoryHome(history: $dailyData.history)
-            .clipped()
-            .tag(Tab.history)
+                .clipped()
+                .tag(Tab.history)
 
             CounterSettings()
-            .tag(Tab.settings)
+                .tag(Tab.settings)
         }
     }
 }

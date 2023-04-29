@@ -91,13 +91,13 @@ struct InteractiveCounter: View {
                                       by: 1.0,
                                       sensitivity: .medium)
             #endif
-            
+
             #if os(watchOS)
             // Compact view for watch
             #else
-            Text(mode.rawValue)
-                .font(.headline)
-                .padding()
+                Text(mode.rawValue)
+                    .font(.headline)
+                    .padding()
             #endif
         }
     }

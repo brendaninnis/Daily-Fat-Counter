@@ -11,11 +11,11 @@ struct HistoryHome: View {
     @EnvironmentObject var counterData: CounterData
     @State var animateHistory = false
     @Binding var history: [DailyFat]
-    
+
     #if os(watchOS)
-    private let useShortDate = true
+        private let useShortDate = true
     #else
-    private let useShortDate = false
+        private let useShortDate = false
     #endif
 
     private var months: [Month] {

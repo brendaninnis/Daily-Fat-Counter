@@ -1,16 +1,16 @@
 
-import SwiftUI
 import StoreKit
+import SwiftUI
 
 struct CounterHome: View {
     static let lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
-    
+
     let date = Date()
     @EnvironmentObject var counterData: CounterData
     @EnvironmentObject var dailyData: DailyFatStore
 
-    @State private var reviewTask: Task<(), Never>?
-    
+    @State private var reviewTask: Task<Void, Never>?
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(currentDateFormatter.string(from: date))
@@ -18,10 +18,10 @@ struct CounterHome: View {
             Spacer()
             HStack {
                 Spacer()
-                    InteractiveCounter(
-                        usedGrams: $counterData.usedFat,
-                        totalGrams: $counterData.totalFat
-                    )
+                InteractiveCounter(
+                    usedGrams: $counterData.usedFat,
+                    totalGrams: $counterData.totalFat
+                )
                 Spacer()
             }
             Spacer()
@@ -50,7 +50,7 @@ struct CounterHome: View {
             reviewTask?.cancel()
         }
     }
-       
+
     @available(iOSApplicationExtension, unavailable)
     @available(watchOS, unavailable)
     private func promptForAppStoreReviewIfNeeded() {
@@ -64,7 +64,7 @@ struct CounterHome: View {
         guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String else {
             fatalError("Expected to find a bundle version in the info dictionary.")
         }
-        
+
         // Verify the user has more than 1 day of history and doesn’t receive a prompt for this app version.
         if dailyData.history.count > 1 && currentVersion != lastVersionPromptedForReview {
             reviewTask?.cancel()
@@ -77,13 +77,13 @@ struct CounterHome: View {
                     DebugLog.log("Review task cancelled")
                     return
                 }
-                
+
                 // try getting current scene
                 guard let currentScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
                     DebugLog.log("Unable to get current scene")
                     return
                 }
-                     
+
                 // show review dialog
                 SKStoreReviewController.requestReview(in: currentScene)
                 CounterData.defaults?.set(currentVersion, forKey: Self.lastVersionPromptedForReviewKey)

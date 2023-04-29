@@ -14,8 +14,9 @@ final class CounterData: NSObject, ObservableObject {
     private var calendar: Calendar {
         Calendar.autoupdatingCurrent
     }
-    private var widgetRefreshTask: Task<(), Never>?
-    
+
+    private var widgetRefreshTask: Task<Void, Never>?
+
     @AppStorage("next_reset", store: defaults) var nextReset: TimeInterval = 0.0 {
         willSet {
             // Publish changes
@@ -84,7 +85,7 @@ final class CounterData: NSObject, ObservableObject {
             }
         }
     }
-    
+
     override init() {
         super.init()
         if WCSession.isSupported() {
@@ -160,26 +161,26 @@ final class CounterData: NSObject, ObservableObject {
 }
 
 extension CounterData: WCSessionDelegate {
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    func session(_: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         DebugLog.log("WCSession activation complete with state: \(activationState), error: \(error?.localizedDescription ?? "")")
     }
-    
+
     #if os(iOS)
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        DebugLog.log("WCSession did become inactive")
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        DebugLog.log("WCSession did deactivate")
-        session.activate()
-    }
+        func sessionDidBecomeInactive(_: WCSession) {
+            DebugLog.log("WCSession did become inactive")
+        }
+
+        func sessionDidDeactivate(_ session: WCSession) {
+            DebugLog.log("WCSession did deactivate")
+            session.activate()
+        }
     #endif
-    
-    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
+
+    func session(_: WCSession, didReceiveUserInfo _: [String: Any]) {
         // Incoming CounterData
     }
-    
-    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+
+    func session(_: WCSession, didReceive _: WCSessionFile) {
         // Incoming HistoryFile
     }
 }
