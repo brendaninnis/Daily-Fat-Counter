@@ -14,7 +14,8 @@ final class CounterData: NSObject, ObservableObject {
     private var calendar: Calendar {
         Calendar.autoupdatingCurrent
     }
-
+    private var widgetRefreshTask: Task<(), Never>?
+    
     @AppStorage("next_reset", store: defaults) var nextReset: TimeInterval = 0.0 {
         willSet {
             // Publish changes
@@ -49,8 +50,19 @@ final class CounterData: NSObject, ObservableObject {
             objectWillChange.send()
         }
         didSet {
-            if #available(watchOS 9.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
+            widgetRefreshTask?.cancel()
+            widgetRefreshTask = Task { @MainActor in
+                // Delay for 500 milliseconds to wait for the user to end inputs
+                do {
+                    try await Task.sleep(nanoseconds: UInt64(5e8))
+                } catch {
+                    DebugLog.log("Widget refresh task cancelled")
+                    return
+                }
+                if #available(watchOS 9.0, *) {
+                    DebugLog.log("Reload widget timelines")
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
             }
         }
     }
