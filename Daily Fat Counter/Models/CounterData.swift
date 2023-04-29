@@ -3,6 +3,7 @@ import Combine
 import Foundation
 import SwiftUI
 import WatchConnectivity
+import WidgetKit
 
 final class CounterData: NSObject, ObservableObject {
     static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
@@ -46,6 +47,11 @@ final class CounterData: NSObject, ObservableObject {
         willSet {
             // Publish changes
             objectWillChange.send()
+        }
+        didSet {
+            if #available(watchOS 9.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 

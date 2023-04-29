@@ -133,7 +133,7 @@ extension DailyFatTimelineProvider: TimelineProvider {
                 DebugLog.log("Failed to load TimelineProvider entry \(error)")
                 completion(placeholder(in: context))
             case let .success(entry):
-                DebugLog.log("Calling entry completion")
+                DebugLog.log("Calling completion with entry \(entry)")
                 completion(entry)
             }
         }
@@ -150,7 +150,7 @@ extension DailyFatTimelineProvider: TimelineProvider {
                 DebugLog.log("Failed to load TimelineProvider timeline \(error)")
                 completion(Timeline(entries: [placeholder(in: context)], policy: .never))
             case let .success(timeline):
-                DebugLog.log("Calling timeline completion")
+                DebugLog.log("Calling completion with timeline \(timeline)")
                 completion(timeline)
             }
         }
