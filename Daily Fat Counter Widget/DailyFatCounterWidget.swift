@@ -19,8 +19,28 @@ class DailyFatTimelineProvider: NSObject {
     typealias DailyFatTimeline = Timeline<FatCounterEntry>
     typealias FetchTimelineCompletion = (Result<DailyFatTimeline, FetchEntryError>) -> Void
 
-    private let dailyData = DailyFatStore()
-    private let counterData = CounterData()
+    private var _dailyData: DailyFatStore?
+    private var dailyData: DailyFatStore {
+        get {
+            guard let _dailyData else {
+                let _dailyData = DailyFatStore()
+                self._dailyData = _dailyData
+                return _dailyData
+            }
+            return _dailyData
+        }
+    }
+    private var _counterData: CounterData?
+    private var counterData: CounterData {
+        get {
+            guard let _counterData else {
+                let _counterData = CounterData()
+                self._counterData = _counterData
+                return _counterData
+            }
+            return _counterData
+        }
+    }
     private var timelineCompletion: FetchTimelineCompletion?
     private var entryCompletion: FetchEntryCompletion?
 
@@ -34,6 +54,13 @@ class DailyFatTimelineProvider: NSObject {
     private var timeline: DailyFatTimeline {
         let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
         return Timeline(entries: [entry], policy: .after(nextResetDate))
+    }
+    
+    private func resetStoredData() {
+        _dailyData = nil
+        _counterData = nil
+        timelineCompletion = nil
+        entryCompletion = nil
     }
 
     private func fetchEntry(for _: Context, _ completion: @escaping FetchEntryCompletion) {
@@ -53,7 +80,7 @@ class DailyFatTimelineProvider: NSObject {
                     }
                     // Give 1 second to update and save a new daily fat entry, if there is one
                     entryCompletion?(.success(entry))
-                    entryCompletion = nil
+                    resetStoredData()
                 }
             case let .failure(failure):
                 completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
@@ -78,7 +105,7 @@ class DailyFatTimelineProvider: NSObject {
                     }
                     // Give 1 second to update and save a new daily fat entry, if there is one
                     timelineCompletion?(.success(timeline))
-                    timelineCompletion = nil
+                    resetStoredData()
                 }
             case let .failure(failure):
                 completion(.failure(FetchEntryError.ioError(failure.localizedDescription)))
@@ -106,9 +133,8 @@ extension DailyFatTimelineProvider: CounterDataDelegate {
                 DebugLog.log("Failed to save daily fat: \(error.localizedDescription)")
             }
             timelineCompletion?(.success(timeline))
-            timelineCompletion = nil
             entryCompletion?(.success(entry))
-            entryCompletion = nil
+            resetStoredData()
         }
     }
 }
