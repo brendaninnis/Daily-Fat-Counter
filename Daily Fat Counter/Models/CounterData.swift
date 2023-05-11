@@ -6,6 +6,14 @@ import WatchConnectivity
 import WidgetKit
 
 final class CounterData: NSObject, ObservableObject {
+    struct StorageKeys {
+        static let nextReset = "next_reset"
+        static let resetHour = "reset_hour"
+        static let resetMinute = "reset_minute"
+        static let usedFat = "used_fat"
+        static let totalFat = "total_fat"
+    }
+    
     static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
 
     private var timer: Timer?
@@ -17,7 +25,7 @@ final class CounterData: NSObject, ObservableObject {
 
     private var widgetRefreshTask: Task<Void, Never>?
 
-    @AppStorage("next_reset", store: defaults) var nextReset: TimeInterval = 0.0 {
+    @AppStorage(StorageKeys.nextReset, store: defaults) var nextReset: TimeInterval = 0.0 {
         willSet {
             // Publish changes
             objectWillChange.send()
@@ -31,21 +39,21 @@ final class CounterData: NSObject, ObservableObject {
         }
     }
 
-    @AppStorage("reset_hour", store: defaults) var resetHour: Int = 0 {
+    @AppStorage(StorageKeys.resetHour, store: defaults) var resetHour: Int = 0 {
         willSet {
             // Publish changes
             objectWillChange.send()
         }
     }
 
-    @AppStorage("reset_minute", store: defaults) var resetMinute: Int = 0 {
+    @AppStorage(StorageKeys.resetMinute, store: defaults) var resetMinute: Int = 0 {
         willSet {
             // Publish changes
             objectWillChange.send()
         }
     }
 
-    @AppStorage("used_fat", store: defaults) var usedFat: Double = 0.0 {
+    @AppStorage(StorageKeys.usedFat, store: defaults) var usedFat: Double = 0.0 {
         willSet {
             // Publish changes
             objectWillChange.send()
@@ -68,7 +76,7 @@ final class CounterData: NSObject, ObservableObject {
         }
     }
 
-    @AppStorage("total_fat", store: defaults) var totalFat: Double = 50.0 {
+    @AppStorage(StorageKeys.totalFat, store: defaults) var totalFat: Double = 50.0 {
         willSet {
             // Publish changes
             objectWillChange.send()
@@ -176,15 +184,44 @@ extension CounterData: WCSessionDelegate {
         }
     #endif
 
-    func session(_: WCSession, didReceiveUserInfo _: [String: Any]) {
-        // Incoming CounterData
+    func session(_: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
+        DispatchQueue.main.async {
+            if let resetHour = userInfo[StorageKeys.resetHour] as? Int {
+                self.resetHour = resetHour
+            }
+            if let resetMinute = userInfo[StorageKeys.resetMinute] as? Int {
+                self.resetMinute = resetMinute
+            }
+            if let usedFat = userInfo[StorageKeys.usedFat] as? Double {
+                self.usedFat = usedFat
+            }
+            if let totalFat = userInfo[StorageKeys.totalFat] as? Double {
+                self.totalFat = totalFat
+            }
+            if let nextReset = userInfo[StorageKeys.nextReset] as? TimeInterval {
+                self.nextReset = nextReset
+            }
+        }
     }
 
-    func session(_: WCSession, didReceive _: WCSessionFile) {
-        // Incoming HistoryFile
+    func session(_: WCSession, didReceive file: WCSessionFile) {
+        guard let fileUrl = try? DailyFatStore.fileURL() else {
+            DebugLog.log("Failed to construct store file URL")
+            return
+        }
+        do {
+            try FileManager.default.moveItem(at: file.fileURL, to: fileUrl)
+        } catch {
+            DebugLog.log("Failed to move file to store URL")
+            return
+        }
+        DispatchQueue.main.async {
+            self.delegate?.historyDidUpdate()
+        }
     }
 }
 
 protocol CounterDataDelegate: AnyObject {
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double)
+    func historyDidUpdate()
 }

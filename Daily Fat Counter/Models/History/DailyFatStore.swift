@@ -15,7 +15,7 @@ class DailyFatStore: ObservableObject {
         .appendingPathComponent("history.data")
     }
 
-    private static func fileURL() throws -> URL {
+    static func fileURL() throws -> URL {
         guard let url = FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: APP_GROUP_IDENTIFIER)?
             .appendingPathComponent("history.data")
@@ -106,6 +106,19 @@ extension DailyFatStore: CounterDataDelegate {
                 DebugLog.log("Daily fat #\(count) saved.")
             case let .failure(error):
                 DebugLog.log("Failed to save daily fat: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func historyDidUpdate() {
+        // Reload updated history
+        Self.load { result in
+            switch result {
+            case .success(let history):
+                self.history = history
+            case .failure(let failure):
+                DebugLog.log("Failed to load updated history")
+                DebugLog.log(failure.localizedDescription)
             }
         }
     }
