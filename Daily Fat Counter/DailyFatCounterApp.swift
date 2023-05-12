@@ -22,6 +22,8 @@ struct DailyFatCounterApp: App {
                             fatalError(error.localizedDescription)
                         case let .success(history):
                             dailyData.history = history
+                            // Ensure Watch apps are provided context when it is their first time running
+                            dailyData.updateCompanion()
                         }
                         counterData.start(withDelegate: dailyData)
                     }

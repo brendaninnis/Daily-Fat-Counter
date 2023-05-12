@@ -1,6 +1,7 @@
 
 import Foundation
 import SwiftUI
+import WatchConnectivity
 
 class DailyFatStore: ObservableObject {
     @Published var history: [DailyFat] = []
@@ -100,10 +101,11 @@ extension DailyFatStore: CounterDataDelegate {
                                 usedFat: usedFat,
                                 totalFat: totalFat),
                        at: 0)
-        Self.save(history: history) { result in
+        Self.save(history: history) { [self] result in
             switch result {
             case let .success(count):
                 DebugLog.log("Daily fat #\(count) saved.")
+                updateCompanion()
             case let .failure(error):
                 DebugLog.log("Failed to save daily fat: \(error.localizedDescription)")
             }
@@ -121,6 +123,13 @@ extension DailyFatStore: CounterDataDelegate {
                 DebugLog.log(failure.localizedDescription)
             }
         }
+    }
+        
+    func updateCompanion() {
+        guard let url = try? Self.fileURL() else {
+            return
+        }
+        WCSession.default.transferFile(url, metadata: nil)
     }
 }
 

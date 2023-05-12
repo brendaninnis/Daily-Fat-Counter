@@ -12,18 +12,19 @@ final class CounterData: NSObject, ObservableObject {
         static let resetMinute = "reset_minute"
         static let usedFat = "used_fat"
         static let totalFat = "total_fat"
+        static let isFirstRun = "is_first_run"
     }
     
     static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
+    
+    private weak var delegate: CounterDataDelegate?
 
     private var timer: Timer?
     private var started = false
-    private weak var delegate: CounterDataDelegate?
-    private var calendar: Calendar {
-        Calendar.autoupdatingCurrent
-    }
-
-    private var widgetRefreshTask: Task<Void, Never>?
+    private var companionUsedFatUpdateTask: Task<Void, Never>?
+    private var calendar: Calendar { .autoupdatingCurrent }
+    private var wcSession: WCSession { .default }
+    private var wcSessionUserInfoTransfer: WCSessionUserInfoTransfer?
 
     @AppStorage(StorageKeys.nextReset, store: defaults) var nextReset: TimeInterval = 0.0 {
         willSet {
@@ -36,6 +37,9 @@ final class CounterData: NSObject, ObservableObject {
                 dateForResetSelection = Date(timeIntervalSince1970: nextReset)
             }
             startResetTimer()
+            if oldValue != nextReset {
+                updateWCUserInfo()
+            }
         }
     }
 
@@ -59,8 +63,9 @@ final class CounterData: NSObject, ObservableObject {
             objectWillChange.send()
         }
         didSet {
-            widgetRefreshTask?.cancel()
-            widgetRefreshTask = Task { @MainActor in
+            let didUpdate = oldValue != usedFat
+            companionUsedFatUpdateTask?.cancel()
+            companionUsedFatUpdateTask = Task { @MainActor in
                 // Delay for 500 milliseconds to wait for the user to end inputs
                 do {
                     try await Task.sleep(nanoseconds: UInt64(5e8))
@@ -72,6 +77,9 @@ final class CounterData: NSObject, ObservableObject {
                     DebugLog.log("Reload widget timelines")
                     WidgetCenter.shared.reloadAllTimelines()
                 }
+                if didUpdate {
+                    updateWCUserInfo()
+                }
             }
         }
     }
@@ -80,6 +88,11 @@ final class CounterData: NSObject, ObservableObject {
         willSet {
             // Publish changes
             objectWillChange.send()
+        }
+        didSet {
+            if oldValue != totalFat {
+                updateWCUserInfo()
+            }
         }
     }
 
@@ -97,9 +110,8 @@ final class CounterData: NSObject, ObservableObject {
     override init() {
         super.init()
         if WCSession.isSupported() {
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
+            wcSession.delegate = self
+            wcSession.activate()
         }
     }
 
@@ -108,6 +120,12 @@ final class CounterData: NSObject, ObservableObject {
         DebugLog.log("CounterData started at \(Date())")
         self.delegate = delegate
         initializeDailyFatReset(Date().timeIntervalSince1970)
+        if let defaults = Self.defaults, !defaults.bool(forKey: StorageKeys.isFirstRun) {
+            // Ensure Watch apps are provided context when it is their first time running
+            updateWCUserInfo()
+            delegate?.updateCompanion()
+        }
+        Self.defaults?.set(true, forKey: StorageKeys.isFirstRun)
     }
 
     func initializeDailyFatReset(_ timestamp: TimeInterval) {
@@ -165,6 +183,20 @@ final class CounterData: NSObject, ObservableObject {
             return timestamp + Double(SECONDS_PER_DAY)
         }
         return result
+    }
+    
+    private func updateWCUserInfo() {
+        if let wcSessionUserInfoTransfer, wcSessionUserInfoTransfer.isTransferring {
+            // The previous update has not finished it's transfer yet, so cancel it and send a new update
+            wcSessionUserInfoTransfer.cancel()
+        }
+        wcSessionUserInfoTransfer = wcSession.transferUserInfo([
+            StorageKeys.nextReset: nextReset,
+            StorageKeys.resetHour: resetHour,
+            StorageKeys.resetMinute: resetMinute,
+            StorageKeys.usedFat: usedFat,
+            StorageKeys.totalFat: totalFat,
+        ])
     }
 }
 
@@ -224,4 +256,5 @@ extension CounterData: WCSessionDelegate {
 protocol CounterDataDelegate: AnyObject {
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double)
     func historyDidUpdate()
+    func updateCompanion()
 }

@@ -115,6 +115,14 @@ class DailyFatTimelineProvider: NSObject {
 }
 
 extension DailyFatTimelineProvider: CounterDataDelegate {
+    func historyDidUpdate() {
+        // NOOP
+    }
+    
+    func updateCompanion() {
+        // NOOP
+    }
+    
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double) {
         DebugLog.log("New daily fat log")
         dailyData.history.insert(DailyFat(id: dailyData.history.count,
