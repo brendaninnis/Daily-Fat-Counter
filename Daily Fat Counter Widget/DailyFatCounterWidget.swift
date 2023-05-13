@@ -21,26 +21,24 @@ class DailyFatTimelineProvider: NSObject {
 
     private var _dailyData: DailyFatStore?
     private var dailyData: DailyFatStore {
-        get {
-            guard let _dailyData else {
-                let _dailyData = DailyFatStore()
-                self._dailyData = _dailyData
-                return _dailyData
-            }
+        guard let _dailyData else {
+            let _dailyData = DailyFatStore()
+            self._dailyData = _dailyData
             return _dailyData
         }
+        return _dailyData
     }
+
     private var _counterData: CounterData?
     private var counterData: CounterData {
-        get {
-            guard let _counterData else {
-                let _counterData = CounterData()
-                self._counterData = _counterData
-                return _counterData
-            }
+        guard let _counterData else {
+            let _counterData = CounterData()
+            self._counterData = _counterData
             return _counterData
         }
+        return _counterData
     }
+
     private var timelineCompletion: FetchTimelineCompletion?
     private var entryCompletion: FetchEntryCompletion?
 
@@ -55,7 +53,7 @@ class DailyFatTimelineProvider: NSObject {
         let nextResetDate = Date(timeIntervalSince1970: counterData.nextReset)
         return Timeline(entries: [entry], policy: .after(nextResetDate))
     }
-    
+
     private func resetStoredData() {
         _dailyData = nil
         _counterData = nil
@@ -118,11 +116,11 @@ extension DailyFatTimelineProvider: CounterDataDelegate {
     func historyDidUpdate() {
         // NOOP
     }
-    
+
     func updateCompanion() {
         // NOOP
     }
-    
+
     func newDailyFat(start: Double, usedFat: Double, totalFat: Double) {
         DebugLog.log("New daily fat log")
         dailyData.history.insert(DailyFat(id: dailyData.history.count,

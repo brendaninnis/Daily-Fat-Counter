@@ -111,20 +111,20 @@ extension DailyFatStore: CounterDataDelegate {
             }
         }
     }
-    
+
     func historyDidUpdate() {
         // Reload updated history
         Self.load { result in
             switch result {
-            case .success(let history):
+            case let .success(history):
                 self.history = history
-            case .failure(let failure):
+            case let .failure(failure):
                 DebugLog.log("Failed to load updated history")
                 DebugLog.log(failure.localizedDescription)
             }
         }
     }
-        
+
     func updateCompanion() {
         guard let url = try? Self.fileURL() else {
             return

@@ -6,7 +6,7 @@ import WatchConnectivity
 import WidgetKit
 
 final class CounterData: NSObject, ObservableObject {
-    struct StorageKeys {
+    enum StorageKeys {
         static let nextReset = "next_reset"
         static let resetHour = "reset_hour"
         static let resetMinute = "reset_minute"
@@ -14,9 +14,9 @@ final class CounterData: NSObject, ObservableObject {
         static let totalFat = "total_fat"
         static let isFirstRun = "is_first_run"
     }
-    
+
     static let defaults = UserDefaults(suiteName: APP_GROUP_IDENTIFIER)
-    
+
     private weak var delegate: CounterDataDelegate?
 
     private var timer: Timer?
@@ -184,7 +184,7 @@ final class CounterData: NSObject, ObservableObject {
         }
         return result
     }
-    
+
     private func updateWCUserInfo() {
         if let wcSessionUserInfoTransfer, wcSessionUserInfoTransfer.isTransferring {
             // The previous update has not finished it's transfer yet, so cancel it and send a new update
